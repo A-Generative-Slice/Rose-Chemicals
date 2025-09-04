@@ -7,7 +7,7 @@ export default function RequestQuoteFab(){
     <>
       <button 
         onClick={() => setOpen(true)} 
-        className="fixed right-6 bottom-6 bg-accent text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-pulse"
+        className="fixed right-6 bottom-6 bg-header-cta text-header-cta-text px-6 py-3 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-pulse"
       >
         Request Quote
       </button>
@@ -18,37 +18,40 @@ export default function RequestQuoteFab(){
           onClick={(e) => e.target === e.currentTarget && setOpen(false)}
         >
           <div 
-            className="bg-white rounded-lg p-6 w-full max-w-md shadow-xl transition-all duration-300 transform"
+            className="bg-tile-bg rounded-lg p-6 w-full max-w-md shadow-xl transition-all duration-300 transform"
           >
-            <h3 className="text-lg font-semibold text-gray-800">Request a Quote</h3>
+            <h3 className="text-lg font-semibold text-tile-text-primary">Request a Quote</h3>
             <form className="mt-4 flex flex-col gap-3">
               <input 
                 placeholder="Name" 
-                className="border border-gray-200 p-2 rounded-lg focus:outline-none focus:border-primary transition-colors" 
+                className="bg-white border border-tile-text-secondary p-2 rounded-lg focus:outline-none focus:border-header-bg transition-colors" 
               />
               <input 
                 placeholder="Company" 
-                className="border border-gray-200 p-2 rounded-lg focus:outline-none focus:border-primary transition-colors" 
+                className="bg-white border border-tile-text-secondary p-2 rounded-lg focus:outline-none focus:border-header-bg transition-colors" 
               />
               <input 
                 placeholder="Email" 
                 type="email"
-                className="border border-gray-200 p-2 rounded-lg focus:outline-none focus:border-primary transition-colors" 
+                className="bg-white border border-tile-text-secondary p-2 rounded-lg focus:outline-none focus:border-header-bg transition-colors" 
               />
               <textarea 
                 placeholder="Details" 
                 rows={4}
-                className="border border-gray-200 p-2 rounded-lg focus:outline-none focus:border-primary transition-colors resize-none" 
+                className="bg-white border border-tile-text-secondary p-2 rounded-lg focus:outline-none focus:border-header-bg transition-colors resize-none" 
               />
               <div className="flex justify-end gap-2 mt-2">
                 <button 
                   type="button" 
                   onClick={() => setOpen(false)} 
-                  className="btn-secondary"
+                  className="px-4 py-2 border border-tile-text-secondary text-tile-text-secondary rounded-lg hover:border-tile-text-primary hover:text-tile-text-primary transition-colors"
                 >
                   Close
                 </button>
-                <button type="submit" className="btn-primary">
+                <button 
+                  type="submit" 
+                  className="px-4 py-2 bg-header-cta text-header-cta-text rounded-lg hover:bg-header-cta/90 transition-colors"
+                >
                   Send
                 </button>
               </div>

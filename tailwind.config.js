@@ -7,8 +7,49 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#2563eb',
-        accent: '#059669',
+        // Header Design Colors
+        'header-bg': '#457B9D',
+        'header-hover': '#A8DADC',
+        'header-cta': '#F4D35E',
+        'header-cta-text': '#1D3557',
+        'header-border': '#BBDEFB',
+        'header-icon-hover-bg': '#1D3557',
+        'header-icon-hover': '#F4D35E',
+        
+        // Hero Section Colors
+        'hero-bg': '#1D3557',
+        'hero-headline': '#A8DADC',
+        'hero-subtext': '#E0FBFC',
+        'hero-cta': '#F4D35E',
+        'hero-cta-text': '#1D3557',
+        
+        // Section Background Colors
+        'section-bg': '#bce0fb',
+        'tile-bg': '#1D3557',
+        'tile-text-primary': '#FFFFFF',
+        'tile-text-secondary': '#A8DADC',
+        
+        primary: {
+          DEFAULT: '#1D3557', // Deep Indigo Blue (60%)
+          light: '#2d4b76',
+          dark: '#142640'
+        },
+        secondary: {
+          DEFAULT: '#457B9D', // Steel Blue (25%)
+          light: '#5a8cac',
+          dark: '#396785'
+        },
+        tertiary: {
+          DEFAULT: '#A8DADC', // Soft Aqua (10%)
+          light: '#bce3e5',
+          dark: '#8cc6c9'
+        },
+        'very-light-aqua': '#E0FBFC',
+        highlight: {
+          DEFAULT: '#F4D35E', // Warm Lemon Yellow (5%)
+          light: '#f6dc7e',
+          dark: '#f1c93d'
+        },
         gray: {
           50: '#f8fafc',
           100: '#f1f5f9',
