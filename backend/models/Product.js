@@ -16,13 +16,15 @@ const productSchema = new mongoose.Schema({
     required: [true, 'Please enter product price'],
     min: [0, 'Price cannot be negative']
   },
+  mrp: {
+    type: Number,
+    required: false,
+    min: [0, 'MRP cannot be negative']
+  },
   category: {
-    type: String,
-    required: [true, 'Please select category'],
-    enum: {
-      values: ['brooms', 'brushes', 'dusters', 'other'],
-      message: 'Please select correct category'
-    }
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    required: [true, 'Please select category']
   },
   stock: {
     type: Number,
@@ -31,9 +33,37 @@ const productSchema = new mongoose.Schema({
     default: 0
   },
   images: [{
-    public_id: String,
-    url: String
+    type: String,
+    required: false
   }],
+  sku: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true
+  },
+  features: [{
+    type: String
+  }],
+  ingredients: [{
+    type: String
+  }],
+  usage: {
+    type: String,
+    required: false
+  },
+  weight: {
+    type: String,
+    required: false
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  isFeatured: {
+    type: Boolean,
+    default: false
+  },
   specs: {
     type: Map,
     of: String
@@ -41,7 +71,7 @@ const productSchema = new mongoose.Schema({
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: false
   },
   createdAt: {
     type: Date,

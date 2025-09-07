@@ -1,0 +1,14 @@
+{
+  "name": "start-all",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"npm run dev\" \"cd backend && npm run dev\"",
+    "setup": "npm install && cd backend && npm install && cd .. && node backend/seed.js",
+    "dev:frontend": "npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "seed": "cd backend && node seed.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

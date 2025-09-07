@@ -5,14 +5,25 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const compression = require('compression');
 const path = require('path');
-const connectDB = require('./config/database');
+const { connectDB } = require('./config/database-enhanced');
 const { startCSVScheduler, cleanOldCSVFiles } = require('./utils/csvGenerator');
 
 // Initialize express
 const app = express();
 
-// Connect to database
-connectDB();
+// Connect to database and seed if using in-memory
+connectDB().then(async () => {
+  // Check if using in-memory database and seed if empty
+  if (process.env.NODE_ENV === 'development') {
+    const Product = require('./models/Product');
+    const productCount = await Product.countDocuments();
+    
+    if (productCount === 0) {
+      console.log('🌱 No products found, seeding database...');
+      require('./seed');
+    }
+  }
+});
 
 // Middleware
 app.use(cors());
