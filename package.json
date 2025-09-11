@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "backend": "cd backend && npm run dev",
+    "frontend": "next dev -p 3001",
+    "dev:all": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "install:all": "npm install && cd backend && npm install",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "next start -p 3001"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -21,6 +27,7 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "autoprefixer": "^10.4.14",
+    "concurrently": "^8.2.0",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.0",
     "typescript": "^5.0.4"
