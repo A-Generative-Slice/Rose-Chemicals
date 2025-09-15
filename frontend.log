@@ -1,0 +1,13 @@
+nohup: ignoring input
+
+> rose-chemicals-frontend@0.1.0 frontend
+> next dev -p 3001
+
+   ▲ Next.js 14.0.4
+   - Local:        http://localhost:3001
+   - Environments: .env.local
+
+ ✓ Ready in 2.1s
+ ○ Compiling / ...
+ ✓ Compiled / in 3.5s (500 modules)
+ ✓ Compiled in 409ms (255 modules)

@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   getCart,
   addToCart,
+  updateCartItem,
   removeFromCart,
   clearCart
 } = require('../controllers/cartController');
@@ -19,6 +20,7 @@ router.use(protect); // All cart routes are protected
 
 router.get('/', getCart);
 router.post('/add', validateCartItem, addToCart);
+router.patch('/update', validateCartItem, updateCartItem);
 router.delete('/remove/:productId', removeFromCart);
 router.delete('/clear', clearCart);
 

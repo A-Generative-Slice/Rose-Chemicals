@@ -1,0 +1,29 @@
+nohup: ignoring input
+CSV scheduler started - running every 2 hours
+CSV cleanup scheduler started - running daily
+Server running in development mode on port 5000
+⚠️ Local MongoDB not available, starting in-memory database...
+✅ In-Memory MongoDB Connected: 127.0.0.1
+📝 Note: Data will not persist after server restart
+🌱 No products found, seeding database...
+🌱 Starting database seeding...
+
+⚠️ Local MongoDB not available, starting in-memory database...
+✅ In-Memory MongoDB Connected: 127.0.0.1
+📝 Note: Data will not persist after server restart
+✅ 7 categories seeded
+✅ 14 products seeded
+✅ Admin user created
+Email: admin@rosechemicals.com
+Password: Admin@123
+
+🎉 Database seeding completed successfully!
+
+You can now:
+1. Start the backend server: npm run dev
+2. Login as admin with: admin@rosechemicals.com / Admin@123
+3. Visit the frontend to see all products
+Starting scheduled CSV generation...
+No orders found for CSV generation
+[0mGET /health [32m200[0m 11.024 ms - 15[0m
+[0mGET /api/products [32m200[0m 32.668 ms - 7423[0m

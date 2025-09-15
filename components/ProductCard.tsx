@@ -18,7 +18,9 @@ export default function ProductCard({ product }: { product: any }){
 
     try {
       setLoading(true);
-      await addToCart(product.id, 1);
+      // Use _id if available, otherwise fallback to id
+      const productId = product._id || product.id;
+      await addToCart(productId, 1);
       alert('Product added to cart!');
     } catch (error) {
       console.error('Error adding to cart:', error);
@@ -35,10 +37,10 @@ export default function ProductCard({ product }: { product: any }){
 
   return (
     <div className="bg-tile-bg rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-200 border border-tertiary">
-      <Link href={`/products/${product.id}`}>
+      <Link href={`/products/${product._id || product.id}`}>
         <div className="overflow-hidden rounded-lg bg-white cursor-pointer">
           <img 
-            src={product.image} 
+            src={product.images?.[0] || product.image || '/images/placeholder-product.png'} 
             alt={product.name} 
             className="w-full h-48 object-contain transform transition-transform duration-300 hover:scale-105"
             onError={(e) => {
@@ -47,12 +49,14 @@ export default function ProductCard({ product }: { product: any }){
           />
         </div>
       </Link>
-      <Link href={`/products/${product.id}`}>
+      <Link href={`/products/${product._id || product.id}`}>
         <h3 className="mt-3 font-medium text-tile-text-primary hover:text-tertiary cursor-pointer transition-colors">
           {product.name}
         </h3>
       </Link>
-      <p className="text-sm text-tile-text-secondary">{product.price}</p>
+      <p className="text-sm text-tile-text-secondary">
+        {typeof product.price === 'number' ? `₹${product.price}` : product.price}
+      </p>
       <div className="mt-3 flex gap-2">
         <button 
           onClick={handleAddToCart}

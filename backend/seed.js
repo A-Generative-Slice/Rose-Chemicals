@@ -45,18 +45,24 @@ const categories = [
     description: 'Heavy-duty industrial cleaning solutions',
     slug: 'industrial-cleaners',
     image: '/images/categories/industrial.jpg'
+  },
+  {
+    name: 'Brooms',
+    description: 'High-quality brooms for all cleaning needs',
+    slug: 'brooms',
+    image: '/images/categories/brooms.jpg'
   }
 ];
 
 const products = [
-  // Bathroom Cleaners
+  // Toilet Cleaners
   {
     name: 'Rose Toilet Bowl Cleaner',
     description: 'Professional strength toilet bowl cleaner with fresh rose fragrance. Removes tough stains and kills 99.9% of germs.',
     price: 299,
     mrp: 399,
     category: 'Bathroom Cleaners',
-    images: ['/images/products/toilet-cleaner-1.jpg'],
+    images: ['/images/TOILET_BRUSHES/99. TOILET BRUSH 6306.png'],
     stock: 150,
     sku: 'RC-TC-001',
     features: ['Kills 99.9% germs', 'Fresh rose fragrance', 'Removes tough stains', 'Safe for septic tanks'],
@@ -72,7 +78,7 @@ const products = [
     price: 249,
     mrp: 329,
     category: 'Bathroom Cleaners',
-    images: ['/images/products/tile-cleaner-1.jpg'],
+    images: ['/images/CARPET_BRUSHES/83. AVON CARPER BRUSH (307).png'],
     stock: 200,
     sku: 'RC-BTC-002',
     features: ['Removes soap scum', 'Anti-mildew formula', 'Safe on all tiles', 'No harsh fumes'],
@@ -89,7 +95,7 @@ const products = [
     price: 349,
     mrp: 449,
     category: 'Kitchen Cleaners',
-    images: ['/images/products/degreaser-1.jpg'],
+    images: ['/images/SINK_BRUSHES/100. SUPREME SINK SQUIRE Rs 57.JPG'],
     stock: 100,
     sku: 'RC-KD-003',
     features: ['Instant grease cutting', 'Safe on surfaces', 'Pleasant fragrance', 'Biodegradable'],
@@ -105,7 +111,7 @@ const products = [
     price: 129,
     mrp: 179,
     category: 'Kitchen Cleaners',
-    images: ['/images/products/dishwash-1.jpg'],
+    images: ['/images/SINK_BRUSHES/108. 2381 SINK BRUSH- Rs 38.png'],
     stock: 300,
     sku: 'RC-DW-004',
     features: ['Concentrated formula', 'Gentle on hands', 'Fresh fragrance', 'Long lasting'],
@@ -122,7 +128,7 @@ const products = [
     price: 199,
     mrp: 249,
     category: 'Floor Cleaners',
-    images: ['/images/products/floor-cleaner-1.jpg'],
+    images: ['/images/LONG_BRUSHES/123. THK 140-Rs 111.png'],
     stock: 180,
     sku: 'RC-FC-005',
     features: ['Multi-surface safe', 'No streaks', 'Quick drying', 'Pleasant fragrance'],
@@ -140,7 +146,7 @@ const products = [
     price: 149,
     mrp: 199,
     category: 'Glass Cleaners',
-    images: ['/images/products/glass-cleaner-1.jpg'],
+    images: ['/images/COBWEB_CLEANERS/219. cobweb sunflower-outer-lock.png'],
     stock: 250,
     sku: 'RC-GC-006',
     features: ['Streak-free shine', 'Quick drying', 'Ammonia-free', 'Safe for tinted glass'],
@@ -157,7 +163,7 @@ const products = [
     price: 279,
     mrp: 349,
     category: 'Disinfectants',
-    images: ['/images/products/disinfectant-1.jpg'],
+    images: ['/images/BROOMS/164. DELUX NICE BROOM 115.png'],
     stock: 120,
     sku: 'RC-MPD-007',
     features: ['Kills 99.99% germs', 'Hospital grade', 'Multi-surface safe', 'Long-lasting protection'],
@@ -175,13 +181,106 @@ const products = [
     price: 599,
     mrp: 749,
     category: 'Industrial Cleaners',
-    images: ['/images/products/heavy-duty-1.jpg'],
+    images: ['/images/BROOMS/166. SITARA BROOM- 84.png'],
     stock: 80,
     sku: 'RC-HDC-008',
     features: ['Industrial strength', 'Concentrated formula', 'Multi-purpose', 'Cost effective'],
     ingredients: ['Sodium Hydroxide', 'Surfactants', 'Chelating agents', 'Stabilizers'],
     usage: 'Dilute as per requirement. Apply, scrub if needed, and rinse thoroughly.',
     weight: '1L',
+    isActive: true
+  },
+
+  // Brooms Category
+  {
+    name: 'Delux Nice Broom',
+    description: 'Premium quality broom with excellent durability and cleaning performance.',
+    price: 115,
+    mrp: 145,
+    category: 'Brooms',
+    images: ['/images/BROOMS/164. DELUX NICE BROOM 115.png'],
+    stock: 100,
+    sku: 'RC-BR-009',
+    features: ['Durable bristles', 'Comfortable grip', 'Long lasting', 'Effective cleaning'],
+    ingredients: ['Natural bristles', 'Wooden handle'],
+    usage: 'Use for sweeping floors and surfaces.',
+    weight: '500g',
+    isActive: true,
+    isFeatured: true
+  },
+  {
+    name: 'Sitara Broom',
+    description: 'Traditional style broom for effective cleaning of all floor types.',
+    price: 84,
+    mrp: 110,
+    category: 'Brooms',
+    images: ['/images/BROOMS/166. SITARA BROOM- 84.png'],
+    stock: 150,
+    sku: 'RC-BR-010',
+    features: ['Traditional design', 'Multi-surface', 'Lightweight', 'Easy to use'],
+    ingredients: ['Natural bristles', 'Bamboo handle'],
+    usage: 'Ideal for daily sweeping of home and office.',
+    weight: '450g',
+    isActive: true
+  },
+  {
+    name: 'Supriya Nice Broom',
+    description: 'High-quality broom with soft bristles for gentle yet effective cleaning.',
+    price: 115,
+    mrp: 145,
+    category: 'Brooms',
+    images: ['/images/BROOMS/167. SUPRIYA NICE BROOM 115.png'],
+    stock: 120,
+    sku: 'RC-BR-011',
+    features: ['Soft bristles', 'Premium quality', 'Comfortable handle', 'Long lasting'],
+    ingredients: ['Premium bristles', 'Ergonomic handle'],
+    usage: 'Perfect for delicate floor surfaces.',
+    weight: '480g',
+    isActive: true
+  },
+  {
+    name: 'Camel Red Broom',
+    description: 'Attractive red colored broom with excellent cleaning capabilities.',
+    price: 65,
+    mrp: 85,
+    category: 'Brooms',
+    images: ['/images/BROOMS/168. CAMEL RED - 65.png'],
+    stock: 200,
+    sku: 'RC-BR-012',
+    features: ['Attractive design', 'Good quality', 'Affordable', 'Reliable'],
+    ingredients: ['Synthetic bristles', 'Plastic handle'],
+    usage: 'Suitable for regular household cleaning.',
+    weight: '400g',
+    isActive: true
+  },
+  {
+    name: 'Shine Red Broom',
+    description: 'Bright red broom with effective cleaning bristles for daily use.',
+    price: 74,
+    mrp: 95,
+    category: 'Brooms',
+    images: ['/images/BROOMS/169. SHINE RED- 74.png'],
+    stock: 180,
+    sku: 'RC-BR-013',
+    features: ['Bright color', 'Effective bristles', 'Daily use', 'Value for money'],
+    ingredients: ['Mixed bristles', 'Durable handle'],
+    usage: 'Great for everyday cleaning tasks.',
+    weight: '420g',
+    isActive: true
+  },
+  {
+    name: 'Pinky Red Broom',
+    description: 'Stylish pink and red broom with superior cleaning performance.',
+    price: 78,
+    mrp: 100,
+    category: 'Brooms',
+    images: ['/images/BROOMS/171. PINKY RED BROOM - 78.png'],
+    stock: 160,
+    sku: 'RC-BR-014',
+    features: ['Stylish design', 'Superior performance', 'Easy handling', 'Durable'],
+    ingredients: ['Quality bristles', 'Strong handle'],
+    usage: 'Ideal for thorough cleaning of all areas.',
+    weight: '460g',
     isActive: true
   }
 ];
@@ -244,10 +343,9 @@ const seedAdmin = async () => {
       return existingAdmin;
     }
 
-    const hashedPassword = await bcrypt.hash(adminUser.password, 12);
+    // Don't manually hash - let the User model's pre-save hook handle it
     const admin = new User({
-      ...adminUser,
-      password: hashedPassword
+      ...adminUser
     });
 
     await admin.save();
@@ -288,10 +386,15 @@ const seedDatabase = async () => {
     console.log('2. Login as admin with: admin@rosechemicals.com / Admin@123');
     console.log('3. Visit the frontend to see all products');
     
-    process.exit(0);
+    // Don't exit process when called from server.js
+    if (require.main === module) {
+      process.exit(0);
+    }
   } catch (error) {
     console.error('Seeding failed:', error);
-    process.exit(1);
+    if (require.main === module) {
+      process.exit(1);
+    }
   }
 };
 

@@ -130,9 +130,8 @@ export const cartAPI = {
 
   // Remove item from cart
   removeFromCart: (productId) => 
-    apiRequest('/cart/remove', {
+    apiRequest(`/cart/remove/${productId}`, {
       method: 'DELETE',
-      body: JSON.stringify({ productId }),
     }),
 
   // Clear entire cart

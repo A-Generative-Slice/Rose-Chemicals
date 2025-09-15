@@ -20,7 +20,8 @@ connectDB().then(async () => {
     
     if (productCount === 0) {
       console.log('🌱 No products found, seeding database...');
-      require('./seed');
+      const { seedDatabase } = require('./seed');
+      await seedDatabase();
     }
   }
 });
@@ -36,6 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 // Static folders
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/exports', express.static(path.join(__dirname, 'exports')));
+app.use('/images', express.static(path.join(__dirname, '../public/images')));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
@@ -65,6 +67,6 @@ const PORT = process.env.PORT || 5000;
 startCSVScheduler();
 cleanOldCSVFiles();
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
 });
