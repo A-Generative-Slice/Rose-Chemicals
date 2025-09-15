@@ -28,7 +28,7 @@ const upload = multer({
 // Get all products with filtering, sorting and pagination
 exports.getProducts = async (req, res) => {
   try {
-    const pageSize = 12;
+    const pageSize = Number(req.query.limit) || (req.query.page ? 12 : 0); // If no pagination requested, return all
     const page = Number(req.query.page) || 1;
     const keyword = req.query.keyword ? {
       $or: [
@@ -39,10 +39,15 @@ exports.getProducts = async (req, res) => {
 
     const category = req.query.category ? { category: req.query.category } : {};
     const count = await Product.countDocuments({ ...keyword, ...category });
-    const products = await Product.find({ ...keyword, ...category })
-      .limit(pageSize)
-      .skip(pageSize * (page - 1))
-      .sort(req.query.sort || '-createdAt');
+    
+    let query = Product.find({ ...keyword, ...category }).sort(req.query.sort || '-createdAt');
+    
+    // Only apply pagination if pageSize > 0
+    if (pageSize > 0) {
+      query = query.limit(pageSize).skip(pageSize * (page - 1));
+    }
+    
+    const products = await query;
 
     res.json({
       success: true,
