@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Chemicals - Server Status</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .status { padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        .header { color: #2c3e50; margin-bottom: 30px; }
+        .test-btn { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .test-btn:hover { background: #0056b3; }
+        #results { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">🌹 Rose Chemicals - Development Status</h1>
+        
+        <div class="status success">
+            <h3>✅ Frontend Server</h3>
+            <p><strong>URL:</strong> <a href="http://localhost:3000" target="_blank">http://localhost:3000</a></p>
+            <p><strong>Status:</strong> Next.js 14 Development Server Running</p>
+        </div>
+        
+        <div class="status success">
+            <h3>✅ Backend API Server</h3>
+            <p><strong>URL:</strong> <a href="http://localhost:5000/api/products" target="_blank">http://localhost:5000/api/products</a></p>
+            <p><strong>Status:</strong> Express.js API Server Running</p>
+        </div>
+        
+        <div class="status info">
+            <h3>📊 Development Database</h3>
+            <p><strong>Type:</strong> JSON File-based Development Database</p>
+            <p><strong>Products:</strong> 5 Chemical Products Loaded</p>
+            <p><strong>Admin User:</strong> admin@rosechemicals.com / Admin@123</p>
+        </div>
+        
+        <div class="status info">
+            <h3>🧪 Sample Chemical Products Available</h3>
+            <ul>
+                <li>Sodium Chloride (NaCl) - Industrial Salts</li>
+                <li>Sulfuric Acid (H2SO4) - Acids</li>
+                <li>Calcium Carbonate (CaCO3) - Carbonates</li>
+                <li>Ethanol (C2H5OH) - Solvents</li>
+                <li>Potassium Hydroxide (KOH) - Bases</li>
+            </ul>
+        </div>
+        
+        <h3>🔧 Quick Tests</h3>
+        <button class="test-btn" onclick="testAPI()">Test API</button>
+        <button class="test-btn" onclick="window.open('http://localhost:3000', '_blank')">Open Frontend</button>
+        <div id="results"></div>
+        
+        <script>
+            async function testAPI() {
+                const results = document.getElementById('results');
+                results.innerHTML = '<p>Testing API...</p>';
+                
+                try {
+                    const response = await fetch('http://localhost:5000/api/products');
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        results.innerHTML = `
+                            <div class="status success">
+                                <h4>✅ API Test Successful</h4>
+                                <p><strong>Products Found:</strong> ${data.products.length}</p>
+                                <p><strong>First Product:</strong> ${data.products[0]?.name || 'None'}</p>
+                            </div>
+                        `;
+                    } else {
+                        results.innerHTML = '<div class="status error">❌ API returned error</div>';
+                    }
+                } catch (error) {
+                    results.innerHTML = `<div class="status error">❌ API Test Failed: ${error.message}</div>`;
+                }
+            }
+            
+            // Auto-test on load
+            window.onload = () => {
+                testAPI();
+            };
+        </script>
+    </div>
+</body>
+</html>

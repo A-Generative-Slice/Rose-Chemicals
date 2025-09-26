@@ -1,0 +1,39 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start Frontend Dev Server",
+			"type": "shell",
+			"command": "npm run dev",
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start Backend Dev Server",
+			"type": "shell",
+			"command": "cd backend; npm run dev",
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start Both Servers",
+			"dependsOrder": "parallel",
+			"dependsOn": [
+				"Start Frontend Dev Server",
+				"Start Backend Dev Server"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Rose Chemicals - Full Stack",
+			"type": "shell",
+			"command": "npm",
+			"args": ["run", "dev:all"],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

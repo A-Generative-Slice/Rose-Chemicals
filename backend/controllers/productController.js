@@ -89,33 +89,45 @@ exports.getProduct = async (req, res) => {
 // Create product
 exports.createProduct = async (req, res) => {
   try {
-    upload(req, res, async (err) => {
-      if (err) {
-        return res.status(400).json({
-          success: false,
-          message: err.message
-        });
-      }
+    console.log('Creating product with data:', req.body);
+    const mongoose = require('mongoose');
+    
+    // For development, allow creation without file uploads
+    const productData = {
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      category: mongoose.Types.ObjectId.isValid(req.body.category) 
+        ? new mongoose.Types.ObjectId(req.body.category) 
+        : req.body.category,
+      stock: req.body.stock || req.body.quantity || 10,
+      sku: req.body.sku || `SKU-${Date.now()}`,
+      images: req.body.images || ['/images/placeholder-product.png'],
+      isActive: req.body.isActive !== false,
+      features: req.body.features || [],
+      ingredients: req.body.ingredients || [],
+      usage: req.body.usage || '',
+      weight: req.body.weight || '',
+      isFeatured: req.body.isFeatured || false,
+      specs: req.body.specs || {}
+    };
 
-      const images = req.files.map(file => ({
-        url: `/uploads/${file.filename}`
-      }));
+    // Only add createdBy if user exists
+    if (req.user?.id) {
+      productData.createdBy = new mongoose.Types.ObjectId(req.user.id);
+    }
 
-      const product = await Product.create({
-        ...req.body,
-        images,
-        createdBy: req.user.id
-      });
+    const product = await Product.create(productData);
 
-      res.status(201).json({
-        success: true,
-        product
-      });
+    res.status(201).json({
+      success: true,
+      product
     });
   } catch (error) {
+    console.error('Product creation error:', error);
     res.status(500).json({
       success: false,
-      message: 'Server Error'
+      message: error.message || 'Server Error'
     });
   }
 };

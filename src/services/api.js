@@ -1,6 +1,6 @@
 // API Service for Rose Chemicals E-commerce Frontend
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
 
 // Helper function to get auth token
 const getAuthToken = () => {
@@ -10,7 +10,7 @@ const getAuthToken = () => {
   return null;
 };
 
-// Helper function to make API requests
+// Helper function to make API requests with retry logic
 const apiRequest = async (endpoint, options = {}) => {
   const url = `${API_BASE_URL}${endpoint}`;
   const token = getAuthToken();
@@ -29,18 +29,43 @@ const apiRequest = async (endpoint, options = {}) => {
     delete config.headers['Content-Type'];
   }
 
-  try {
-    const response = await fetch(url, config);
-    const data = await response.json();
+  // Retry logic for network failures
+  const maxRetries = 3;
+  let lastError;
 
-    if (!response.ok) {
-      throw new Error(data.message || 'Something went wrong');
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch(url, config);
+      
+      // Check if response is ok
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({ message: 'Server error' }));
+        throw new Error(data.message || `HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      lastError = error;
+      
+      // Don't retry for auth errors or client errors (4xx)
+      if (error.message.includes('401') || error.message.includes('403') || error.message.includes('404')) {
+        throw error;
+      }
+      
+      // If it's a network error and we have retries left, wait and retry
+      if (attempt < maxRetries && (error.name === 'TypeError' || error.message.includes('Failed to fetch'))) {
+        console.warn(`API request failed (attempt ${attempt}/${maxRetries}), retrying...`, error.message);
+        await new Promise(resolve => setTimeout(resolve, attempt * 1000)); // Progressive delay
+        continue;
+      }
+      
+      // If all retries exhausted or it's not a network error, throw
+      break;
     }
-
-    return data;
-  } catch (error) {
-    throw error;
   }
+  
+  throw lastError;
 };
 
 // Authentication API

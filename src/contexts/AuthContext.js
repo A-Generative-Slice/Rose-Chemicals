@@ -35,6 +35,8 @@ export const AuthProvider = ({ children }) => {
       try {
         const token = localStorage.getItem('token');
         if (token) {
+          // Add a small delay to ensure backend is ready
+          await new Promise(resolve => setTimeout(resolve, 1000));
           const userData = await authAPI.getCurrentUser();
           dispatch({ type: 'SET_USER', payload: userData.user });
         } else {
@@ -42,7 +44,12 @@ export const AuthProvider = ({ children }) => {
         }
       } catch (error) {
         console.error('Auth check failed:', error);
-        localStorage.removeItem('token');
+        // Don't remove token immediately - might be a temporary network issue
+        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+          console.warn('Network error during auth check, keeping token for retry');
+        } else {
+          localStorage.removeItem('token');
+        }
         dispatch({ type: 'SET_LOADING', payload: false });
       }
     };

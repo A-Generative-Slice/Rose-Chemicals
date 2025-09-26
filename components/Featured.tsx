@@ -24,9 +24,7 @@ export default function Featured() {
   const loadProducts = async () => {
     try {
       setLoading(true)
-      const apiUrl = process.env.NODE_ENV === 'production' 
-        ? '/api/products' 
-        : 'https://potential-umbrella-wrrgv6xp6479hgwxr-5000.app.github.dev/api/products'
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL + '/products'
       
       const response = await fetch(apiUrl, {
         method: 'GET',

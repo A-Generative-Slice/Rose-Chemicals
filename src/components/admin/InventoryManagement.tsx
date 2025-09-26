@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { productAPI } from '@/services/api';
+import { productsAPI } from '@/services/api';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import LoadingSkeleton from '@/components/ui/LoadingSkeleton';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
+import ProductForm from './ProductForm';
 
 interface Product {
   _id: string;
@@ -26,6 +27,8 @@ const InventoryManagement: React.FC = () => {
   const [filterCategory, setFilterCategory] = useState('');
   const [stockFilter, setStockFilter] = useState('all');
   const [updating, setUpdating] = useState<string | null>(null);
+  const [showProductForm, setShowProductForm] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<string | null>(null);
 
   useEffect(() => {
     loadProducts();
@@ -35,7 +38,7 @@ const InventoryManagement: React.FC = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await productAPI.getAll({ limit: 100 });
+      const response = await productsAPI.getProducts({ limit: 100 });
       setProducts(response.products || []);
     } catch (err: any) {
       setError(err.message || 'Failed to load products');
@@ -47,7 +50,7 @@ const InventoryManagement: React.FC = () => {
   const updateStock = async (productId: string, newStock: number) => {
     try {
       setUpdating(productId);
-      await productAPI.update(productId, { stock: newStock });
+      await productsAPI.updateProduct(productId, { stock: newStock });
       
       setProducts(prev => 
         prev.map(product => 
@@ -66,7 +69,7 @@ const InventoryManagement: React.FC = () => {
   const toggleProductStatus = async (productId: string, isActive: boolean) => {
     try {
       setUpdating(productId);
-      await productAPI.update(productId, { isActive });
+      await productsAPI.updateProduct(productId, { isActive });
       
       setProducts(prev => 
         prev.map(product => 
@@ -107,6 +110,22 @@ const InventoryManagement: React.FC = () => {
     return { color: 'text-green-600', bg: 'bg-green-100', label: 'In Stock' };
   };
 
+  const handleProductSave = (product: any) => {
+    loadProducts(); // Refresh the product list
+    setShowProductForm(false);
+    setEditingProduct(null);
+  };
+
+  const handleProductCancel = () => {
+    setShowProductForm(false);
+    setEditingProduct(null);
+  };
+
+  const handleEditProduct = (productId: string) => {
+    setEditingProduct(productId);
+    setShowProductForm(true);
+  };
+
   if (loading) {
     return (
       <div className="p-6">
@@ -126,16 +145,35 @@ const InventoryManagement: React.FC = () => {
     );
   }
 
+  // Show product form if needed
+  if (showProductForm) {
+    return (
+      <ProductForm
+        productId={editingProduct || undefined}
+        onSave={handleProductSave}
+        onCancel={handleProductCancel}
+      />
+    );
+  }
+
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Inventory Management</h1>
-        <button
-          onClick={loadProducts}
-          className="bg-rose-600 text-white px-4 py-2 rounded-lg hover:bg-rose-700 transition-colors"
-        >
-          Refresh
-        </button>
+        <div className="flex space-x-3">
+          <button
+            onClick={() => setShowProductForm(true)}
+            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+          >
+            + Add Product
+          </button>
+          <button
+            onClick={loadProducts}
+            className="bg-rose-600 text-white px-4 py-2 rounded-lg hover:bg-rose-700 transition-colors"
+          >
+            Refresh
+          </button>
+        </div>
       </div>
 
       {/* Filters */}
@@ -264,7 +302,7 @@ const InventoryManagement: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <button
                         className="text-rose-600 hover:text-rose-900 mr-3"
-                        onClick={() => window.open(`/admin/products/${product._id}/edit`, '_blank')}
+                        onClick={() => handleEditProduct(product._id)}
                       >
                         Edit
                       </button>
