@@ -19,12 +19,9 @@ const validateProduct = [
   check('stock', 'Stock must be a non-negative number').isInt({ min: 0 })
 ];
 
-// Public routes
-router.get('/', getProducts);
-router.get('/:id', getProduct);
-
-// Get categories (public route)
+// Get categories (public route) - MUST be before /:id route
 router.get('/categories', async (req, res) => {
+  console.log('Categories endpoint hit');
   try {
     // Try to get categories from Category model first
     const Category = require('../models/Category');
@@ -48,9 +45,14 @@ router.get('/categories', async (req, res) => {
   }
 });
 
+// Public routes
+router.get('/', getProducts);
+router.get('/:id', getProduct);
+
 // Protected routes (temporarily disabled auth for development)
 router.post('/', createProduct);
 router.put('/:id', updateProduct);
+router.patch('/:id', updateProduct);  // Add PATCH method
 router.delete('/:id', deleteProduct);
 
 // Development only - clear all products and get categories

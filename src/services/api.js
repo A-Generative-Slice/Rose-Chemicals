@@ -112,15 +112,27 @@ export const productsAPI = {
   createProduct: (productData) => 
     apiRequest('/products', {
       method: 'POST',
-      body: productData, // FormData for file uploads
+      body: JSON.stringify(productData),
     }),
 
   // Update product (admin only)
-  updateProduct: (id, productData) => 
-    apiRequest(`/products/${id}`, {
+  updateProduct: (id, productData) => {
+    const options = {
       method: 'PATCH',
-      body: productData instanceof FormData ? productData : JSON.stringify(productData),
-    }),
+    };
+    
+    if (productData instanceof FormData) {
+      options.body = productData;
+      // Don't set Content-Type for FormData - let browser set it
+    } else {
+      options.body = JSON.stringify(productData);
+      options.headers = {
+        'Content-Type': 'application/json',
+      };
+    }
+    
+    return apiRequest(`/products/${id}`, options);
+  },
 
   // Delete product (admin only)
   deleteProduct: (id) => 

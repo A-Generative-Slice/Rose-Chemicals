@@ -33,8 +33,22 @@ const productSchema = new mongoose.Schema({
     default: 0
   },
   images: [{
-    type: String,
-    required: false
+    url: {
+      type: String,
+      required: true
+    },
+    key: {
+      type: String,
+      required: true
+    },
+    alt: {
+      type: String,
+      default: ''
+    },
+    isPrimary: {
+      type: Boolean,
+      default: false
+    }
   }],
   sku: {
     type: String,
@@ -64,9 +78,19 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  specs: {
-    type: Map,
-    of: String
+  specifications: [{
+    name: {
+      type: String,
+      required: true
+    },
+    value: {
+      type: String,
+      required: true
+    }
+  }],
+  detailedDescription: {
+    type: String,
+    required: false
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,

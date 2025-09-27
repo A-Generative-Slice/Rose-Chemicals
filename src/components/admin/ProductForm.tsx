@@ -3,17 +3,28 @@
 import React, { useState, useEffect } from 'react';
 import { productsAPI } from '../../services/api';
 
+interface ProductImage {
+  url: string;
+  key: string;
+  alt: string;
+  isPrimary: boolean;
+}
+
 interface ProductFormData {
   name: string;
   description: string;
+  detailedDescription?: string;
   price: number;
+  mrp?: number;
   category: string;
   stock: number;
   sku: string;
-  images: string[];
+  images: ProductImage[];
   isActive: boolean;
-  specifications?: Record<string, string>;
+  specifications?: Array<{name: string, value: string}>;
   features?: string[];
+  usage?: string;
+  weight?: string;
 }
 
 interface ProductFormProps {
@@ -26,20 +37,26 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
   const [formData, setFormData] = useState<ProductFormData>({
     name: '',
     description: '',
+    detailedDescription: '',
     price: 0,
+    mrp: 0,
     category: '',
     stock: 0,
     sku: '',
     images: [],
     isActive: true,
-    specifications: {},
-    features: []
+    specifications: [],
+    features: [],
+    usage: '',
+    weight: ''
   });
 
   const [categories, setCategories] = useState<Array<{_id: string, name: string, slug: string}>>([]);
 
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
+  const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
+  const [uploadingImages, setUploadingImages] = useState(false);
   const [newFeature, setNewFeature] = useState('');
   const [specKey, setSpecKey] = useState('');
   const [specValue, setSpecValue] = useState('');
@@ -99,18 +116,25 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
   const loadProduct = async () => {
     try {
       setLoading(true);
-      const product = await productsAPI.getProduct(productId!);
+      const response = await productsAPI.getProduct(productId!);
+      // Handle both direct product and wrapped response
+      const product = response.product || response;
+      
       setFormData({
         name: product.name || '',
         description: product.description || '',
+        detailedDescription: product.detailedDescription || '',
         price: product.price || 0,
-        category: product.category || '',
+        mrp: product.mrp || product.price || 0,
+        category: product.category?._id || product.category || '',
         stock: product.stock || 0,
         sku: product.sku || '',
-        images: product.images || [],
+        images: Array.isArray(product.images) ? product.images : [],
         isActive: product.isActive !== false,
-        specifications: product.specifications || {},
-        features: product.features || []
+        specifications: Array.isArray(product.specifications) ? product.specifications : [],
+        features: Array.isArray(product.features) ? product.features : [],
+        usage: product.usage || '',
+        weight: product.weight || ''
       });
     } catch (error) {
       console.error('Error loading product:', error);
@@ -137,13 +161,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
         stock: Number(formData.stock)
       };
 
-      let savedProduct;
+      let response;
       if (productId) {
-        savedProduct = await productsAPI.updateProduct(productId, productData);
+        response = await productsAPI.updateProduct(productId, productData);
       } else {
-        savedProduct = await productsAPI.createProduct(productData);
+        response = await productsAPI.createProduct(productData);
       }
       
+      // Handle response properly - get the product from the response
+      const savedProduct = response.product || response;
       onSave(savedProduct);
       alert(productId ? 'Product updated successfully!' : 'Product created successfully!');
     } catch (error) {
@@ -154,11 +180,83 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
     }
   };
 
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedFiles(e.target.files);
+  };
+
+  const uploadImages = async () => {
+    if (!selectedFiles || selectedFiles.length === 0) {
+      alert('Please select images to upload');
+      return;
+    }
+
+    try {
+      setUploadingImages(true);
+      const formDataUpload = new FormData();
+      
+      for (let i = 0; i < selectedFiles.length; i++) {
+        formDataUpload.append('images', selectedFiles[i]);
+      }
+
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+      let response = await fetch(`${apiUrl}/upload/multiple`, {
+        method: 'POST',
+        body: formDataUpload
+      });
+
+      // If S3 upload fails, try local upload
+      if (!response.ok) {
+        console.log('S3 upload failed, trying local upload...');
+        response = await fetch(`${apiUrl}/upload/local/multiple`, {
+          method: 'POST',
+          body: formDataUpload
+        });
+      }
+
+      const result = await response.json();
+      
+      if (result.success) {
+        const newImages = result.images.map((img: any, index: number) => ({
+          url: img.url,
+          key: img.key,
+          alt: '',
+          isPrimary: formData.images.length === 0 && index === 0 // Only first image is primary if no existing images
+        }));
+
+        setFormData(prev => ({
+          ...prev,
+          images: [...prev.images, ...newImages]
+        }));
+
+        // Clear file input
+        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+        if (fileInput) fileInput.value = '';
+        setSelectedFiles(null);
+        
+        alert(`${result.images.length} images uploaded successfully!`);
+      } else {
+        alert('Failed to upload images: ' + result.message);
+      }
+    } catch (error) {
+      console.error('Error uploading images:', error);
+      alert('Failed to upload images. Please try again.');
+    } finally {
+      setUploadingImages(false);
+    }
+  };
+
   const addImage = () => {
     if (imageUrl.trim()) {
+      const newImage = {
+        url: imageUrl.trim(),
+        key: `manual-${Date.now()}`,
+        alt: '',
+        isPrimary: formData.images.length === 0
+      };
+      
       setFormData(prev => ({
         ...prev,
-        images: [...prev.images, imageUrl.trim()]
+        images: [...prev.images, newImage]
       }));
       setImageUrl('');
     }
@@ -168,6 +266,16 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
     setFormData(prev => ({
       ...prev,
       images: prev.images.filter((_, i) => i !== index)
+    }));
+  };
+
+  const setPrimaryImage = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      images: prev.images.map((img, i) => ({
+        ...img,
+        isPrimary: i === index
+      }))
     }));
   };
 
@@ -192,25 +300,21 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
     if (specKey.trim() && specValue.trim()) {
       setFormData(prev => ({
         ...prev,
-        specifications: {
-          ...prev.specifications,
-          [specKey.trim()]: specValue.trim()
-        }
+        specifications: [
+          ...(prev.specifications || []),
+          { name: specKey.trim(), value: specValue.trim() }
+        ]
       }));
       setSpecKey('');
       setSpecValue('');
     }
   };
 
-  const removeSpecification = (key: string) => {
-    setFormData(prev => {
-      const newSpecs = { ...prev.specifications };
-      delete newSpecs[key];
-      return {
-        ...prev,
-        specifications: newSpecs
-      };
-    });
+  const removeSpecification = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      specifications: (prev.specifications || []).filter((_, i) => i !== index)
+    }));
   };
 
   return (
@@ -322,20 +426,60 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
               Product Images
             </label>
             <div className="space-y-3">
+              {/* File Upload */}
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
+                <div className="text-center">
+                  <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <div className="mt-4">
+                    <label htmlFor="file-upload" className="cursor-pointer">
+                      <span className="mt-2 block text-sm font-medium text-gray-900">
+                        Upload product images
+                      </span>
+                      <input
+                        id="file-upload"
+                        name="file-upload"
+                        type="file"
+                        className="sr-only"
+                        multiple
+                        accept="image/*"
+                        onChange={handleFileSelect}
+                      />
+                    </label>
+                    <p className="mt-1 text-xs text-gray-500">PNG, JPG, WEBP up to 5MB each</p>
+                  </div>
+                  {selectedFiles && (
+                    <div className="mt-3">
+                      <p className="text-sm text-gray-600">{selectedFiles.length} file(s) selected</p>
+                      <button
+                        type="button"
+                        onClick={uploadImages}
+                        disabled={uploadingImages}
+                        className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                      >
+                        {uploadingImages ? 'Uploading...' : `Upload ${selectedFiles.length} Images`}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* URL Input (alternative) */}
               <div className="flex gap-2">
                 <input
                   type="url"
                   value={imageUrl}
                   onChange={(e) => setImageUrl(e.target.value)}
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
-                  placeholder="Enter image URL"
+                  placeholder="Or enter image URL"
                 />
                 <button
                   type="button"
                   onClick={addImage}
                   className="px-4 py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700"
                 >
-                  Add
+                  Add URL
                 </button>
               </div>
               
@@ -344,13 +488,25 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
                   {formData.images.map((img, index) => (
                     <div key={index} className="relative">
                       <img
-                        src={img}
-                        alt={`Product ${index + 1}`}
+                        src={img.url}
+                        alt={img.alt || `Product ${index + 1}`}
                         className="w-full h-24 object-cover rounded-lg border"
                         onError={(e) => {
                           e.currentTarget.src = '/images/placeholder-product.svg';
                         }}
                       />
+                      {img.isPrimary && (
+                        <span className="absolute top-1 left-1 bg-blue-500 text-white text-xs px-1 rounded">
+                          Primary
+                        </span>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => setPrimaryImage(index)}
+                        className="absolute bottom-1 left-1 bg-blue-500 text-white text-xs px-1 rounded hover:bg-blue-600"
+                      >
+                        Set Primary
+                      </button>
                       <button
                         type="button"
                         onClick={() => removeImage(index)}
@@ -439,14 +595,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
                 </div>
               </div>
               
-              {formData.specifications && Object.keys(formData.specifications).length > 0 && (
+              {formData.specifications && formData.specifications.length > 0 && (
                 <div className="space-y-2">
-                  {Object.entries(formData.specifications).map(([key, value]) => (
-                    <div key={key} className="flex items-center justify-between bg-gray-50 px-3 py-2 rounded-lg">
-                      <span className="text-sm"><strong>{key}:</strong> {value}</span>
+                  {formData.specifications.map((spec, index) => (
+                    <div key={index} className="flex items-center justify-between bg-gray-50 px-3 py-2 rounded-lg">
+                      <span className="text-sm"><strong>{spec.name}:</strong> {spec.value}</span>
                       <button
                         type="button"
-                        onClick={() => removeSpecification(key)}
+                        onClick={() => removeSpecification(index)}
                         className="text-red-500 hover:text-red-700"
                       >
                         Remove

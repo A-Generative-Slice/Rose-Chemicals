@@ -3,64 +3,19 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Minus, Plus, ShoppingBag, MessageSquare } from 'lucide-react';
+import { ArrowLeft, Minus, Plus, ShoppingBag, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react';
 import Header from '../../../components/Header';
 import { useCart } from '../../../src/contexts/CartContext';
 import { useAuth } from '../../../src/contexts/AuthContext';
 import { productsAPI } from '../../../src/services/api';
 
-// Mock product data - in real app this would come from API
-const MOCK_PRODUCTS = {
-  '1': {
-    id: '1',
-    name: 'Delux Nice Broom',
-    price: 115,
-    image: '/images/BROOMS/164. DELUX NICE BROOM 115.png',
-    category: 'Brooms',
-    description: 'High-quality deluxe broom perfect for everyday cleaning. Made with durable materials for long-lasting performance.',
-    features: [
-      'Durable construction',
-      'Ergonomic handle',
-      'Effective cleaning bristles',
-      'Suitable for all floor types'
-    ],
-    specifications: {
-      'Material': 'Premium synthetic bristles',
-      'Handle Length': '120cm',
-      'Weight': '450g',
-      'Color': 'Natural'
-    },
-    inStock: true,
-    stockQuantity: 50
-  },
-  '2': {
-    id: '2',
-    name: 'Sitara Broom',
-    price: 84,
-    image: '/images/BROOMS/166. SITARA BROOM- 84.png',
-    category: 'Brooms',
-    description: 'Reliable and efficient broom for regular household cleaning tasks.',
-    features: [
-      'Traditional design',
-      'Natural bristles',
-      'Lightweight',
-      'Cost-effective'
-    ],
-    specifications: {
-      'Material': 'Natural bristles',
-      'Handle Length': '110cm',
-      'Weight': '380g',
-      'Color': 'Natural'
-    },
-    inStock: true,
-    stockQuantity: 75
-  }
-};
+// No mock data needed - we'll fetch from API
 
 export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
   const [product, setProduct] = useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [addingToCart, setAddingToCart] = useState(false);
@@ -70,10 +25,11 @@ export default function ProductDetailPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        // For now, use mock data. In real app, use: await productsAPI.getProduct(params.id)
-        const productData = MOCK_PRODUCTS[params.id as string];
-        if (productData) {
-          setProduct(productData);
+        const response = await productsAPI.getProduct(params.id as string);
+        if (response.success && response.product) {
+          setProduct(response.product);
+          // Reset selected image when product changes
+          setSelectedImageIndex(0);
         } else {
           router.push('/404');
         }
@@ -99,7 +55,7 @@ export default function ProductDetailPage() {
 
     try {
       setAddingToCart(true);
-      await addToCart(product.id, quantity);
+      await addToCart(product._id, quantity);
       alert('Product added to cart!');
     } catch (error) {
       console.error('Error adding to cart:', error);
@@ -110,10 +66,40 @@ export default function ProductDetailPage() {
   };
 
   const handleQuantityChange = (newQuantity: number) => {
-    if (newQuantity >= 1 && newQuantity <= product?.stockQuantity) {
+    if (newQuantity >= 1 && newQuantity <= product?.stock) {
       setQuantity(newQuantity);
     }
   };
+
+  const handlePreviousImage = () => {
+    if (product?.images && product.images.length > 1) {
+      setSelectedImageIndex((prev) => 
+        prev === 0 ? product.images.length - 1 : prev - 1
+      );
+    }
+  };
+
+  const handleNextImage = () => {
+    if (product?.images && product.images.length > 1) {
+      setSelectedImageIndex((prev) => 
+        prev === product.images.length - 1 ? 0 : prev + 1
+      );
+    }
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        handlePreviousImage();
+      } else if (e.key === 'ArrowRight') {
+        handleNextImage();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [product]);
 
   if (loading) {
     return (
@@ -157,35 +143,135 @@ export default function ProductDetailPage() {
             Back to Products
           </Link>
           <span className="text-gray-400">/</span>
-          <span className="text-gray-600">{product.category}</span>
+          <span className="text-gray-600">
+            {typeof product.category === 'object' && product.category?.name
+              ? product.category.name 
+              : typeof product.category === 'string' 
+                ? product.category 
+                : 'Uncategorized'}
+          </span>
           <span className="text-gray-400">/</span>
           <span className="text-gray-900 font-medium">{product.name}</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Product Image */}
-          <div className="bg-white rounded-lg p-8 shadow-sm">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-96 object-contain"
-              onError={(e) => {
-                e.currentTarget.src = '/images/placeholder-product.png';
-              }}
-            />
+          {/* Product Images */}
+          <div className="bg-white rounded-lg p-8 shadow-sm space-y-4">
+            {/* Main Image */}
+            <div className="relative w-full h-96 bg-gray-100 rounded-lg overflow-hidden group">
+              {product.images && product.images.length > 0 ? (
+                <>
+                  <img
+                    src={
+                      (() => {
+                        const selectedImage = product.images[selectedImageIndex];
+                        const imageUrl = selectedImage?.url || product.images[0].url;
+                        return imageUrl?.startsWith('/uploads/') ? 
+                          `/api/image-proxy?path=${imageUrl.replace('/uploads/', '')}` :
+                          imageUrl;
+                      })()
+                    }
+                    alt={product.images[selectedImageIndex]?.alt || product.name}
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/placeholder-product.png';
+                    }}
+                  />
+                  
+                  {/* Navigation Arrows */}
+                  {product.images.length > 1 && (
+                    <>
+                      <button
+                        onClick={handlePreviousImage}
+                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      >
+                        <ChevronLeft size={20} className="text-gray-700" />
+                      </button>
+                      <button
+                        onClick={handleNextImage}
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      >
+                        <ChevronRight size={20} className="text-gray-700" />
+                      </button>
+                    </>
+                  )}
+
+                  {/* Image Counter */}
+                  {product.images.length > 1 && (
+                    <div className="absolute bottom-2 right-2 bg-black bg-opacity-60 text-white px-2 py-1 rounded text-sm">
+                      {selectedImageIndex + 1} / {product.images.length}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-gray-400">
+                  <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              )}
+            </div>
+
+            {/* Thumbnail Images */}
+            {product.images && product.images.length > 1 && (
+              <div className="flex space-x-2 overflow-x-auto pb-2">
+                {product.images.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImageIndex(index)}
+                    className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                      selectedImageIndex === index 
+                        ? 'border-primary ring-2 ring-primary ring-opacity-50 scale-105' 
+                        : 'border-gray-200 hover:border-gray-400'
+                    }`}
+                  >
+                    <img
+                      src={
+                        image.url?.startsWith('/uploads/') ? 
+                          `/api/image-proxy?path=${image.url.replace('/uploads/', '')}` :
+                          image.url
+                      }
+                      alt={image.alt || `${product.name} ${index + 1}`}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = '/images/placeholder-product.png';
+                      }}
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Product Details */}
           <div className="space-y-6">
             <div>
-              <p className="text-sm text-gray-500 uppercase tracking-wide">{product.category}</p>
+              <p className="text-sm text-gray-500 uppercase tracking-wide">
+                {typeof product.category === 'object' && product.category?.name
+                  ? product.category.name 
+                  : typeof product.category === 'string' 
+                    ? product.category 
+                    : 'Uncategorized'}
+              </p>
               <h1 className="text-3xl font-bold text-gray-900 mt-2">{product.name}</h1>
-              <p className="text-2xl font-semibold text-primary mt-4">₹{product.price}</p>
+              <div className="flex items-center space-x-4 mt-4">
+                <p className="text-2xl font-semibold text-primary">₹{product.price}</p>
+                {product.mrp && product.mrp > product.price && (
+                  <>
+                    <span className="text-lg text-gray-500 line-through">₹{product.mrp}</span>
+                    <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">
+                      {Math.round(((product.mrp - product.price) / product.mrp) * 100)}% OFF
+                    </span>
+                  </>
+                )}
+              </div>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Description</h3>
-              <p className="text-gray-600 leading-relaxed">{product.description}</p>
+              <p className="text-gray-600 leading-relaxed">
+                {product.detailedDescription || product.description}
+              </p>
             </div>
 
             <div>
@@ -200,30 +286,32 @@ export default function ProductDetailPage() {
               </ul>
             </div>
 
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Specifications</h3>
-              <div className="bg-gray-50 rounded-lg p-4">
-                <dl className="space-y-2">
-                  {Object.entries(product.specifications).map(([key, value]) => (
-                    <div key={key} className="flex justify-between">
-                      <dt className="text-gray-600">{key}:</dt>
-                      <dd className="text-gray-900 font-medium">{String(value)}</dd>
-                    </div>
-                  ))}
-                </dl>
+            {product.specifications && product.specifications.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Specifications</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <dl className="space-y-2">
+                    {product.specifications.map((spec, index) => (
+                      <div key={index} className="flex justify-between">
+                        <dt className="text-gray-600">{spec.name}:</dt>
+                        <dd className="text-gray-900 font-medium">{spec.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Stock Status */}
             <div className="flex items-center gap-2">
-              <div className={`w-3 h-3 rounded-full ${product.inStock ? 'bg-green-500' : 'bg-red-500'}`}></div>
-              <span className={`text-sm font-medium ${product.inStock ? 'text-green-700' : 'text-red-700'}`}>
-                {product.inStock ? `In Stock (${product.stockQuantity} available)` : 'Out of Stock'}
+              <div className={`w-3 h-3 rounded-full ${product.stock > 0 ? 'bg-green-500' : 'bg-red-500'}`}></div>
+              <span className={`text-sm font-medium ${product.stock > 0 ? 'text-green-700' : 'text-red-700'}`}>
+                {product.stock > 0 ? `In Stock (${product.stock} available)` : 'Out of Stock'}
               </span>
             </div>
 
             {/* Quantity and Add to Cart */}
-            {product.inStock && (
+            {product.stock > 0 && (
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
@@ -238,7 +326,7 @@ export default function ProductDetailPage() {
                     <span className="w-16 text-center font-medium">{quantity}</span>
                     <button
                       onClick={() => handleQuantityChange(quantity + 1)}
-                      disabled={quantity >= product.stockQuantity}
+                      disabled={quantity >= product.stock}
                       className="p-2 rounded-full border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <Plus size={16} />

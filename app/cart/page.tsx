@@ -130,7 +130,11 @@ export default function CartPage() {
                             {item.product.name}
                           </Link>
                           <p className="text-sm text-gray-500 mt-1">
-                            {item.product.category}
+                            {typeof item.product.category === 'object' && item.product.category?.name
+                              ? item.product.category.name 
+                              : typeof item.product.category === 'string' 
+                                ? item.product.category 
+                                : 'Uncategorized'}
                           </p>
                           <p className="text-lg font-semibold text-gray-900 mt-2">
                             ₹{item.product.price}

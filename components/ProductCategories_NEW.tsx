@@ -7,7 +7,7 @@ interface Product {
   _id: string;
   name: string;
   price: number;
-  category: string;
+  category: string | { _id: string; name: string; slug: string };
   description: string;
   images: string[];
   sku: string;
@@ -72,7 +72,10 @@ export default function ProductCategories() {
     if (activeCategory === 'all') {
       return products
     }
-    return products.filter(product => product.category === activeCategory)
+    return products.filter(product => {
+      const categoryName = typeof product.category === 'object' ? product.category.name : product.category;
+      return categoryName === activeCategory;
+    });
   }
 
   // Get product count for a category
@@ -80,12 +83,17 @@ export default function ProductCategories() {
     if (categoryKey === 'all') {
       return products.length
     }
-    return products.filter(product => product.category === categoryKey).length
+    return products.filter(product => {
+      const categoryName = typeof product.category === 'object' ? product.category.name : product.category;
+      return categoryName === categoryKey;
+    }).length;
   }
 
   // Get available categories from products
   const getAvailableCategories = () => {
-    const productCategories = Array.from(new Set(products.map(p => p.category)))
+    const productCategories = Array.from(new Set(products.map(p => 
+      typeof p.category === 'object' ? p.category.name : p.category
+    )));
     return CATEGORIES.filter(cat => 
       cat.key === 'all' || productCategories.includes(cat.key)
     )
@@ -219,7 +227,8 @@ export default function ProductCategories() {
             image: product.images[0] || '/images/placeholder-product.jpg',
             description: product.description,
             sku: product.sku,
-            specifications: product.specifications
+            specifications: product.specifications,
+            category: typeof product.category === 'object' ? product.category.name : product.category
           }} />
         ))}
       </div>

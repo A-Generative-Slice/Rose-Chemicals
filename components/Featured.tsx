@@ -8,7 +8,11 @@ interface Product {
   name: string
   price: number
   image: string
-  category: string
+  category: {
+    _id: string
+    name: string
+    slug: string
+  } | string
   description?: string
 }
 
@@ -51,7 +55,11 @@ export default function Featured() {
 
   // Group products by category
   const groupedProducts = products.reduce((acc, product) => {
-    const category = product.category || 'other'
+    const category = typeof product.category === 'object' && product.category?.name
+      ? product.category.name 
+      : typeof product.category === 'string' 
+        ? product.category 
+        : 'other'
     if (!acc[category]) {
       acc[category] = []
     }

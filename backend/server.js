@@ -46,6 +46,8 @@ app.use('/api/cart', require('./routes/cart'));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/payment', require('./routes/payment'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/upload', require('./routes/upload'));
+app.use('/api/upload', require('./routes/upload-local'));
 
 // Health check
 app.get('/health', (req, res) => {
