@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { 
   Package, 
   Plus, 
@@ -17,13 +17,14 @@ import {
   DollarSign
 } from 'lucide-react';
 import { adminAPI } from '../../services/api';
+import ProductForm from './ProductForm';
 
 interface Product {
   _id: string;
   name: string;
   description: string;
   price: number;
-  category: string;
+  category: string | { _id: string; name: string };
   stock: number;
   images: Array<{ url: string }>;
   isActive: boolean;
@@ -33,14 +34,7 @@ interface Product {
   updatedAt: string;
 }
 
-interface ProductFormData {
-  name: string;
-  description: string;
-  price: string;
-  category: string;
-  stock: string;
-  isActive: boolean;
-}
+
 
 export default function ProductsManagement() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -53,16 +47,6 @@ export default function ProductsManagement() {
   const [totalPages, setTotalPages] = useState(1);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const [formData, setFormData] = useState<ProductFormData>({
-    name: '',
-    description: '',
-    price: '',
-    category: '',
-    stock: '',
-    isActive: true
-  });
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
-  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     fetchProducts();
@@ -89,66 +73,18 @@ export default function ProductsManagement() {
     }
   };
 
-  const validateForm = (): boolean => {
-    const errors: Record<string, string> = {};
-
-    if (!formData.name.trim()) errors.name = 'Product name is required';
-    if (!formData.description.trim()) errors.description = 'Description is required';
-    if (!formData.price || parseFloat(formData.price) <= 0) {
-      errors.price = 'Please enter a valid price';
-    }
-    if (!formData.category.trim()) errors.category = 'Category is required';
-    if (!formData.stock || parseInt(formData.stock) < 0) {
-      errors.stock = 'Please enter a valid stock quantity';
-    }
-
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
+  const handleProductSave = async (product: any) => {
+    await fetchProducts();
+    setShowAddForm(false);
+    setEditingProduct(null);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!validateForm()) return;
-
-    try {
-      setSubmitting(true);
-      
-      const productData = {
-        name: formData.name.trim(),
-        description: formData.description.trim(),
-        price: parseFloat(formData.price),
-        category: formData.category.trim(),
-        stock: parseInt(formData.stock),
-        isActive: formData.isActive
-      };
-
-      if (editingProduct) {
-        await adminAPI.updateProduct(editingProduct._id, productData);
-      } else {
-        await adminAPI.createProduct(productData);
-      }
-
-      await fetchProducts();
-      resetForm();
-      setShowAddForm(false);
-      setEditingProduct(null);
-    } catch (error) {
-      console.error('Error saving product:', error);
-    } finally {
-      setSubmitting(false);
-    }
+  const handleProductCancel = () => {
+    setShowAddForm(false);
+    setEditingProduct(null);
   };
 
   const handleEdit = (product: Product) => {
-    setFormData({
-      name: product.name,
-      description: product.description,
-      price: product.price.toString(),
-      category: product.category,
-      stock: product.stock.toString(),
-      isActive: product.isActive
-    });
     setEditingProduct(product);
     setShowAddForm(true);
   };
@@ -173,18 +109,6 @@ export default function ProductsManagement() {
     }
   };
 
-  const resetForm = () => {
-    setFormData({
-      name: '',
-      description: '',
-      price: '',
-      category: '',
-      stock: '',
-      isActive: true
-    });
-    setFormErrors({});
-  };
-
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
@@ -207,20 +131,40 @@ export default function ProductsManagement() {
     return { color: 'text-green-600', label: 'In Stock' };
   };
 
+  // Helper function to get category name
+  const getCategoryName = (category: string | { _id: string; name: string }): string => {
+    return typeof category === 'string' ? category : category.name;
+  };
+
   // Filter products based on search term
   const filteredProducts = products.filter(product => {
     if (searchTerm) {
       const searchLower = searchTerm.toLowerCase();
+      const categoryName = getCategoryName(product.category);
       return (
         product.name.toLowerCase().includes(searchLower) ||
         product.description.toLowerCase().includes(searchLower) ||
-        product.category.toLowerCase().includes(searchLower)
+        categoryName.toLowerCase().includes(searchLower)
       );
     }
     return true;
   });
 
-  const categories = [...new Set(products.map(product => product.category))];
+  // Build stable category options (id + name). If category is a populated object we use its _id; otherwise fall back to the string.
+  const categoryOptions = useMemo(() => {
+    const map = new Map<string, { id: string; name: string }>();
+    products.forEach(p => {
+      if (p.category) {
+        if (typeof p.category === 'string') {
+          // Could be a name or an ObjectId string; treat as both id & display name for now
+            map.set(p.category, { id: p.category, name: p.category });
+        } else if (p.category._id) {
+          map.set(p.category._id, { id: p.category._id, name: p.category.name });
+        }
+      }
+    });
+    return Array.from(map.values()).sort((a,b) => a.name.localeCompare(b.name));
+  }, [products]);
 
   const sortOptions = [
     { value: 'newest', label: 'Newest First' },
@@ -263,7 +207,6 @@ export default function ProductsManagement() {
         </div>
         <button
           onClick={() => {
-            resetForm();
             setShowAddForm(true);
             setEditingProduct(null);
           }}
@@ -296,9 +239,9 @@ export default function ProductsManagement() {
             className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="all">All Categories</option>
-            {categories.map(category => (
-              <option key={category} value={category}>
-                {category}
+            {categoryOptions.map(cat => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
               </option>
             ))}
           </select>
@@ -346,162 +289,14 @@ export default function ProductsManagement() {
 
       {/* Add/Edit Form Modal */}
       {showAddForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900">
-                  {editingProduct ? 'Edit Product' : 'Add New Product'}
-                </h3>
-                <button
-                  onClick={() => {
-                    setShowAddForm(false);
-                    setEditingProduct(null);
-                    resetForm();
-                  }}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  ×
-                </button>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Product Name */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Product Name *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                      formErrors.name ? 'border-red-300' : 'border-gray-300'
-                    }`}
-                    placeholder="Enter product name"
-                  />
-                  {formErrors.name && (
-                    <p className="text-red-600 text-sm mt-1">{formErrors.name}</p>
-                  )}
-                </div>
-
-                {/* Description */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Description *
-                  </label>
-                  <textarea
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    rows={3}
-                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                      formErrors.description ? 'border-red-300' : 'border-gray-300'
-                    }`}
-                    placeholder="Enter product description"
-                  />
-                  {formErrors.description && (
-                    <p className="text-red-600 text-sm mt-1">{formErrors.description}</p>
-                  )}
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Price */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Price (₹) *
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={formData.price}
-                      onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                        formErrors.price ? 'border-red-300' : 'border-gray-300'
-                      }`}
-                      placeholder="0.00"
-                      min="0"
-                    />
-                    {formErrors.price && (
-                      <p className="text-red-600 text-sm mt-1">{formErrors.price}</p>
-                    )}
-                  </div>
-
-                  {/* Stock */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Stock Quantity *
-                    </label>
-                    <input
-                      type="number"
-                      value={formData.stock}
-                      onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                        formErrors.stock ? 'border-red-300' : 'border-gray-300'
-                      }`}
-                      placeholder="0"
-                      min="0"
-                    />
-                    {formErrors.stock && (
-                      <p className="text-red-600 text-sm mt-1">{formErrors.stock}</p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Category */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Category *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.category}
-                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                      formErrors.category ? 'border-red-300' : 'border-gray-300'
-                    }`}
-                    placeholder="Enter category"
-                  />
-                  {formErrors.category && (
-                    <p className="text-red-600 text-sm mt-1">{formErrors.category}</p>
-                  )}
-                </div>
-
-                {/* Active Status */}
-                <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    id="isActive"
-                    checked={formData.isActive}
-                    onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                  />
-                  <label htmlFor="isActive" className="text-sm text-gray-700">
-                    Product is active and visible to customers
-                  </label>
-                </div>
-
-                {/* Submit Buttons */}
-                <div className="flex gap-3 pt-4">
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-                  >
-                    {submitting ? 'Saving...' : editingProduct ? 'Update Product' : 'Add Product'}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowAddForm(false);
-                      setEditingProduct(null);
-                      resetForm();
-                    }}
-                    className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 overflow-y-auto">
+          <div className="min-h-screen px-4 py-6 flex items-center justify-center">
+            <div className="bg-white rounded-lg max-w-5xl w-full shadow-xl">
+              <ProductForm
+                productId={editingProduct?._id}
+                onSave={handleProductSave}
+                onCancel={handleProductCancel}
+              />
             </div>
           </div>
         </div>
@@ -523,8 +318,8 @@ export default function ProductsManagement() {
           {products.length === 0 && (
             <button
               onClick={() => {
-                resetForm();
                 setShowAddForm(true);
+                setEditingProduct(null);
               }}
               className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
@@ -587,7 +382,7 @@ export default function ProductsManagement() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="px-2 py-1 text-xs bg-gray-100 text-gray-800 rounded-full">
-                        {product.category}
+                        {getCategoryName(product.category)}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

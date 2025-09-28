@@ -13,13 +13,27 @@ router.post('/single', upload.single('image'), (req, res) => {
       });
     }
 
+    // Handle both S3 and local uploads
+    let imageUrl, key;
+    if (req.file.location) {
+      // S3 upload
+      imageUrl = req.file.location;
+      key = req.file.key;
+    } else {
+      // Local upload
+      const baseUrl = `${req.protocol}://${req.get('host')}`;
+      imageUrl = `${baseUrl}/uploads/products/${req.file.filename}`;
+      key = req.file.filename;
+    }
+
     res.json({
       success: true,
       message: 'Image uploaded successfully',
-      imageUrl: req.file.location,
-      key: req.file.key
+      imageUrl: imageUrl,
+      key: key
     });
   } catch (error) {
+    console.error('Upload error:', error);
     res.status(500).json({
       success: false,
       message: 'Error uploading image',
@@ -38,11 +52,25 @@ router.post('/multiple', upload.array('images', 10), (req, res) => {
       });
     }
 
-    const uploadedImages = req.files.map(file => ({
-      url: file.location,
-      key: file.key,
-      originalName: file.originalname
-    }));
+    const uploadedImages = req.files.map(file => {
+      // Handle both S3 and local uploads
+      if (file.location) {
+        // S3 upload
+        return {
+          url: file.location,
+          key: file.key,
+          originalName: file.originalname
+        };
+      } else {
+        // Local upload
+        const baseUrl = `${req.protocol}://${req.get('host')}`;
+        return {
+          url: `${baseUrl}/uploads/products/${file.filename}`,
+          key: file.filename,
+          originalName: file.originalname
+        };
+      }
+    });
 
     res.json({
       success: true,
@@ -50,6 +78,7 @@ router.post('/multiple', upload.array('images', 10), (req, res) => {
       images: uploadedImages
     });
   } catch (error) {
+    console.error('Upload error:', error);
     res.status(500).json({
       success: false,
       message: 'Error uploading images',

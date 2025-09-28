@@ -6,32 +6,47 @@ const morgan = require('morgan');
 const compression = require('compression');
 const path = require('path');
 const { connectDB } = require('./config/database-enhanced');
+// CSV utilities (can be temporarily disabled during diagnostics)
 const { startCSVScheduler, cleanOldCSVFiles } = require('./utils/csvGenerator');
 
 // Initialize express
 const app = express();
 
-// Connect to database (seeding temporarily disabled for testing)
-connectDB().then(async () => {
-  console.log('✅ Database connected, admin functionality ready');
-  
-  // Create admin user if it doesn't exist
-  const User = require('./models/User');
-  const bcrypt = require('bcryptjs');
-  
-  const adminExists = await User.findOne({ email: 'admin@rosechemicals.com' });
-  if (!adminExists) {
-    const hashedPassword = await bcrypt.hash('Admin@123', 12);
-    await User.create({
-      name: 'Admin',
-      email: 'admin@rosechemicals.com',
-      password: hashedPassword,
-      role: 'admin',
-      isActive: true
-    });
-    console.log('✅ Admin user created: admin@rosechemicals.com / Admin@123');
-  }
+// Global diagnostics for silent crashes
+process.on('unhandledRejection', (reason) => {
+  console.error('UNHANDLED REJECTION:', reason);
 });
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION:', err);
+});
+
+// Connect to database (seeding temporarily disabled for testing)
+const dbReady = connectDB()
+  .then(async () => {
+    console.log('✅ Database connected, admin functionality ready');
+    try {
+      // Create admin user if it doesn't exist
+      const User = require('./models/User');
+      const bcrypt = require('bcryptjs');
+      const adminExists = await User.findOne({ email: 'admin@rosechemicals.com' });
+      if (!adminExists) {
+        const hashedPassword = await bcrypt.hash('Admin@123', 12);
+        await User.create({
+          name: 'Admin',
+          email: 'admin@rosechemicals.com',
+          password: hashedPassword,
+          role: 'admin',
+          isActive: true
+        });
+        console.log('✅ Admin user created: admin@rosechemicals.com / Admin@123');
+      }
+    } catch (userErr) {
+      console.error('Admin user bootstrap error:', userErr);
+    }
+  })
+  .catch(err => {
+    console.error('DB connection chain error:', err);
+  });
 
 // Middleware
 app.use(cors());
@@ -73,12 +88,24 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; // .env sets 5001
 
-// Start CSV schedulers
-startCSVScheduler();
-cleanOldCSVFiles();
+// Start CSV schedulers (temporarily disabled for diagnostics)
+if (process.env.ENABLE_CSV_JOBS === 'true') {
+  try { startCSVScheduler(); } catch (e) { console.error('Scheduler start error:', e); }
+  try { cleanOldCSVFiles(); } catch (e) { console.error('CSV cleanup start error:', e); }
+} else {
+  console.log('⏸ CSV schedulers disabled (set ENABLE_CSV_JOBS=true to enable)');
+}
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+// Ensure we only start listening after DB attempt (even if it failed we still expose errors)
+Promise.resolve(dbReady).finally(() => {
+  const server = app.listen(PORT, '0.0.0.0', () => {
+    const addr = server.address();
+    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+    console.log('Listening address info:', addr);
+  });
+  server.on('error', (err) => {
+    console.error('HTTP server error:', err);
+  });
 });

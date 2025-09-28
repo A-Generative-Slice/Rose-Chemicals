@@ -81,11 +81,41 @@ router.get('/export/products', exportProducts);
 // User management
 router.get('/users', getAllUsers);
 router.patch('/users/:userId/status', validateUserStatus, updateUserStatus);
+// Recent users (simple, non-paginated list for dashboard)
+router.get('/users/recent', async (req, res) => {
+  try {
+    const User = require('../models/User');
+    const limit = parseInt(req.query.limit) || 5;
+    const users = await User.find({ role: { $ne: 'admin' } })
+      .sort('-createdAt')
+      .limit(limit)
+      .select('name email createdAt isActive');
+    res.json({ success: true, data: { users } });
+  } catch (e) {
+    res.status(500).json({ success: false, message: 'Error fetching recent users', error: e.message });
+  }
+});
 
 // Order management
 router.get('/orders', getAllOrders);
 router.get('/orders/:id', getOrderDetails);
 router.patch('/orders/:id', updateOrderDetails);
+// Recent orders (dashboard quick view)
+router.get('/orders/recent', async (req, res) => {
+  try {
+    const Order = require('../models/Order');
+    const limit = parseInt(req.query.limit) || 5;
+    const orders = await Order.find({})
+      .sort('-createdAt')
+      .limit(limit)
+      .populate('user', 'name email')
+      .populate('items.product', 'name')
+      .select('user totalAmount orderStatus createdAt items');
+    res.json({ success: true, data: { orders } });
+  } catch (e) {
+    res.status(500).json({ success: false, message: 'Error fetching recent orders', error: e.message });
+  }
+});
 
 // ========== ENHANCED ADMIN ROUTES ==========
 
@@ -95,11 +125,33 @@ router.get('/users/:userId', getUserDetails);
 router.patch('/users/:userId/status', updateUserStatusEnhanced);
 router.delete('/users/:userId', deleteUser);
 
-// Enhanced Product Management  
+// Enhanced Product Management
 router.get('/products', getEnhancedProducts);
-router.patch('/products/:productId/stock', updateProductStock);
-
-// Enhanced Order Management
+router.post('/products', protect, authorize('admin'), async (req, res) => {
+  try {
+    const { createProduct } = require('../controllers/productController');
+    await createProduct(req, res);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+router.put('/products/:productId', protect, authorize('admin'), async (req, res) => {
+  try {
+    const { updateProduct } = require('../controllers/productController');
+    await updateProduct(req, res);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+router.delete('/products/:productId', protect, authorize('admin'), async (req, res) => {
+  try {
+    const { deleteProduct } = require('../controllers/productController');
+    await deleteProduct(req, res);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+router.patch('/products/:productId/stock', updateProductStock);// Enhanced Order Management
 router.get('/orders/enhanced', getEnhancedOrders);
 router.patch('/orders/:orderId/status', updateOrderStatus);
 

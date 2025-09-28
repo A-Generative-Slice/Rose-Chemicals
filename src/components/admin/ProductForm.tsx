@@ -318,15 +318,22 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="bg-white rounded-lg shadow-lg">
-        <div className="px-6 py-4 border-b border-gray-200">
+    <div className="w-full">
+      <div className="bg-white rounded-lg">
+        <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
           <h2 className="text-2xl font-bold text-gray-900">
             {productId ? 'Edit Product' : 'Add New Product'}
           </h2>
+          <button
+            onClick={onCancel}
+            className="text-gray-400 hover:text-gray-600 text-2xl font-light"
+          >
+            ×
+          </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <div className="max-h-[75vh] overflow-y-auto">
+          <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {/* Basic Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -427,14 +434,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
             </label>
             <div className="space-y-3">
               {/* File Upload */}
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-3">
                 <div className="text-center">
-                  <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                  <svg className="mx-auto h-8 w-8 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <div className="mt-4">
+                  <div className="mt-2">
                     <label htmlFor="file-upload" className="cursor-pointer">
-                      <span className="mt-2 block text-sm font-medium text-gray-900">
+                      <span className="block text-sm font-medium text-gray-900">
                         Upload product images
                       </span>
                       <input
@@ -447,16 +454,16 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
                         onChange={handleFileSelect}
                       />
                     </label>
-                    <p className="mt-1 text-xs text-gray-500">PNG, JPG, WEBP up to 5MB each</p>
+                    <p className="text-xs text-gray-500">PNG, JPG, WEBP up to 5MB each</p>
                   </div>
                   {selectedFiles && (
-                    <div className="mt-3">
+                    <div className="mt-2">
                       <p className="text-sm text-gray-600">{selectedFiles.length} file(s) selected</p>
                       <button
                         type="button"
                         onClick={uploadImages}
                         disabled={uploadingImages}
-                        className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                        className="mt-1 px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 disabled:opacity-50"
                       >
                         {uploadingImages ? 'Uploading...' : `Upload ${selectedFiles.length} Images`}
                       </button>
@@ -646,6 +653,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
             </button>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );

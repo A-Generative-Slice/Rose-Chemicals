@@ -237,11 +237,9 @@ exports.createProduct = async (req, res) => {
       detailedDescription: req.body.detailedDescription || req.body.description,
       price: req.body.price,
       mrp: req.body.mrp || req.body.price,
-      category: mongoose.Types.ObjectId.isValid(categoryId) 
-        ? new mongoose.Types.ObjectId(categoryId) 
-        : categoryId,
+      category: categoryId,
       stock: req.body.stock || req.body.quantity || 10,
-      sku: req.body.sku || `SKU-${Date.now()}`,
+      sku: req.body.sku || `SKU-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
       images: req.body.images || [],
       isActive: req.body.isActive !== false,
       features: req.body.features || [],
@@ -251,9 +249,9 @@ exports.createProduct = async (req, res) => {
       isFeatured: req.body.isFeatured || false
     };
 
-    // Only add createdBy if user exists
-    if (req.user?.id) {
-      productData.createdBy = new mongoose.Types.ObjectId(req.user.id);
+    // Only add createdBy if user exists and id is valid
+    if (req.user?.id && mongoose.Types.ObjectId.isValid(req.user.id)) {
+      productData.createdBy = req.user.id;
     }
 
     const product = await Product.create(productData);

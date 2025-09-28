@@ -254,7 +254,28 @@ exports.getEnhancedProducts = async (req, res) => {
 
     // Build filter
     const filter = {};
-    if (category && category !== 'all') filter.category = category;
+    if (category && category !== 'all') {
+      // If category is provided, try to find it by name first
+      if (mongoose.Types.ObjectId.isValid(category)) {
+        // If it's already an ObjectId, use it directly
+        filter.category = category;
+      } else {
+        // If it's a name, find the category ObjectId
+        const categoryDoc = await Category.findOne({ name: category });
+        if (categoryDoc) {
+          filter.category = categoryDoc._id;
+        } else {
+          // If category name not found, return empty results
+          return res.json({
+            success: true,
+            products: [],
+            total: 0,
+            page,
+            pages: 0
+          });
+        }
+      }
+    }
     if (status && status !== 'all') filter.isActive = status === 'active';
     if (stock) {
       switch (stock) {

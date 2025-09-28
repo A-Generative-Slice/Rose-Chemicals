@@ -103,8 +103,9 @@ export default function AdminDashboard() {
       // Fetch dashboard analytics from our enhanced admin API
       const [analyticsResponse, recentOrdersResponse, recentUsersResponse] = await Promise.all([
         adminAPI.getAnalytics(),
-        adminAPI.getOrders({ limit: 5, sort: '-createdAt' }),
-        adminAPI.getUsers({ limit: 5, sort: '-createdAt' })
+        // Use dedicated recent endpoints (they wrap data under data.orders/users)
+        adminAPI.getRecentOrders ? adminAPI.getRecentOrders({ limit: 5 }) : adminAPI.getOrders({ limit: 5, sort: '-createdAt' }),
+        adminAPI.getRecentUsers ? adminAPI.getRecentUsers({ limit: 5 }) : adminAPI.getUsers({ limit: 5, sort: '-createdAt' })
       ]);
 
       if (analyticsResponse.success) {
@@ -120,12 +121,14 @@ export default function AdminDashboard() {
         });
       }
 
-      if (recentOrdersResponse.success) {
-        setRecentOrders(recentOrdersResponse.data.orders || []);
+      if (recentOrdersResponse?.success) {
+        const orders = (recentOrdersResponse.data?.orders) || recentOrdersResponse.orders || [];
+        setRecentOrders(Array.isArray(orders) ? orders : []);
       }
 
-      if (recentUsersResponse.success) {
-        setRecentUsers(recentUsersResponse.data.users || []);
+      if (recentUsersResponse?.success) {
+        const users = (recentUsersResponse.data?.users) || recentUsersResponse.users || [];
+        setRecentUsers(Array.isArray(users) ? users : []);
       }
       
     } catch (error) {
