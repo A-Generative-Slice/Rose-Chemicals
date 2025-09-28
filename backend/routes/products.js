@@ -5,7 +5,11 @@ const {
   getProduct, 
   createProduct, 
   updateProduct, 
-  deleteProduct 
+  deleteProduct,
+  searchProducts,
+  getFeaturedProducts,
+  getProductsByCategory,
+  getProductSuggestions
 } = require('../controllers/productController');
 const { protect, authorize } = require('../middleware/auth');
 const { check } = require('express-validator');
@@ -47,6 +51,10 @@ router.get('/categories', async (req, res) => {
 
 // Public routes
 router.get('/', getProducts);
+router.get('/search', searchProducts);
+router.get('/featured', getFeaturedProducts);
+router.get('/suggestions', getProductSuggestions);
+router.get('/category/:categoryId', getProductsByCategory);
 router.get('/:id', getProduct);
 
 // Protected routes (temporarily disabled auth for development)

@@ -154,3 +154,58 @@ exports.updateOrderStatus = async (req, res) => {
     });
   }
 };
+
+// Cancel order (user can cancel their own orders)
+exports.cancelOrder = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+
+    // Check if user owns this order or is admin
+    if (order.user.toString() !== req.user.id && req.user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: 'Not authorized to cancel this order'
+      });
+    }
+
+    // Check if order can be cancelled
+    const cancellableStatuses = ['pending', 'confirmed', 'processing'];
+    if (!cancellableStatuses.includes(order.orderStatus)) {
+      return res.status(400).json({
+        success: false,
+        message: `Cannot cancel order with status: ${order.orderStatus}`
+      });
+    }
+
+    // Update order status to cancelled
+    order.orderStatus = 'cancelled';
+    order.cancelledAt = new Date();
+    await order.save();
+
+    // If payment was made, initiate refund process
+    if (order.paymentStatus === 'completed') {
+      // Here you would integrate with your payment gateway to initiate refund
+      console.log(`Refund initiated for order ${order._id}`);
+    }
+
+    res.json({
+      success: true,
+      message: 'Order cancelled successfully',
+      order
+    });
+  } catch (error) {
+    console.error('Cancel order error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error cancelling order',
+      error: error.message
+    });
+  }
+};

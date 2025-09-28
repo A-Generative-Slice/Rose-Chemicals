@@ -1,8 +1,11 @@
 const User = require('../models/User');
 const Product = require('../models/Product');
 const Order = require('../models/Order');
+const Review = require('../models/Review');
+const Category = require('../models/Category');
 const { generateOrderCSV, generateProductCSV } = require('../utils/csvGenerator');
 const path = require('path');
+const mongoose = require('mongoose');
 
 // Get dashboard statistics
 exports.getDashboardStats = async (req, res) => {
@@ -332,7 +335,7 @@ exports.getAllOrders = async (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
     
-    const { status, paymentStatus, startDate, endDate } = req.query;
+    const { status, paymentStatus, startDate, endDate, search } = req.query;
     
     const filter = {};
     if (status) filter.orderStatus = status;
@@ -342,6 +345,15 @@ exports.getAllOrders = async (req, res) => {
         $gte: new Date(startDate),
         $lte: new Date(endDate)
       };
+    }
+    
+    // Add search functionality
+    if (search) {
+      filter.$or = [
+        { '_id': { $regex: search, $options: 'i' } },
+        { 'shippingAddress.name': { $regex: search, $options: 'i' } },
+        { 'shippingAddress.phone': { $regex: search, $options: 'i' } }
+      ];
     }
 
     const orders = await Order.find(filter)
@@ -356,6 +368,8 @@ exports.getAllOrders = async (req, res) => {
     res.json({
       success: true,
       orders,
+      totalPages: Math.ceil(totalOrders / limit),
+      totalOrders,
       pagination: {
         currentPage: page,
         totalPages: Math.ceil(totalOrders / limit),
@@ -369,6 +383,153 @@ exports.getAllOrders = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Error fetching orders',
+      error: error.message
+    });
+  }
+};
+
+// Get single order details (admin)
+exports.getOrderDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const order = await Order.findById(id)
+      .populate('user', 'name email phone')
+      .populate('items.product', 'name category images');
+    
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      order
+    });
+  } catch (error) {
+    console.error('Get order details error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching order details',
+      error: error.message
+    });
+  }
+};
+
+// Update order details (admin)
+exports.updateOrderDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+    
+    const order = await Order.findById(id);
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+    
+    // Update allowed fields
+    const allowedUpdates = ['trackingNumber', 'estimatedDelivery', 'orderNotes'];
+    allowedUpdates.forEach(field => {
+      if (updateData[field] !== undefined) {
+        order[field] = updateData[field];
+      }
+    });
+    
+    await order.save();
+    await order.populate('user', 'name email phone');
+    await order.populate('items.product', 'name category images');
+    
+    res.json({
+      success: true,
+      message: 'Order updated successfully',
+      order
+    });
+  } catch (error) {
+    console.error('Update order details error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error updating order details',
+      error: error.message
+    });
+  }
+};
+
+// Get single order details (admin)
+exports.getOrderDetails = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id)
+      .populate('user', 'name email phone')
+      .populate('items.product', 'name category');
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      order
+    });
+  } catch (error) {
+    console.error('Get order details error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching order details',
+      error: error.message
+    });
+  }
+};
+
+// Update order details (admin)
+exports.updateOrderDetails = async (req, res) => {
+  try {
+    const allowedUpdates = ['trackingNumber', 'estimatedDelivery', 'orderNotes'];
+    const updates = {};
+    
+    allowedUpdates.forEach(field => {
+      if (req.body[field] !== undefined) {
+        updates[field] = req.body[field];
+      }
+    });
+
+    if (Object.keys(updates).length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'No valid updates provided'
+      });
+    }
+
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      updates,
+      { new: true, runValidators: true }
+    ).populate('user', 'name email phone')
+     .populate('items.product', 'name category');
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Order updated successfully',
+      order
+    });
+  } catch (error) {
+    console.error('Update order details error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error updating order details',
       error: error.message
     });
   }

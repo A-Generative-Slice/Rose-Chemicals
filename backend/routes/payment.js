@@ -5,7 +5,9 @@ const { protect } = require('../middleware/auth');
 const {
   createPaymentOrder,
   verifyPayment,
-  getPaymentStatus
+  getPaymentStatus,
+  handleWebhook,
+  retryPayment
 } = require('../controllers/paymentController');
 
 // Validation middleware
@@ -38,5 +40,7 @@ const validatePaymentVerification = [
 router.post('/create-order', protect, validatePaymentOrder, createPaymentOrder);
 router.post('/verify', protect, validatePaymentVerification, verifyPayment);
 router.get('/status/:orderId', protect, getPaymentStatus);
+router.post('/webhook', handleWebhook); // No auth for webhooks
+router.post('/retry', protect, validatePaymentOrder, retryPayment);
 
 module.exports = router;

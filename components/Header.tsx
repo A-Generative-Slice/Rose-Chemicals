@@ -4,10 +4,12 @@ import { useState } from 'react'
 import { Search, ShoppingBag, Menu, User, LogOut } from 'lucide-react'
 import { useAuth } from '../src/contexts/AuthContext'
 import { useCart } from '../src/contexts/CartContext'
+import CartDrawer from './CartDrawer'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const [isCartOpen, setIsCartOpen] = useState(false)
   const { user, isAuthenticated, logout } = useAuth()
   const { totalItems } = useCart()
   
@@ -53,8 +55,8 @@ export default function Header() {
           >
             <Search size={22} className="group-hover:scale-110 transition-transform duration-200" />
           </button>
-          <Link
-            href="/cart"
+          <button
+            onClick={() => setIsCartOpen(true)}
             aria-label="cart" 
             className="relative p-2 rounded-full text-white hover:bg-header-icon-hover-bg hover:text-header-icon-hover transition-all duration-200 group"
           >
@@ -64,7 +66,7 @@ export default function Header() {
                 {totalItems}
               </span>
             )}
-          </Link>
+          </button>
           
           {/* User Menu */}
           {isAuthenticated ? (
@@ -214,6 +216,9 @@ export default function Header() {
           </Link>
         </div>
       </div>
+
+      {/* Cart Drawer */}
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   )
 }

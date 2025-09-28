@@ -157,3 +157,170 @@ exports.getPaymentStatus = async (req, res) => {
     });
   }
 };
+
+// Handle Razorpay webhooks
+exports.handleWebhook = async (req, res) => {
+  try {
+    const webhookSignature = req.headers['x-razorpay-signature'];
+    const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
+    
+    if (!webhookSecret) {
+      console.error('Webhook secret not configured');
+      return res.status(500).json({ success: false, message: 'Webhook not configured' });
+    }
+
+    // Verify webhook signature
+    const expectedSignature = crypto
+      .createHmac('sha256', webhookSecret)
+      .update(JSON.stringify(req.body))
+      .digest('hex');
+
+    if (webhookSignature !== expectedSignature) {
+      console.error('Invalid webhook signature');
+      return res.status(400).json({ success: false, message: 'Invalid signature' });
+    }
+
+    const event = req.body;
+    
+    console.log('Webhook received:', event.event);
+
+    switch (event.event) {
+      case 'payment.captured':
+        await handlePaymentCaptured(event.payload.payment.entity);
+        break;
+      case 'payment.failed':
+        await handlePaymentFailed(event.payload.payment.entity);
+        break;
+      case 'order.paid':
+        await handleOrderPaid(event.payload.order.entity);
+        break;
+      default:
+        console.log('Unhandled webhook event:', event.event);
+    }
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Webhook error:', error);
+    res.status(500).json({ success: false, message: 'Webhook processing error' });
+  }
+};
+
+// Handle payment captured
+const handlePaymentCaptured = async (paymentEntity) => {
+  try {
+    const orderId = paymentEntity.notes?.orderId;
+    if (!orderId) return;
+
+    await Order.findByIdAndUpdate(orderId, {
+      paymentStatus: 'completed',
+      razorpayPaymentId: paymentEntity.id,
+      paidAt: new Date(paymentEntity.created_at * 1000)
+    });
+
+    console.log(`Payment captured for order: ${orderId}`);
+  } catch (error) {
+    console.error('Error handling payment captured:', error);
+  }
+};
+
+// Handle payment failed
+const handlePaymentFailed = async (paymentEntity) => {
+  try {
+    const orderId = paymentEntity.notes?.orderId;
+    if (!orderId) return;
+
+    await Order.findByIdAndUpdate(orderId, {
+      paymentStatus: 'failed',
+      razorpayPaymentId: paymentEntity.id
+    });
+
+    console.log(`Payment failed for order: ${orderId}`);
+  } catch (error) {
+    console.error('Error handling payment failed:', error);
+  }
+};
+
+// Handle order paid
+const handleOrderPaid = async (orderEntity) => {
+  try {
+    // Find order by razorpay order ID
+    const order = await Order.findOne({ razorpayOrderId: orderEntity.id });
+    if (!order) return;
+
+    await Order.findByIdAndUpdate(order._id, {
+      paymentStatus: 'completed',
+      paidAt: new Date()
+    });
+
+    console.log(`Order paid: ${order._id}`);
+  } catch (error) {
+    console.error('Error handling order paid:', error);
+  }
+};
+
+// Retry failed payment
+exports.retryPayment = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+
+    const order = await Order.findById(orderId);
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+
+    // Check if user is authorized
+    if (order.user.toString() !== req.user.id) {
+      return res.status(403).json({
+        success: false,
+        message: 'Not authorized to retry payment for this order'
+      });
+    }
+
+    // Check if payment can be retried
+    if (order.paymentStatus === 'completed') {
+      return res.status(400).json({
+        success: false,
+        message: 'Payment already completed'
+      });
+    }
+
+    // Create new Razorpay order
+    const options = {
+      amount: order.totalAmount * 100,
+      currency: 'INR',
+      receipt: `retry_${orderId}_${Date.now()}`,
+      notes: {
+        orderId: orderId.toString(),
+        userId: req.user.id,
+        isRetry: 'true'
+      }
+    };
+
+    const razorpayOrder = await razorpay.orders.create(options);
+
+    // Update order with new razorpay order ID
+    await Order.findByIdAndUpdate(orderId, {
+      razorpayOrderId: razorpayOrder.id,
+      paymentStatus: 'pending'
+    });
+
+    res.json({
+      success: true,
+      razorpayOrder,
+      order: {
+        _id: order._id,
+        totalAmount: order.totalAmount
+      }
+    });
+  } catch (error) {
+    console.error('Retry payment error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error retrying payment',
+      error: error.message
+    });
+  }
+};

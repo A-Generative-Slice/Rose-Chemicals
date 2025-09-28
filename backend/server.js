@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -11,18 +11,25 @@ const { startCSVScheduler, cleanOldCSVFiles } = require('./utils/csvGenerator');
 // Initialize express
 const app = express();
 
-// Connect to database and seed if using in-memory
+// Connect to database (seeding temporarily disabled for testing)
 connectDB().then(async () => {
-  // Check if using in-memory database and seed if empty
-  if (process.env.NODE_ENV === 'development') {
-    const Product = require('./models/Product');
-    const productCount = await Product.countDocuments();
-    
-    if (productCount === 0) {
-      console.log('🌱 No products found, seeding database...');
-      const { seedDatabase } = require('./seed');
-      await seedDatabase();
-    }
+  console.log('✅ Database connected, admin functionality ready');
+  
+  // Create admin user if it doesn't exist
+  const User = require('./models/User');
+  const bcrypt = require('bcryptjs');
+  
+  const adminExists = await User.findOne({ email: 'admin@rosechemicals.com' });
+  if (!adminExists) {
+    const hashedPassword = await bcrypt.hash('Admin@123', 12);
+    await User.create({
+      name: 'Admin',
+      email: 'admin@rosechemicals.com',
+      password: hashedPassword,
+      role: 'admin',
+      isActive: true
+    });
+    console.log('✅ Admin user created: admin@rosechemicals.com / Admin@123');
   }
 });
 
@@ -44,8 +51,11 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/cart', require('./routes/cart'));
 app.use('/api/orders', require('./routes/orders'));
-app.use('/api/payment', require('./routes/payment'));
+// app.use('/api/payment', require('./routes/payment')); // Temporarily disabled due to Razorpay config
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/reviews', require('./routes/reviews'));
+app.use('/api/wishlist', require('./routes/wishlist'));
+app.use('/api/addresses', require('./routes/addresses'));
 app.use('/api/upload', require('./routes/upload'));
 app.use('/api/upload', require('./routes/upload-local'));
 

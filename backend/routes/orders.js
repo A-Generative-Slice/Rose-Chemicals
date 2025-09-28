@@ -6,7 +6,8 @@ const {
   createOrder,
   getMyOrders,
   getOrderById,
-  updateOrderStatus
+  updateOrderStatus,
+  cancelOrder
 } = require('../controllers/orderController');
 
 // Validation middleware
@@ -41,7 +42,7 @@ const validateOrderStatus = [
   body('status')
     .notEmpty()
     .withMessage('Status is required')
-    .isIn(['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'])
+    .isIn(['pending', 'confirmed', 'processing', 'shipped', 'out-for-delivery', 'delivered', 'cancelled'])
     .withMessage('Invalid order status')
 ];
 
@@ -50,5 +51,6 @@ router.post('/', protect, validateOrder, createOrder);
 router.get('/my-orders', protect, getMyOrders);
 router.get('/:id', protect, getOrderById);
 router.patch('/:id/status', protect, authorize('admin'), validateOrderStatus, updateOrderStatus);
+router.patch('/:id/cancel', protect, cancelOrder);
 
 module.exports = router;

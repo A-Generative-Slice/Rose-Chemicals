@@ -3,14 +3,19 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, CreditCard, Truck, Shield } from 'lucide-react';
+import { ArrowLeft, CreditCard, Truck, Shield, MapPin } from 'lucide-react';
 import Header from '../../components/Header';
+import PaymentMethod from '../../components/PaymentMethod';
+import PaymentModal from '../../components/PaymentModal';
 import { useCart } from '../../src/contexts/CartContext';
 import { useAuth } from '../../src/contexts/AuthContext';
 import { ordersAPI, processPayment } from '../../src/services/api';
 
 export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
+  const [addressLoading, setAddressLoading] = useState(false);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [createdOrderId, setCreatedOrderId] = useState<string | null>(null);
   const [shippingAddress, setShippingAddress] = useState({
     name: '',
     phone: '',
@@ -21,7 +26,7 @@ export default function CheckoutPage() {
     country: 'India'
   });
   const [paymentMethod, setPaymentMethod] = useState('online');
-  const { items, totalAmount, clearCart } = useCart();
+  const { items, totalAmount, clearCart, validateCart } = useCart();
   const { user, isAuthenticated } = useAuth();
   const router = useRouter();
 
@@ -36,6 +41,9 @@ export default function CheckoutPage() {
       return;
     }
 
+    // Validate cart items before checkout
+    validateCart().catch(console.error);
+
     // Pre-fill address from user data
     if (user) {
       setShippingAddress({
@@ -48,7 +56,7 @@ export default function CheckoutPage() {
         country: user.address?.country || 'India'
       });
     }
-  }, [isAuthenticated, items.length, user, router]);
+  }, [isAuthenticated, items.length, user, router, validateCart]);
 
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setShippingAddress({
@@ -74,6 +82,14 @@ export default function CheckoutPage() {
     try {
       setLoading(true);
 
+      // Final cart validation
+      const cartValidation = await validateCart();
+      if (!cartValidation.valid) {
+        alert('Some items in your cart are no longer available. Please review your cart.');
+        router.push('/cart');
+        return;
+      }
+
       // Create order
       const orderData = {
         items: items.map(item => ({
@@ -88,14 +104,11 @@ export default function CheckoutPage() {
 
       const orderResponse = await ordersAPI.createOrder(orderData);
       const orderId = orderResponse.order._id;
+      setCreatedOrderId(orderId);
 
       if (paymentMethod === 'online') {
-        // Process online payment
-        await processPayment(orderId, {
-          name: shippingAddress.name,
-          email: user.email,
-          phone: shippingAddress.phone
-        });
+        // Open payment modal
+        setIsPaymentModalOpen(true);
       } else {
         // For COD, redirect to success page
         await clearCart();
@@ -107,6 +120,52 @@ export default function CheckoutPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handlePaymentSuccess = async (paymentData: any) => {
+    try {
+      await clearCart();
+      router.push(`/order-success?orderId=${createdOrderId}&paymentId=${paymentData.order.razorpayPaymentId}`);
+    } catch (error) {
+      console.error('Error after payment success:', error);
+      router.push(`/order-success?orderId=${createdOrderId}`);
+    }
+  };
+
+  const handlePaymentError = (error: string) => {
+    console.error('Payment error:', error);
+    alert(`Payment failed: ${error}`);
+    setIsPaymentModalOpen(false);
+  };
+
+  const detectLocation = async () => {
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by this browser.');
+      return;
+    }
+
+    setAddressLoading(true);
+    
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          // In a real app, you'd use a geocoding service like Google Maps API
+          // For demo, we'll just show the coordinates
+          const { latitude, longitude } = position.coords;
+          alert(`Location detected: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}. Please fill in your address manually.`);
+        } catch (error) {
+          console.error('Error getting address:', error);
+          alert('Failed to get address from location.');
+        } finally {
+          setAddressLoading(false);
+        }
+      },
+      (error) => {
+        console.error('Geolocation error:', error);
+        alert('Failed to detect location. Please allow location access.');
+        setAddressLoading(false);
+      }
+    );
   };
 
   const subtotal = totalAmount;
@@ -138,9 +197,19 @@ export default function CheckoutPage() {
           <div className="lg:col-span-2 space-y-8">
             {/* Shipping Address */}
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Truck className="text-primary" size={24} />
-                <h2 className="text-xl font-semibold text-gray-900">Shipping Address</h2>
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <Truck className="text-primary" size={24} />
+                  <h2 className="text-xl font-semibold text-gray-900">Shipping Address</h2>
+                </div>
+                <button
+                  onClick={detectLocation}
+                  disabled={addressLoading}
+                  className="flex items-center gap-2 px-3 py-2 text-sm text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors disabled:opacity-50"
+                >
+                  <MapPin size={16} />
+                  {addressLoading ? 'Detecting...' : 'Use My Location'}
+                </button>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -245,54 +314,11 @@ export default function CheckoutPage() {
             </div>
 
             {/* Payment Method */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <CreditCard className="text-primary" size={24} />
-                <h2 className="text-xl font-semibold text-gray-900">Payment Method</h2>
-              </div>
-              
-              <div className="space-y-4">
-                <label className="flex items-center gap-3 p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="online"
-                    checked={paymentMethod === 'online'}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="text-primary focus:ring-primary"
-                  />
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <CreditCard size={20} />
-                      <span className="font-medium">Online Payment</span>
-                    </div>
-                    <p className="text-sm text-gray-600 mt-1">
-                      Pay securely using UPI, Cards, Net Banking via Razorpay
-                    </p>
-                  </div>
-                </label>
-                
-                <label className="flex items-center gap-3 p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="cod"
-                    checked={paymentMethod === 'cod'}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                    className="text-primary focus:ring-primary"
-                  />
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <Shield size={20} />
-                      <span className="font-medium">Cash on Delivery</span>
-                    </div>
-                    <p className="text-sm text-gray-600 mt-1">
-                      Pay when your order is delivered to your doorstep
-                    </p>
-                  </div>
-                </label>
-              </div>
-            </div>
+            <PaymentMethod 
+              selectedMethod={paymentMethod}
+              onMethodChange={setPaymentMethod}
+              isProcessing={loading}
+            />
           </div>
 
           {/* Order Summary */}
@@ -370,6 +396,25 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+
+      {/* Payment Modal */}
+      {isPaymentModalOpen && createdOrderId && (
+        <PaymentModal
+          isOpen={isPaymentModalOpen}
+          onClose={() => setIsPaymentModalOpen(false)}
+          orderDetails={{
+            orderId: createdOrderId,
+            amount: total,
+            customerInfo: {
+              name: shippingAddress.name,
+              email: user?.email || '',
+              phone: shippingAddress.phone
+            }
+          }}
+          onPaymentSuccess={handlePaymentSuccess}
+          onPaymentError={handlePaymentError}
+        />
+      )}
     </div>
   );
 }

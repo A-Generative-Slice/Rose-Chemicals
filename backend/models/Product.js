@@ -92,6 +92,33 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  averageRating: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 5
+  },
+  totalReviews: {
+    type: Number,
+    default: 0,
+    min: 0
+  },
+  tags: [{
+    type: String,
+    trim: true
+  }],
+  relatedProducts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product'
+  }],
+  viewCount: {
+    type: Number,
+    default: 0
+  },
+  salesCount: {
+    type: Number,
+    default: 0
+  },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

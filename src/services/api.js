@@ -143,6 +143,20 @@ export const productsAPI = {
   // Search products
   searchProducts: (query) => 
     apiRequest(`/products/search?q=${encodeURIComponent(query)}`),
+    
+  // Get featured products
+  getFeaturedProducts: (limit = 8) =>
+    apiRequest(`/products/featured?limit=${limit}`),
+    
+  // Get product suggestions for autocomplete
+  getProductSuggestions: (query, limit = 5) =>
+    apiRequest(`/products/suggestions?q=${encodeURIComponent(query)}&limit=${limit}`),
+    
+  // Get products by category
+  getProductsByCategory: (categoryId, params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/products/category/${categoryId}${queryString ? `?${queryString}` : ''}`);
+  },
 };
 
 // Cart API
@@ -176,6 +190,19 @@ export const cartAPI = {
     apiRequest('/cart/clear', {
       method: 'DELETE',
     }),
+
+  // Validate cart items
+  validateCart: () =>
+    apiRequest('/cart/validate', {
+      method: 'POST',
+    }),
+
+  // Merge temporary cart
+  mergeTempCart: (tempCartItems) =>
+    apiRequest('/cart/merge-temp', {
+      method: 'POST',
+      body: JSON.stringify({ tempCartItems }),
+    }),
 };
 
 // Orders API
@@ -194,6 +221,19 @@ export const ordersAPI = {
   // Get single order
   getOrder: (id) => 
     apiRequest(`/orders/${id}`),
+
+  // Cancel order
+  cancelOrder: (id) =>
+    apiRequest(`/orders/${id}/cancel`, {
+      method: 'PATCH',
+    }),
+
+  // Update order status (admin only)
+  updateOrderStatus: (id, status) =>
+    apiRequest(`/orders/${id}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    }),
 };
 
 // Payment API
@@ -215,6 +255,110 @@ export const paymentAPI = {
   // Get payment status
   getPaymentStatus: (orderId) => 
     apiRequest(`/payment/status/${orderId}`),
+
+  // Retry failed payment
+  retryPayment: (orderId) =>
+    apiRequest('/payment/retry', {
+      method: 'POST',
+      body: JSON.stringify({ orderId }),
+    }),
+};
+
+// Reviews API
+export const reviewsAPI = {
+  // Get reviews for a product
+  getProductReviews: (productId, params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/reviews/product/${productId}${queryString ? `?${queryString}` : ''}`);
+  },
+
+  // Create a review
+  createReview: (productId, reviewData) =>
+    apiRequest(`/reviews/product/${productId}`, {
+      method: 'POST',
+      body: JSON.stringify(reviewData),
+    }),
+
+  // Update a review
+  updateReview: (reviewId, reviewData) =>
+    apiRequest(`/reviews/${reviewId}`, {
+      method: 'PUT',
+      body: JSON.stringify(reviewData),
+    }),
+
+  // Delete a review
+  deleteReview: (reviewId) =>
+    apiRequest(`/reviews/${reviewId}`, {
+      method: 'DELETE',
+    }),
+
+  // Mark review as helpful
+  markHelpful: (reviewId) =>
+    apiRequest(`/reviews/${reviewId}/helpful`, {
+      method: 'PATCH',
+    }),
+
+  // Report a review
+  reportReview: (reviewId, reason) =>
+    apiRequest(`/reviews/${reviewId}/report`, {
+      method: 'POST',
+      body: JSON.stringify({ reason }),
+    }),
+
+  // Get user's reviews
+  getUserReviews: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/reviews/my-reviews${queryString ? `?${queryString}` : ''}`);
+  },
+};
+
+// Wishlist API
+export const wishlistAPI = {
+  // Get user's wishlist
+  getWishlist: () =>
+    apiRequest('/wishlist'),
+
+  // Add item to wishlist
+  addToWishlist: (productId, options = {}) =>
+    apiRequest(`/wishlist/add/${productId}`, {
+      method: 'POST',
+      body: JSON.stringify(options),
+    }),
+
+  // Remove item from wishlist
+  removeFromWishlist: (productId) =>
+    apiRequest(`/wishlist/remove/${productId}`, {
+      method: 'DELETE',
+    }),
+
+  // Update wishlist settings
+  updateWishlist: (wishlistData) =>
+    apiRequest('/wishlist', {
+      method: 'PATCH',
+      body: JSON.stringify(wishlistData),
+    }),
+
+  // Update wishlist item
+  updateWishlistItem: (productId, options) =>
+    apiRequest(`/wishlist/item/${productId}`, {
+      method: 'PATCH',
+      body: JSON.stringify(options),
+    }),
+
+  // Check if product is in wishlist
+  checkWishlistStatus: (productId) =>
+    apiRequest(`/wishlist/check/${productId}`),
+
+  // Get public wishlist
+  getPublicWishlist: (userId) =>
+    apiRequest(`/wishlist/public/${userId}`),
+
+  // Move items to cart
+  moveToCart: (productIds) =>
+    apiRequest('/wishlist/move-to-cart', {
+      method: 'POST',
+      body: JSON.stringify({ productIds }),
+    }),
 };
 
 // Razorpay Integration Helper
@@ -286,4 +430,179 @@ export const processPayment = async (orderId, userInfo) => {
     console.error('Payment error:', error);
     alert('Payment failed. Please try again.');
   }
+};
+
+// Address API
+export const addressAPI = {
+  // Get all user addresses
+  getAddresses: () => apiRequest('/addresses'),
+
+  // Add new address
+  addAddress: (addressData) =>
+    apiRequest('/addresses', {
+      method: 'POST',
+      body: JSON.stringify(addressData),
+    }),
+
+  // Update address
+  updateAddress: (addressId, addressData) =>
+    apiRequest(`/addresses/${addressId}`, {
+      method: 'PUT',
+      body: JSON.stringify(addressData),
+    }),
+
+  // Delete address
+  deleteAddress: (addressId) =>
+    apiRequest(`/addresses/${addressId}`, {
+      method: 'DELETE',
+    }),
+
+  // Set default address
+  setDefaultAddress: (addressId) =>
+    apiRequest(`/addresses/${addressId}/default`, {
+      method: 'PUT',
+    }),
+};
+
+// Admin API
+export const adminAPI = {
+  // Dashboard & Analytics
+  getAnalytics: () => apiRequest('/admin/analytics'),
+  getDashboardStats: () => apiRequest('/admin/dashboard/stats'),
+  getSalesAnalytics: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/admin/analytics/sales${queryString ? `?${queryString}` : ''}`);
+  },
+  getProductAnalytics: () => apiRequest('/admin/analytics/products'),
+  getUserAnalytics: () => apiRequest('/admin/analytics/users'),
+  getRevenueAnalytics: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/admin/analytics/revenue${queryString ? `?${queryString}` : ''}`);
+  },
+  
+  // Recent Activity
+  getRecentOrders: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/admin/orders/recent${queryString ? `?${queryString}` : ''}`);
+  },
+  
+  getRecentUsers: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/admin/users/recent${queryString ? `?${queryString}` : ''}`);
+  },
+
+  // Product Management
+  getAllProducts: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/admin/products${queryString ? `?${queryString}` : ''}`);
+  },
+
+  createProduct: (productData) =>
+    apiRequest('/admin/products', {
+      method: 'POST',
+      body: JSON.stringify(productData),
+    }),
+
+  updateProduct: (productId, productData) =>
+    apiRequest(`/admin/products/${productId}`, {
+      method: 'PUT',
+      body: JSON.stringify(productData),
+    }),
+
+  deleteProduct: (productId) =>
+    apiRequest(`/admin/products/${productId}`, {
+      method: 'DELETE',
+    }),
+
+  updateProductStock: (productId, stock) =>
+    apiRequest(`/admin/products/${productId}/stock`, {
+      method: 'PATCH',
+      body: JSON.stringify({ stock }),
+    }),
+
+  // Order Management
+  getOrders: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/admin/orders/enhanced${queryString ? `?${queryString}` : ''}`);
+  },
+
+  getAllOrders: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/admin/orders${queryString ? `?${queryString}` : ''}`);
+  },
+
+  updateOrderStatus: (orderId, status) =>
+    apiRequest(`/admin/orders/${orderId}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    }),
+
+  getOrderDetails: (orderId) =>
+    apiRequest(`/admin/orders/${orderId}`),
+
+  // User Management
+  getUsers: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/admin/users/enhanced${queryString ? `?${queryString}` : ''}`);
+  },
+
+  getAllUsers: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/admin/users${queryString ? `?${queryString}` : ''}`);
+  },
+
+  getUserDetails: (userId) =>
+    apiRequest(`/admin/users/${userId}`),
+
+  updateUserStatus: (userId, status) =>
+    apiRequest(`/admin/users/${userId}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    }),
+
+  updateUserStatusEnhanced: (userId, isActive) =>
+    apiRequest(`/admin/users/${userId}/status-enhanced`, {
+      method: 'PATCH',
+      body: JSON.stringify({ isActive }),
+    }),
+
+  deleteUser: (userId) =>
+    apiRequest(`/admin/users/${userId}`, {
+      method: 'DELETE',
+    }),
+
+  // Review Management
+  getReviews: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/admin/reviews/enhanced${queryString ? `?${queryString}` : ''}`);
+  },
+
+  getAllReviews: (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    return apiRequest(`/admin/reviews${queryString ? `?${queryString}` : ''}`);
+  },
+
+  updateReviewStatus: (reviewId, status) =>
+    apiRequest(`/admin/reviews/${reviewId}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    }),
+
+  deleteReview: (reviewId) =>
+    apiRequest(`/admin/reviews/${reviewId}`, {
+      method: 'DELETE',
+    }),
+
+  getReviewStats: () =>
+    apiRequest('/admin/reviews/stats'),
+
+  // Settings Management
+  getSettings: () =>
+    apiRequest('/admin/settings'),
+
+  updateSettings: (settings) =>
+    apiRequest('/admin/settings', {
+      method: 'PUT',
+      body: JSON.stringify(settings),
+    }),
 };

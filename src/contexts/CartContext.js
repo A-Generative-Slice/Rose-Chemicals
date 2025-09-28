@@ -152,6 +152,30 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  const validateCart = async () => {
+    try {
+      dispatch({ type: 'SET_LOADING', payload: true });
+      const response = await cartAPI.validateCart();
+      dispatch({ type: 'SET_CART', payload: response.cart });
+      return response;
+    } catch (error) {
+      dispatch({ type: 'SET_ERROR', payload: error.message });
+      throw error;
+    }
+  };
+
+  const mergeTempCart = async (tempCartItems) => {
+    try {
+      dispatch({ type: 'SET_LOADING', payload: true });
+      const response = await cartAPI.mergeTempCart(tempCartItems);
+      dispatch({ type: 'SET_CART', payload: response.cart });
+      return response;
+    } catch (error) {
+      dispatch({ type: 'SET_ERROR', payload: error.message });
+      throw error;
+    }
+  };
+
   const clearError = () => {
     dispatch({ type: 'SET_ERROR', payload: null });
   };
@@ -163,6 +187,8 @@ export const CartProvider = ({ children }) => {
       updateCartItem,
       removeFromCart,
       clearCart,
+      validateCart,
+      mergeTempCart,
       loadCart,
       clearError,
     }}>

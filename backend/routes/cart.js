@@ -5,7 +5,9 @@ const {
   addToCart,
   updateCartItem,
   removeFromCart,
-  clearCart
+  clearCart,
+  validateCart,
+  mergeTempCart
 } = require('../controllers/cartController');
 const { protect } = require('../middleware/auth');
 const { check } = require('express-validator');
@@ -23,5 +25,7 @@ router.post('/add', validateCartItem, addToCart);
 router.patch('/update', validateCartItem, updateCartItem);
 router.delete('/remove/:productId', removeFromCart);
 router.delete('/clear', clearCart);
+router.post('/validate', validateCart);
+router.post('/merge-temp', mergeTempCart);
 
 module.exports = router;

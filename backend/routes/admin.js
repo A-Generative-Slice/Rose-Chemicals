@@ -9,8 +9,33 @@ const {
   exportProducts,
   getAllUsers,
   updateUserStatus,
-  getAllOrders
+  getAllOrders,
+  getOrderDetails,
+  updateOrderDetails
 } = require('../controllers/adminController');
+
+// Enhanced admin functions
+const {
+  getAnalytics,
+  getUserDetails,
+  updateUserStatusEnhanced,
+  deleteUser,
+  getEnhancedUsers,
+  getEnhancedProducts,
+  updateProductStock,
+  getEnhancedOrders,
+  updateOrderStatus,
+  getAllReviews,
+  updateReviewStatus,
+  deleteReview,
+  getReviewStats,
+  getSalesAnalytics,
+  getProductAnalytics,
+  getUserAnalytics,
+  getRevenueAnalytics,
+  getSettings,
+  updateSettings
+} = require('../controllers/adminEnhancedController');
 
 // Validation middleware
 const validateInventoryUpdate = [
@@ -59,5 +84,40 @@ router.patch('/users/:userId/status', validateUserStatus, updateUserStatus);
 
 // Order management
 router.get('/orders', getAllOrders);
+router.get('/orders/:id', getOrderDetails);
+router.patch('/orders/:id', updateOrderDetails);
+
+// ========== ENHANCED ADMIN ROUTES ==========
+
+// Enhanced User Management
+router.get('/users/enhanced', getEnhancedUsers);
+router.get('/users/:userId', getUserDetails);
+router.patch('/users/:userId/status', updateUserStatusEnhanced);
+router.delete('/users/:userId', deleteUser);
+
+// Enhanced Product Management  
+router.get('/products', getEnhancedProducts);
+router.patch('/products/:productId/stock', updateProductStock);
+
+// Enhanced Order Management
+router.get('/orders/enhanced', getEnhancedOrders);
+router.patch('/orders/:orderId/status', updateOrderStatus);
+
+// Review Management
+router.get('/reviews', getAllReviews);
+router.get('/reviews/stats', getReviewStats);
+router.patch('/reviews/:reviewId/status', updateReviewStatus);
+router.delete('/reviews/:reviewId', deleteReview);
+
+// Analytics
+router.get('/analytics', getAnalytics); // General analytics dashboard
+router.get('/analytics/sales', getSalesAnalytics);
+router.get('/analytics/products', getProductAnalytics);
+router.get('/analytics/users', getUserAnalytics);
+router.get('/analytics/revenue', getRevenueAnalytics);
+
+// Settings Management
+router.get('/settings', getSettings);
+router.put('/settings', updateSettings);
 
 module.exports = router;
