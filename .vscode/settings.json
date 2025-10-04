@@ -1,0 +1,17 @@
+{
+    "chat.agent.maxRequests": 50,
+    "chat.mcp.assisted.nuget.enabled": true,
+    "chat.mcp.autostart": "newAndOutdated",
+    "chat.mcp.discovery.enabled": {
+        "claude-desktop": true,
+        "windsurf": true,
+        "cursor-global": true,
+        "cursor-workspace": true
+    },
+    "chat.renderRelatedFiles": true,
+    "chat.todoListTool.writeOnly": true,
+    "inlineChat.hideOnRequest": true,
+    "inlineChat.finishOnType": true,
+    "inlineChat.enableV2": true,
+    "inlineChat.lineEmptyHint": true
+}
