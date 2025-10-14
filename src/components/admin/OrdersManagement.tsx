@@ -396,14 +396,14 @@ export default function OrdersManagement() {
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-600">Order Status:</span>
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getOrderStatusColor(selectedOrder.orderStatus)}`}>
-                          {selectedOrder.orderStatus.charAt(0).toUpperCase() + selectedOrder.orderStatus.slice(1)}
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getOrderStatusColor(selectedOrder.orderStatus || 'pending')}`}>
+                          {selectedOrder.orderStatus ? selectedOrder.orderStatus.charAt(0).toUpperCase() + selectedOrder.orderStatus.slice(1) : 'Pending'}
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-600">Payment Status:</span>
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPaymentStatusColor(selectedOrder.paymentStatus)}`}>
-                          {selectedOrder.paymentStatus.charAt(0).toUpperCase() + selectedOrder.paymentStatus.slice(1)}
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPaymentStatusColor(selectedOrder.paymentStatus || 'pending')}`}>
+                          {selectedOrder.paymentStatus ? selectedOrder.paymentStatus.charAt(0).toUpperCase() + selectedOrder.paymentStatus.slice(1) : 'Pending'}
                         </span>
                       </div>
                     </div>
@@ -594,16 +594,16 @@ export default function OrdersManagement() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getOrderStatusColor(order.orderStatus)}`}>
-                        {getStatusIcon(order.orderStatus)}
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getOrderStatusColor(order.orderStatus || 'pending')}`}>
+                        {getStatusIcon(order.orderStatus || 'pending')}
                         <span className="ml-1">
-                          {order.orderStatus.charAt(0).toUpperCase() + order.orderStatus.slice(1)}
+                          {order.orderStatus ? order.orderStatus.charAt(0).toUpperCase() + order.orderStatus.slice(1) : 'Pending'}
                         </span>
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPaymentStatusColor(order.paymentStatus)}`}>
-                        {order.paymentStatus.charAt(0).toUpperCase() + order.paymentStatus.slice(1)}
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getPaymentStatusColor(order.paymentStatus || 'pending')}`}>
+                        {order.paymentStatus ? order.paymentStatus.charAt(0).toUpperCase() + order.paymentStatus.slice(1) : 'Pending'}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">

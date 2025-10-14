@@ -25,7 +25,7 @@ exports.getAnalytics = async (req, res) => {
       Product.countDocuments(),
       Order.countDocuments(),
       Order.aggregate([
-        { $match: { paymentStatus: 'paid' } },
+        { $match: { paymentStatus: 'completed' } },
         { $group: { _id: null, total: { $sum: '$totalAmount' } } }
       ]),
       Order.countDocuments({ orderStatus: 'pending' }),
@@ -77,7 +77,7 @@ exports.getUserDetails = async (req, res) => {
     const [totalOrders, totalSpent, addresses] = await Promise.all([
       Order.countDocuments({ user: userId }),
       Order.aggregate([
-        { $match: { user: mongoose.Types.ObjectId(userId), paymentStatus: 'paid' } },
+        { $match: { user: mongoose.Types.ObjectId(userId), paymentStatus: 'completed' } },
         { $group: { _id: null, total: { $sum: '$totalAmount' } } }
       ]),
       User.findById(userId).select('addresses')
@@ -214,7 +214,7 @@ exports.getEnhancedUsers = async (req, res) => {
         const [totalOrders, totalSpent] = await Promise.all([
           Order.countDocuments({ user: user._id }),
           Order.aggregate([
-            { $match: { user: user._id, paymentStatus: 'paid' } },
+            { $match: { user: user._id, paymentStatus: 'completed' } },
             { $group: { _id: null, total: { $sum: '$totalAmount' } } }
           ])
         ]);
@@ -643,7 +643,7 @@ exports.getSalesAnalytics = async (req, res) => {
       {
         $match: {
           createdAt: { $gte: startDate },
-          paymentStatus: 'paid'
+          paymentStatus: 'completed'
         }
       },
       {
@@ -821,7 +821,7 @@ exports.getRevenueAnalytics = async (req, res) => {
         {
           $match: {
             createdAt: { $gte: startDate },
-            paymentStatus: 'paid'
+            paymentStatus: 'completed'
           }
         },
         {
@@ -836,7 +836,7 @@ exports.getRevenueAnalytics = async (req, res) => {
         {
           $match: {
             createdAt: { $gte: prevStartDate, $lt: prevEndDate },
-            paymentStatus: 'paid'
+            paymentStatus: 'completed'
           }
         },
         {
@@ -848,7 +848,7 @@ exports.getRevenueAnalytics = async (req, res) => {
       ]),
       Order.aggregate([
         {
-          $match: { paymentStatus: 'paid' }
+          $match: { paymentStatus: 'completed' }
         },
         {
           $group: {
@@ -859,7 +859,7 @@ exports.getRevenueAnalytics = async (req, res) => {
       ]),
       Order.aggregate([
         {
-          $match: { paymentStatus: 'paid' }
+          $match: { paymentStatus: 'completed' }
         },
         { $unwind: '$items' },
         {

@@ -90,7 +90,7 @@ exports.verifyPayment = async (req, res) => {
     const order = await Order.findByIdAndUpdate(
       orderId,
       {
-        paymentStatus: 'paid',
+        paymentStatus: 'completed',
         razorpayOrderId: razorpay_order_id,
         razorpayPaymentId: razorpay_payment_id,
         paidAt: new Date()

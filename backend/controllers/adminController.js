@@ -40,7 +40,7 @@ exports.getDashboardStats = async (req, res) => {
 
     // Calculate revenue
     const revenueData = await Order.aggregate([
-      { $match: { paymentStatus: 'paid' } },
+      { $match: { paymentStatus: 'completed' } },
       {
         $group: {
           _id: null,
@@ -53,7 +53,7 @@ exports.getDashboardStats = async (req, res) => {
     const monthlyRevenue = await Order.aggregate([
       { 
         $match: { 
-          paymentStatus: 'paid',
+          paymentStatus: 'completed',
           createdAt: { $gte: startOfMonth }
         } 
       },
