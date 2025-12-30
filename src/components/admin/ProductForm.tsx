@@ -186,7 +186,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
         formDataUpload.append('images', selectedFiles[i]);
       }
 
-      const apiUrl = (process.env.NEXT_PUBLIC_API_URL || '') + '/api';
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || '';
+      const apiUrl = apiBase.endsWith('/api') ? apiBase : (apiBase ? `${apiBase}/api` : '/api');
+
       let response = await fetch(`${apiUrl}/upload/multiple`, {
         method: 'POST',
         headers: {
@@ -207,14 +209,20 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
         });
       }
 
-      const result = await response.json();
+      let responseJson;
+      try {
+        responseJson = await response.json();
+      } catch (e) {
+        console.error('Failed to parse response as JSON:', e);
+        throw new Error(`Server returned an invalid response (${response.status} ${response.statusText}). This usually happens when the upload is blocked by the server or exceeds the allowable size.`);
+      }
 
-      if (result.success) {
-        const newImages = result.images.map((img: any, index: number) => ({
+      if (responseJson.success) {
+        const newImages = responseJson.images.map((img: any, index: number) => ({
           url: img.url,
           key: img.key,
           alt: '',
-          isPrimary: formData.images.length === 0 && index === 0 // Only first image is primary if no existing images
+          isPrimary: formData.images.length === 0 && index === 0
         }));
 
         setFormData(prev => ({
@@ -222,18 +230,17 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
           images: [...prev.images, ...newImages]
         }));
 
-        // Clear file input
         const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
         if (fileInput) fileInput.value = '';
         setSelectedFiles(null);
 
-        alert(`${result.images.length} images uploaded successfully!`);
+        alert(`${responseJson.images.length} images uploaded successfully!`);
       } else {
-        alert('Failed to upload images: ' + result.message);
+        alert('Failed to upload images: ' + (responseJson.message || 'Unknown error'));
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error uploading images:', error);
-      alert('Failed to upload images. Please try again.');
+      alert('Failed to upload images: ' + (error.message || 'Please try again.'));
     } finally {
       setUploadingImages(false);
     }
