@@ -1,0 +1,41 @@
+{
+  "name": "rose-chemicals-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "backend": "cd backend && npm run dev",
+    "frontend": "next dev -p 3001",
+    "dev:all": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "install:all": "npm install && cd backend && npm install",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "next start -p 3001"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "lucide-react": "^0.542.0",
+    "next": "^14.2.32",
+    "razorpay": "^2.9.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "schema-dts": "^1.1.5"
+  },
+  "optionalDependencies": {
+    "@next/swc-linux-x64": "14.2.32"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.2",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.14",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.32",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.0.4"
+  }
+}

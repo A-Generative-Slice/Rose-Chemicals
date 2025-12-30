@@ -1,0 +1,330 @@
+[
+  {
+    "_id": "prod-001",
+    "name": "Sodium Chloride (NaCl)",
+    "description": "High purity sodium chloride for industrial and laboratory use. Meets ACS specifications.",
+    "price": 25.99,
+    "category": "Industrial",
+    "inStock": true,
+    "quantity": 500,
+    "sku": "RC-NACL-001",
+    "images": [
+      "/images/CATALOG/1. Acetic Acid - Rs 170.webp"
+    ],
+    "specifications": {
+      "purity": "99.5%",
+      "grade": "ACS",
+      "form": "Crystalline powder",
+      "packaging": "25kg bags"
+    },
+    "createdAt": "2025-09-26T14:35:41.623Z"
+  },
+  {
+    "_id": "prod-002",
+    "name": "Sulfuric Acid (H2SO4)",
+    "description": "Concentrated sulfuric acid for industrial applications. Handle with extreme care.",
+    "price": 89.99,
+    "category": "Acids",
+    "inStock": true,
+    "quantity": 200,
+    "sku": "RC-H2SO4-001",
+    "images": [
+      "/images/CATALOG/10. cocamidopropyl-betaine-CAPB - RS 163.webp"
+    ],
+    "specifications": {
+      "concentration": "98%",
+      "grade": "Technical",
+      "form": "Liquid",
+      "packaging": "25L containers"
+    },
+    "createdAt": "2025-09-26T14:35:41.623Z"
+  },
+  {
+    "_id": "prod-003",
+    "name": "Calcium Carbonate (CaCO3)",
+    "description": "Precipitated calcium carbonate for pharmaceutical and food applications.",
+    "price": 45.5,
+    "category": "Carbonates",
+    "inStock": true,
+    "quantity": 300,
+    "sku": "RC-CACO3-001",
+    "images": [
+      "/images/CATALOG/101. MAGIC SPONGE-Rs 68.png"
+    ],
+    "specifications": {
+      "purity": "99.0%",
+      "grade": "USP",
+      "form": "Fine powder",
+      "packaging": "20kg bags"
+    },
+    "createdAt": "2025-09-26T14:35:41.623Z"
+  },
+  {
+    "_id": "prod-004",
+    "name": "Ethanol (C2H5OH)",
+    "description": "Denatured ethanol for industrial cleaning and solvent applications.",
+    "price": 65.75,
+    "category": "Solvents",
+    "inStock": true,
+    "quantity": 150,
+    "sku": "RC-ETOH-001",
+    "images": [
+      "/images/CATALOG/109. MINI DUSTER SPL 43 GM-Rs 43.png"
+    ],
+    "specifications": {
+      "purity": "95%",
+      "grade": "Industrial",
+      "form": "Liquid",
+      "packaging": "20L containers"
+    },
+    "createdAt": "2025-09-26T14:35:41.623Z"
+  },
+  {
+    "_id": "prod-005",
+    "name": "Potassium Hydroxide (KOH)",
+    "description": "Caustic potash for soap making and industrial applications.",
+    "price": 78.25,
+    "category": "Industrial",
+    "inStock": true,
+    "quantity": 100,
+    "sku": "RC-KOH-001",
+    "images": [
+      "/images/CATALOG/116. 6606 CLOTH BRUSH-Rs 50.png"
+    ],
+    "specifications": {
+      "purity": "90%",
+      "grade": "Technical",
+      "form": "Flakes",
+      "packaging": "25kg drums"
+    },
+    "createdAt": "2025-09-26T14:35:41.623Z"
+  },
+  {
+    "_id": "prod-006",
+    "name": "Glass Wiper 3008",
+    "description": "Premium glass wiper for streak-free cleaning of windows and mirrors.",
+    "price": 52.00,
+    "category": "Glass Cleaner",
+    "inStock": true,
+    "quantity": 150,
+    "sku": "RC-GW-3008",
+    "images": [
+      "/images/CATALOG/87. 3008 GLASS WIPER Rs 52.JPG"
+    ],
+    "specifications": {
+      "material": "Rubber and Plastic",
+      "size": "Standard",
+      "use": "Windows, Mirrors"
+    },
+    "createdAt": "2025-09-26T14:35:41.623Z"
+  },
+  {
+    "_id": "prod-007",
+    "name": "SLES 70% (Liquid)",
+    "description": "Sodium Lauryl Ether Sulfate, a powerful surfactant used in disinfectants and soaps.",
+    "price": 145.00,
+    "category": "Disinfectant",
+    "inStock": true,
+    "quantity": 300,
+    "sku": "RC-SLES-70",
+    "images": [
+      "/images/CATALOG/8. sodium-lauryl-ether-sulfate-SLES-70_.webp"
+    ],
+    "specifications": {
+      "concentration": "70%",
+      "form": "Liquid",
+      "packaging": "50kg drums"
+    },
+    "createdAt": "2025-09-26T14:35:41.623Z"
+  },
+  {
+    "_id": "broom-001",
+    "name": "Delux Nice Broom",
+    "price": 115,
+    "category": "Brooms",
+    "description": "Premium quality broom for household and commercial cleaning.",
+    "images": [
+      "/images/BROOMS/164. DELUX NICE BROOM 115.png"
+    ],
+    "sku": "BR-DELUX-001",
+    "inStock": true,
+    "quantity": 100,
+    "specifications": {
+      "material": "Natural fibers",
+      "handle": "Wooden",
+      "size": "Standard"
+    },
+    "createdAt": "2025-09-26T15:28:53.089Z"
+  },
+  {
+    "_id": "broom-002",
+    "name": "Sitara Broom",
+    "price": 84,
+    "category": "Brooms",
+    "description": "Durable broom suitable for daily cleaning tasks.",
+    "images": [
+      "/images/BROOMS/166. SITARA BROOM- 84.png"
+    ],
+    "sku": "BR-SITARA-001",
+    "inStock": true,
+    "quantity": 150,
+    "specifications": {
+      "material": "Synthetic fibers",
+      "handle": "Plastic",
+      "size": "Standard"
+    },
+    "createdAt": "2025-09-26T15:28:53.091Z"
+  },
+  {
+    "_id": "broom-003",
+    "name": "Supriya Nice Broom",
+    "price": 115,
+    "category": "Brooms",
+    "description": "High-quality broom with excellent sweeping performance.",
+    "images": [
+      "/images/BROOMS/167. SUPRIYA NICE BROOM 115.png"
+    ],
+    "sku": "BR-SUPRIYA-001",
+    "inStock": true,
+    "quantity": 80,
+    "specifications": {
+      "material": "Natural fibers",
+      "handle": "Wooden",
+      "size": "Standard"
+    },
+    "createdAt": "2025-09-26T15:28:53.092Z"
+  },
+  {
+    "_id": "broom-004",
+    "name": "Camel Red Broom",
+    "price": 65,
+    "category": "Brooms",
+    "description": "Economical broom for everyday cleaning needs.",
+    "images": [
+      "/images/BROOMS/168. CAMEL RED - 65.png"
+    ],
+    "sku": "BR-CAMEL-001",
+    "inStock": true,
+    "quantity": 200,
+    "specifications": {
+      "material": "Mixed fibers",
+      "handle": "Wooden",
+      "size": "Standard"
+    },
+    "createdAt": "2025-09-26T15:28:53.093Z"
+  },
+  {
+    "_id": "toilet-001",
+    "name": "Keetal Brush",
+    "price": 30,
+    "category": "Toilet Brushes",
+    "description": "Essential toilet cleaning brush for bathroom hygiene.",
+    "images": [
+      "/images/TOILET_BRUSHES/107. 5500 KEETAL BRUSH-Rs 30.png"
+    ],
+    "sku": "TB-KEETAL-001",
+    "inStock": true,
+    "quantity": 120,
+    "specifications": {
+      "material": "Plastic bristles",
+      "handle": "Plastic",
+      "type": "Standard"
+    },
+    "createdAt": "2025-09-26T15:28:53.093Z"
+  },
+  {
+    "_id": "toilet-002",
+    "name": "New Container Brush",
+    "price": 141,
+    "category": "Toilet Brushes",
+    "description": "Premium toilet brush with storage container.",
+    "images": [
+      "/images/TOILET_BRUSHES/119. NEW CONTAINER BRUSH 1642-Rs 141.png"
+    ],
+    "sku": "TB-CONTAINER-001",
+    "inStock": true,
+    "quantity": 60,
+    "specifications": {
+      "material": "Durable bristles",
+      "handle": "Stainless steel",
+      "type": "Container included"
+    },
+    "createdAt": "2025-09-26T15:28:53.094Z"
+  },
+  {
+    "_id": "sink-001",
+    "name": "Supreme Sink Square",
+    "price": 57,
+    "category": "Sink Brushes",
+    "description": "Square-shaped brush ideal for sink corners and edges.",
+    "images": [
+      "/images/SINK_BRUSHES/100. SUPREME SINK SQUIRE Rs 57.JPG"
+    ],
+    "sku": "SB-SUPREME-001",
+    "inStock": true,
+    "quantity": 90,
+    "specifications": {
+      "shape": "Square",
+      "material": "Nylon bristles",
+      "handle": "Plastic"
+    },
+    "createdAt": "2025-09-26T15:28:53.095Z"
+  },
+  {
+    "_id": "sink-002",
+    "name": "2381 Sink Brush",
+    "price": 38,
+    "category": "Sink Brushes",
+    "description": "Compact sink brush for kitchen and bathroom cleaning.",
+    "images": [
+      "/images/SINK_BRUSHES/108. 2381 SINK BRUSH- Rs 38.png"
+    ],
+    "sku": "SB-2381-001",
+    "inStock": true,
+    "quantity": 150,
+    "specifications": {
+      "shape": "Round",
+      "material": "Soft bristles",
+      "handle": "Plastic"
+    },
+    "createdAt": "2025-09-26T15:28:53.096Z"
+  },
+  {
+    "_id": "carpet-001",
+    "name": "Avon Carpet Brush",
+    "price": 127,
+    "category": "Carpet Brushes",
+    "description": "Professional carpet cleaning brush for deep cleaning.",
+    "images": [
+      "/images/CARPET_BRUSHES/83. AVON CARPER BRUSH (307)-Rs 127.png"
+    ],
+    "sku": "CB-AVON-001",
+    "inStock": true,
+    "quantity": 40,
+    "specifications": {
+      "material": "Stiff bristles",
+      "handle": "Ergonomic grip",
+      "type": "Deep cleaning"
+    },
+    "createdAt": "2025-09-26T15:28:53.097Z"
+  },
+  {
+    "_id": "long-001",
+    "name": "THK 140",
+    "price": 111,
+    "category": "Long Brushes",
+    "description": "Extended reach brush for high areas and corners.",
+    "images": [
+      "/images/LONG_BRUSHES/123. THK 140-Rs 111.png"
+    ],
+    "sku": "LB-THK-001",
+    "inStock": true,
+    "quantity": 70,
+    "specifications": {
+      "length": "140cm",
+      "material": "Synthetic bristles",
+      "handle": "Telescopic"
+    },
+    "createdAt": "2025-09-26T15:28:53.097Z"
+  }
+]
