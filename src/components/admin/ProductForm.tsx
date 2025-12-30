@@ -200,7 +200,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
       // If S3 upload fails, try local upload
       if (!response.ok) {
         console.log('S3 upload failed, trying local upload...');
-        response = await fetch(`${apiUrl}/upload/local/multiple`, {
+        response = await fetch(`${apiUrl}/upload-local/multiple`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`

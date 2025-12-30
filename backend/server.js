@@ -100,7 +100,7 @@ app.use('/api/addresses', require('./routes/addresses'));
 app.use('/api/upload', require('./routes/upload'));
 app.use('/api/admin/whatsapp', require('./routes/whatsapp-chats'));
 app.use('/api/whatsapp', require('./routes/whatsapp-webhook')); // Public Webhook routes
-app.use('/api/upload', require('./routes/upload-local'));
+app.use('/api/upload-local', require('./routes/upload-local'));
 app.use('/api/inquiries', require('./routes/inquiry'));
 app.use('/api/settings', require('./routes/settings'));
 

@@ -35,7 +35,7 @@ const localStorage = multer({
 });
 
 // Local upload endpoint (fallback if S3 fails)
-router.post('/local/multiple', localStorage.array('images', 10), (req, res) => {
+router.post('/multiple', localStorage.array('images', 10), (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({
