@@ -197,6 +197,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
 
       // Remove trailing slash if it exists before appending routes
       apiUrl = apiUrl.replace(/\/$/, '');
+      console.log('API Base:', apiBase);
+      console.log('Constructed API URL:', apiUrl);
 
       let response = await fetch(`${apiUrl}/upload/multiple`, {
         method: 'POST',
