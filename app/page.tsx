@@ -8,6 +8,7 @@ export default function Home() {
     <main>
       <Header />
       <Hero />
+
       <section className="max-w-7xl mx-auto px-6 py-16">
         <h2 className="text-2xl font-semibold mb-6">Featured Products</h2>
         <Featured />

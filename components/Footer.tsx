@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Linkedin, Youtube } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { settingsAPI } from '../src/services/api';
 
@@ -16,6 +16,7 @@ interface FooterSettings {
         instagram: string;
         twitter: string;
         linkedin: string;
+        youtube: string;
     };
 }
 
@@ -41,10 +42,10 @@ export default function Footer() {
     const displaySettings = {
         siteName: settings?.siteName || 'Rose Chemicals',
         siteDescription: settings?.siteDescription || 'Premium cleaning solutions for homes and industries. Committed to quality and customer satisfaction.',
-        contactEmail: settings?.contactEmail || 'contact@rosechemicals.in',
-        contactPhone: settings?.contactPhone || '+91 99999 99999',
-        address: settings?.address || 'Ahmedabad, Gujarat, India',
-        socialMedia: settings?.socialMedia || { facebook: '', instagram: '', twitter: '', linkedin: '' }
+        contactEmail: 'contact@rosechemicals.in',
+        contactPhone: '8610570490',
+        address: '1st street, Tagore Nagar, Tiruppalai, Madurai, Tamil Nadu 625014',
+        socialMedia: settings?.socialMedia || { facebook: '', instagram: '', twitter: '', linkedin: '', youtube: '' }
     };
 
     return (
@@ -76,6 +77,11 @@ export default function Footer() {
                             {displaySettings.socialMedia.linkedin && (
                                 <Link href={displaySettings.socialMedia.linkedin} target="_blank" className="text-tile-text-secondary hover:text-accent transition-colors">
                                     <Linkedin size={20} />
+                                </Link>
+                            )}
+                            {displaySettings.socialMedia.youtube && (
+                                <Link href={displaySettings.socialMedia.youtube} target="_blank" className="text-tile-text-secondary hover:text-accent transition-colors">
+                                    <Youtube size={20} />
                                 </Link>
                             )}
                         </div>
@@ -126,6 +132,15 @@ export default function Footer() {
 
                 <div className="border-t border-tertiary mt-12 pt-8 text-center text-sm text-tile-text-secondary">
                     <p>© {new Date().getFullYear()} {displaySettings.siteName}. All rights reserved.</p>
+                    <p className="mt-2 text-xs">
+                        <Link
+                            href="https://a-generative-slice.github.io/A-generative-slice"
+                            target="_blank"
+                            className="text-tile-text-secondary hover:text-accent transition-colors opacity-75 hover:opacity-100 uppercase tracking-widest font-medium"
+                        >
+                            BUILT WITH VIBE OF <span className="font-extrabold text-white">A GENERATIVE SLICE</span>
+                        </Link>
+                    </p>
                 </div>
             </div>
         </footer>

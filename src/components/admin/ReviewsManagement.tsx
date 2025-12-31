@@ -33,10 +33,15 @@ const ProductImage = ({ src, alt }: { src?: string, alt: string }) => {
     );
   }
 
+  // Use proxy for uploaded images
+  const finalSrc = src.startsWith('/uploads/')
+    ? `/api/image-proxy?path=${src.replace('/uploads/', '')}`
+    : src;
+
   return (
     <img
       className="h-10 w-10 rounded-lg object-cover flex-shrink-0"
-      src={src}
+      src={finalSrc}
       alt={alt}
       onError={() => setError(true)}
     />
@@ -54,6 +59,7 @@ interface Review {
     _id: string;
     name: string;
     imageUrl: string;
+    images?: { url: string }[];
   };
   rating: number;
   comment: string;
@@ -453,7 +459,7 @@ export default function ReviewsManagement() {
                     </div>
                     <div className="p-4 flex gap-4">
                       <ProductImage
-                        src={selectedReview.product.imageUrl}
+                        src={selectedReview.product.images?.[0]?.url || selectedReview.product.imageUrl}
                         alt={selectedReview.product.name}
                       />
                       <div className="flex flex-1 flex-col justify-center">
@@ -619,7 +625,7 @@ export default function ReviewsManagement() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <ProductImage
-                          src={review.product.imageUrl}
+                          src={review.product.images?.[0]?.url || review.product.imageUrl}
                           alt={review.product.name}
                         />
                         <div className="ml-3">

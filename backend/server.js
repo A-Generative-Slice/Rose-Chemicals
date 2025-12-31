@@ -118,7 +118,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000; // .env sets 5001 comment might be wrong, sticking to active config
+const PORT = process.env.PORT || 5000;
 
 // Start CSV schedulers (temporarily disabled for diagnostics)
 if (process.env.ENABLE_CSV_JOBS === 'true') {
@@ -128,14 +128,12 @@ if (process.env.ENABLE_CSV_JOBS === 'true') {
   console.log('⏸ CSV schedulers disabled (set ENABLE_CSV_JOBS=true to enable)');
 }
 
-// Ensure we only start listening after DB attempt (even if it failed we still expose errors)
-Promise.resolve(dbReady).finally(() => {
-  const server = app.listen(PORT, '0.0.0.0', () => {
-    const addr = server.address();
-    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
-    console.log('Listening address info:', addr);
-  });
-  server.on('error', (err) => {
-    console.error('HTTP server error:', err);
-  });
+// Start Server Immediately (Decoupled from DB)
+const server = app.listen(PORT, '127.0.0.1', () => {
+  const addr = server.address();
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+  console.log('Listening address info:', addr);
+});
+server.on('error', (err) => {
+  console.error('HTTP server error:', err);
 });

@@ -26,20 +26,50 @@ exports.createOrder = async (req, res) => {
       }
     }
 
-    // Calculate total amount
-    const totalAmount = cart.items.reduce((total, item) => {
-      return total + (item.product.price * item.quantity);
-    }, 0);
+    // Calculate Pricing Breakdown
+    let subtotal = 0;
+    let taxAmount = 0;
+
+    const orderItems = cart.items.map(item => {
+      const itemTotal = item.product.price * item.quantity;
+      const itemTax = (itemTotal * (item.product.gstPercentage || 0)) / 100;
+
+      subtotal += itemTotal;
+      taxAmount += itemTax;
+
+      return {
+        product: item.product._id,
+        quantity: item.quantity,
+        price: item.product.price,
+        itemTax: itemTax
+      };
+    });
+
+    // Calculate Packing & Delivery Charge (Shipping)
+    let shippingCost = 0;
+    if (subtotal <= 1000) {
+      shippingCost = 100;
+    } else if (subtotal <= 2000) {
+      shippingCost = 150;
+    } else if (subtotal <= 3000) {
+      shippingCost = 200;
+    } else if (subtotal <= 4000) {
+      shippingCost = 250;
+    } else {
+      shippingCost = 300;
+    }
+
+    // Final Total
+    const totalAmount = subtotal + taxAmount + shippingCost;
 
     // Create order
     const order = await Order.create({
       user: req.user.id,
-      items: cart.items.map(item => ({
-        product: item.product._id,
-        quantity: item.quantity,
-        price: item.product.price
-      })),
+      items: orderItems,
       shippingAddress: req.body.shippingAddress,
+      subtotal,
+      taxAmount,
+      shippingCost,
       totalAmount,
       orderNotes: req.body.orderNotes
     });

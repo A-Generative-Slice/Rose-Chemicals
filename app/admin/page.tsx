@@ -22,7 +22,8 @@ import ReviewsManagement from '../../src/components/admin/ReviewsManagement';
 import AnalyticsDashboard from '../../src/components/admin/AnalyticsDashboard';
 import SettingsManagement from '../../src/components/admin/SettingsManagement';
 import WhatsAppManagement from '../../src/components/admin/WhatsAppManagement';
-import { MessageSquare } from 'lucide-react';
+import InquiriesManagement from '../../src/components/admin/InquiriesManagement';
+import { MessageSquare, Inbox } from 'lucide-react';
 
 interface DashboardStats {
   totalUsers: number;
@@ -185,6 +186,7 @@ export default function AdminDashboard() {
     { id: 'users', label: 'Users', icon: Users },
     { id: 'reviews', label: 'Reviews', icon: Star },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+    { id: 'inquiries', label: 'Inquiries', icon: Inbox },
     { id: 'whatsapp', label: 'WhatsApp Chats', icon: MessageSquare },
     { id: 'settings', label: 'Settings', icon: Settings }
   ];
@@ -196,6 +198,7 @@ export default function AdminDashboard() {
       case 'users': return <UsersManagement />;
       case 'reviews': return <ReviewsManagement />;
       case 'analytics': return <AnalyticsDashboard />;
+      case 'inquiries': return <InquiriesManagement />;
       case 'settings': return <SettingsManagement />;
       case 'whatsapp': return <WhatsAppManagement />;
       default: return <ProductsManagement />;
@@ -346,6 +349,20 @@ export default function AdminDashboard() {
         {/* Content */}
         <main className="flex-1 p-4 lg:p-6 overflow-x-hidden">
           {renderContent()}
+
+          <div className="mt-12 border-t py-6 text-center">
+            <p className="text-sm text-gray-500 mb-2">© {new Date().getFullYear()} Rose Chemicals. All rights reserved.</p>
+            <p className="text-xs">
+              <a
+                href="https://a-generative-slice.github.io/A-generative-slice"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-blue-600 transition-colors uppercase tracking-widest font-medium"
+              >
+                BUILT WITH VIBE OF <span className="font-extrabold text-blue-600">A GENERATIVE SLICE</span>
+              </a>
+            </p>
+          </div>
         </main>
       </div>
 

@@ -202,9 +202,8 @@ export default function ContactPage() {
                   <h3 className="font-semibold text-tile-bg mb-1">Office Address</h3>
                   <p className="text-gray-600">
                     Rose Chemicals<br />
-                    Industrial Area, Sector 45<br />
-                    Gurgaon, Haryana 122003<br />
-                    India
+                    1st street, Tagore Nagar, Tiruppalai<br />
+                    Madurai, Tamil Nadu 625014<br />
                   </p>
                 </div>
               </div>
@@ -218,9 +217,9 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold text-tile-bg mb-1">Phone Numbers</h3>
                   <p className="text-gray-600">
-                    Sales: +91 98765 43210<br />
-                    Support: +91 98765 43211<br />
-                    WhatsApp: +91 98765 43212
+                    Sales: +91 98412 23709<br />
+                    Support: +91 97917 89786<br />
+                    WhatsApp: +91 86105 70490
                   </p>
                 </div>
               </div>
@@ -234,9 +233,9 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold text-tile-bg mb-1">Email Addresses</h3>
                   <p className="text-gray-600">
-                    General: info@rosechemicals.com<br />
-                    Sales: sales@rosechemicals.com<br />
-                    Support: support@rosechemicals.com
+                    General: contact@rosechemicals.in<br />
+                    Sales: sales@rosechemicals.in<br />
+                    Support: support@rosechemicals.in
                   </p>
                 </div>
               </div>
@@ -275,7 +274,7 @@ export default function ContactPage() {
                   Browse Products
                 </a>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+919841223709"
                   className="block w-full bg-gray-200 text-gray-700 py-3 px-4 rounded-lg text-center font-semibold hover:bg-gray-300 transition-colors"
                 >
                   Call Now
@@ -292,17 +291,17 @@ export default function ContactPage() {
           <h2 className="text-3xl font-bold text-tile-bg mb-8 text-center">
             Find Our Location
           </h2>
-          <div className="bg-gray-300 rounded-lg h-96 flex items-center justify-center">
-            <div className="text-center">
-              <svg className="w-16 h-16 text-gray-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <p className="text-gray-600">
-                Interactive map coming soon<br />
-                Rose Chemicals, Gurgaon, Haryana
-              </p>
-            </div>
+          <div className="rounded-lg h-96 overflow-hidden shadow-lg border border-gray-200">
+            <iframe
+              src="https://maps.google.com/maps?q=Rose%20Chemicals,%20No%20179,%201st%20St,%20Tagore%20Nagar,%20Bharat%20Nagar,%20Tiruppalai,%20Madurai,%20Tamil%20Nadu%20625014&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Rose Chemicals Location"
+            ></iframe>
           </div>
         </div>
       </section>

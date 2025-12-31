@@ -189,16 +189,31 @@ export default function CheckoutPage() {
   };
 
   // Calculate totals
-  const { subtotal, taxTotal, total } = items.reduce((acc, item) => {
+  const { subtotal, taxTotal } = items.reduce((acc, item) => {
     const itemTotal = item.product.price * item.quantity;
     const itemTax = (itemTotal * (item.product.gstPercentage || 0)) / 100;
 
     return {
       subtotal: acc.subtotal + itemTotal,
-      taxTotal: acc.taxTotal + itemTax,
-      total: acc.total + itemTotal + itemTax
+      taxTotal: acc.taxTotal + itemTax
     };
-  }, { subtotal: 0, taxTotal: 0, total: 0 });
+  }, { subtotal: 0, taxTotal: 0 });
+
+  // Packing & Delivery Calculation
+  let shippingCost = 0;
+  if (subtotal <= 1000) {
+    shippingCost = 100;
+  } else if (subtotal <= 2000) {
+    shippingCost = 150;
+  } else if (subtotal <= 3000) {
+    shippingCost = 200;
+  } else if (subtotal <= 4000) {
+    shippingCost = 250;
+  } else {
+    shippingCost = 300;
+  }
+
+  const total = subtotal + taxTotal + shippingCost;
 
   if (!isAuthenticated || items.length === 0) {
     return null; // Will redirect in useEffect
@@ -393,6 +408,10 @@ export default function CheckoutPage() {
                 <div className="flex justify-between">
                   <span className="text-gray-600">Tax (GST)</span>
                   <span className="font-medium">₹{taxTotal.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Packing & Delivery</span>
+                  <span className="font-medium">₹{shippingCost.toFixed(2)}</span>
                 </div>
                 <hr className="my-4" />
                 <div className="flex justify-between text-lg font-semibold">

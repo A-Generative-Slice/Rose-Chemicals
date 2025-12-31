@@ -9,12 +9,13 @@ const settingsSchema = new mongoose.Schema({
         favicon: String,
         contactEmail: { type: String, default: 'info@rosechemicals.com' },
         contactPhone: { type: String, default: '+91 98765 43210' },
-        address: { type: String, default: '123 Chemical Street, Industrial Area, Mumbai, Maharashtra 400001' },
+        address: { type: String, default: '1st street, Tagore Nagar, Tiruppalai, Madurai, Tamil Nadu 625014' },
         socialMedia: {
             facebook: String,
             twitter: String,
             instagram: String,
-            linkedin: String
+            linkedin: String,
+            youtube: String
         }
     },
     email: {

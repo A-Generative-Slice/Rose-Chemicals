@@ -1,9 +1,10 @@
 "use client"
 import Link from 'next/link'
-import { useState } from 'react'
-import { Search, ShoppingBag, Menu, User, LogOut } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Search, ShoppingBag, Menu, User, LogOut, Facebook, Instagram, Twitter, Linkedin, Youtube } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '../src/contexts/AuthContext'
+import { settingsAPI } from '../src/services/api'
 import { useCart } from '../src/contexts/CartContext'
 import CartDrawer from './CartDrawer'
 
@@ -12,10 +13,25 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const [socialLinks, setSocialLinks] = useState({ facebook: '', instagram: '', twitter: '', linkedin: '', youtube: '' })
   const [isCartOpen, setIsCartOpen] = useState(false)
   const { user, isAuthenticated, logout } = useAuth()
   const { totalItems } = useCart()
   const router = useRouter()
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const response = await settingsAPI.getPublicSettings()
+        if (response.success && response.settings?.socialMedia) {
+          setSocialLinks(response.settings.socialMedia)
+        }
+      } catch (error) {
+        console.error('Failed to fetch social links:', error)
+      }
+    }
+    fetchSettings()
+  }, [])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -31,9 +47,10 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="font-semibold text-lg text-white hover:opacity-90 transition-opacity"
+          className="flex items-center gap-3 font-semibold text-lg text-white hover:opacity-90 transition-opacity"
         >
-          Rose Chemicals
+          <img src="/logo.png" alt="Rose Chemicals Logo" className="h-10 w-auto object-contain" />
+          <span className="hidden md:block">Rose Chemicals</span>
         </Link>
         <nav className="hidden md:flex gap-8 items-center">
           <Link
@@ -62,6 +79,34 @@ export default function Header() {
           </Link>
         </nav>
         <div className="flex items-center gap-3">
+          {/* Social Icons - Desktop Only */}
+          <div className="hidden lg:flex items-center gap-2 mr-2 border-r border-white/20 pr-4">
+            {socialLinks.facebook && (
+              <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <Facebook size={18} />
+              </a>
+            )}
+            {socialLinks.instagram && (
+              <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <Instagram size={18} />
+              </a>
+            )}
+            {socialLinks.twitter && (
+              <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <Twitter size={18} />
+              </a>
+            )}
+            {socialLinks.linkedin && (
+              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <Linkedin size={18} />
+              </a>
+            )}
+            {socialLinks.youtube && (
+              <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <Youtube size={18} />
+              </a>
+            )}
+          </div>
           <div className={`relative flex items-center transition-all duration-300 ${searchOpen ? 'w-48 md:w-64' : 'w-10'}`}>
             {searchOpen && (
               <form onSubmit={handleSearch} className="w-full">
@@ -241,6 +286,35 @@ export default function Header() {
           >
             Request Quote
           </Link>
+
+          {/* Social Icons - Mobile */}
+          <div className="flex items-center justify-center gap-6 pt-4 border-t border-white/10 mt-2">
+            {socialLinks.facebook && (
+              <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <Facebook size={24} />
+              </a>
+            )}
+            {socialLinks.instagram && (
+              <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <Instagram size={24} />
+              </a>
+            )}
+            {socialLinks.twitter && (
+              <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <Twitter size={24} />
+              </a>
+            )}
+            {socialLinks.linkedin && (
+              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <Linkedin size={24} />
+              </a>
+            )}
+            {socialLinks.youtube && (
+              <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors">
+                <Youtube size={24} />
+              </a>
+            )}
+          </div>
         </div>
       </div>
 

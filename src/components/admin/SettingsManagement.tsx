@@ -35,6 +35,7 @@ interface GeneralSettings {
     twitter: string;
     instagram: string;
     linkedin: string;
+    youtube: string;
   };
 }
 
@@ -107,12 +108,13 @@ export default function SettingsManagement() {
     favicon: '',
     contactEmail: 'info@rosechemicals.com',
     contactPhone: '+91 98765 43210',
-    address: '123 Chemical Street, Industrial Area, Mumbai, Maharashtra 400001',
+    address: '1st street, Tagore Nagar, Tiruppalai, Madurai, Tamil Nadu 625014',
     socialMedia: {
       facebook: '',
       twitter: '',
       instagram: '',
-      linkedin: ''
+      linkedin: '',
+      youtube: ''
     }
   });
 
@@ -534,6 +536,7 @@ export default function SettingsManagement() {
           </div>
         )}
       </div>
+
     </div>
   );
 
@@ -841,70 +844,139 @@ export default function SettingsManagement() {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <h2 className="text-2xl font-bold text-gray-900">Settings Management</h2>
+    <div className="space-y-8 max-w-4xl mx-auto pb-12">
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
+          <p className="text-gray-500">Manage your store configuration</p>
         </div>
         <button
           onClick={handleSaveSettings}
           disabled={saving}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+          className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
         >
-          <Save size={16} />
-          {saving ? 'Saving...' : 'Save Settings'}
+          {saving ? (
+            <>
+              <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+              Saving...
+            </>
+          ) : (
+            <>
+              <Save size={20} />
+              Save Changes
+            </>
+          )}
         </button>
       </div>
 
-      {/* Success/Error Message */}
       {message && (
-        <div className={`flex items-center gap-2 p-4 rounded-lg ${message.type === 'success'
-          ? 'bg-green-50 text-green-800 border border-green-200'
-          : 'bg-red-50 text-red-800 border border-red-200'
+        <div className={`p-4 rounded-lg flex items-center gap-2 ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
           }`}>
-          {message.type === 'success' ? (
-            <CheckCircle size={20} />
-          ) : (
-            <AlertCircle size={20} />
-          )}
-          <span>{message.text}</span>
-          <button
-            onClick={() => setMessage(null)}
-            className="ml-auto text-gray-400 hover:text-gray-600"
-          >
-            <X size={16} />
-          </button>
+          {message.type === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
+          {message.text}
         </div>
       )}
 
-      {/* Tabs */}
-      <div className="bg-white rounded-lg border border-gray-200">
-        <div className="border-b border-gray-200">
-          <nav className="flex space-x-8 px-6">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${activeTab === tab.id
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
-              >
-                <tab.icon size={16} />
-                {tab.label}
-              </button>
-            ))}
-          </nav>
+      {loading ? (
+        <div className="flex justify-center py-12">
+          <div className="w-8 h-8 border-2 border-blue-600/20 border-t-blue-600 rounded-full animate-spin" />
         </div>
+      ) : (
+        <>
+          {/* Social Media Settings Section */}
+          <section className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="p-6 border-b border-gray-100 bg-gray-50/50">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-100 text-blue-600 rounded-lg">
+                  <Globe size={20} />
+                </div>
+                <h2 className="text-lg font-semibold text-gray-900">Social Media Links</h2>
+              </div>
+            </div>
+            <div className="p-6 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Facebook
+                  </label>
+                  <input
+                    type="url"
+                    value={generalSettings.socialMedia?.facebook || ''}
+                    onChange={(e) => setGeneralSettings(prev => ({
+                      ...prev,
+                      socialMedia: { ...prev.socialMedia, facebook: e.target.value }
+                    }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="https://facebook.com/yourpage"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Instagram
+                  </label>
+                  <input
+                    type="url"
+                    value={generalSettings.socialMedia?.instagram || ''}
+                    onChange={(e) => setGeneralSettings(prev => ({
+                      ...prev,
+                      socialMedia: { ...prev.socialMedia, instagram: e.target.value }
+                    }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="https://instagram.com/yourpage"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Twitter
+                  </label>
+                  <input
+                    type="url"
+                    value={generalSettings.socialMedia?.twitter || ''}
+                    onChange={(e) => setGeneralSettings(prev => ({
+                      ...prev,
+                      socialMedia: { ...prev.socialMedia, twitter: e.target.value }
+                    }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="https://twitter.com/yourpage"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    LinkedIn
+                  </label>
+                  <input
+                    type="url"
+                    value={generalSettings.socialMedia?.linkedin || ''}
+                    onChange={(e) => setGeneralSettings(prev => ({
+                      ...prev,
+                      socialMedia: { ...prev.socialMedia, linkedin: e.target.value }
+                    }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="https://linkedin.com/company/yourpage"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    YouTube
+                  </label>
+                  <input
+                    type="url"
+                    value={generalSettings.socialMedia?.youtube || ''}
+                    onChange={(e) => setGeneralSettings(prev => ({
+                      ...prev,
+                      socialMedia: { ...prev.socialMedia, youtube: e.target.value }
+                    }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="https://youtube.com/@yourchannel"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
 
-        <div className="p-6">
-          {activeTab === 'general' && renderGeneralSettings()}
-          {activeTab === 'payment' && renderPaymentSettings()}
-          {activeTab === 'shipping' && renderShippingSettings()}
-          {activeTab === 'security' && renderSecuritySettings()}
-        </div>
-      </div>
+
+        </>
+      )}
     </div>
   );
 }

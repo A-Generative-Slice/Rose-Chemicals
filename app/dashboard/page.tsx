@@ -453,8 +453,8 @@ export default function UserDashboard() {
                       key={item.id}
                       onClick={() => setActiveTab(item.id)}
                       className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-left transition-colors ${activeTab === item.id
-                          ? 'bg-primary text-white'
-                          : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-primary text-white'
+                        : 'text-gray-700 hover:bg-gray-100'
                         }`}
                     >
                       <div className="flex items-center gap-3">
@@ -472,6 +472,20 @@ export default function UserDashboard() {
           {/* Main Content */}
           <div className="lg:col-span-3">
             {renderContent()}
+
+            <div className="mt-12 border-t pt-8 text-center bg-white rounded-lg p-6 shadow-sm border-gray-100">
+              <p className="text-sm text-gray-500 mb-2">© {new Date().getFullYear()} Rose Chemicals. All rights reserved.</p>
+              <p className="text-xs">
+                <a
+                  href="https://a-generative-slice.github.io/A-generative-slice"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-primary transition-colors uppercase tracking-widest font-medium"
+                >
+                  BUILT WITH VIBE OF <span className="font-extrabold text-primary">A GENERATIVE SLICE</span>
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
