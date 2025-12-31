@@ -187,7 +187,16 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
       }
 
       const apiBase = process.env.NEXT_PUBLIC_API_URL || '';
-      const apiUrl = apiBase.endsWith('/api') ? apiBase : (apiBase ? `${apiBase}/api` : '/api');
+      // Ensure we don't double up on /api or provide a broken relative path
+      let apiUrl = apiBase;
+      if (!apiBase) {
+        apiUrl = '/api';
+      } else if (!apiBase.startsWith('http') && !apiBase.startsWith('/api')) {
+        apiUrl = `/api${apiBase.startsWith('/') ? '' : '/'}${apiBase}`;
+      }
+
+      // Remove trailing slash if it exists before appending routes
+      apiUrl = apiUrl.replace(/\/$/, '');
 
       let response = await fetch(`${apiUrl}/upload/multiple`, {
         method: 'POST',
