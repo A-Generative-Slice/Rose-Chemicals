@@ -437,7 +437,7 @@ function RequestQuoteContent() {
                   </div>
                   <div>
                     <div className="font-medium text-sm">Sales Hotline</div>
-                    <div className="text-gray-600 text-sm">+91 98765 43210</div>
+                    <div className="text-gray-600 text-sm">9944663001</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -448,7 +448,7 @@ function RequestQuoteContent() {
                   </div>
                   <div>
                     <div className="font-medium text-sm">Email</div>
-                    <div className="text-gray-600 text-sm">sales@rosechemicals.com</div>
+                    <div className="text-gray-600 text-sm">contact@rosechemicals.in</div>
                   </div>
                 </div>
               </div>
