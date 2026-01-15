@@ -1,6 +1,8 @@
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
 const Order = require('../models/Order');
+const User = require('../models/User');
+const emailService = require('../services/emailService');
 
 // Initialize Razorpay
 const razorpay = new Razorpay({
@@ -214,11 +216,19 @@ const handlePaymentCaptured = async (paymentEntity) => {
     const orderId = paymentEntity.notes?.orderId;
     if (!orderId) return;
 
-    await Order.findByIdAndUpdate(orderId, {
+    const updatedOrder = await Order.findByIdAndUpdate(orderId, {
       paymentStatus: 'completed',
       razorpayPaymentId: paymentEntity.id,
       paidAt: new Date(paymentEntity.created_at * 1000)
-    });
+    }, { new: true }).populate('items.product');
+
+    // Send email confirmation
+    if (updatedOrder) {
+      const user = await User.findById(updatedOrder.user);
+      if (user) {
+        await emailService.sendOrderConfirmation(user, updatedOrder).catch(err => console.error('Email failed:', err));
+      }
+    }
 
     console.log(`Payment captured for order: ${orderId}`);
   } catch (error) {
@@ -250,10 +260,18 @@ const handleOrderPaid = async (orderEntity) => {
     const order = await Order.findOne({ razorpayOrderId: orderEntity.id });
     if (!order) return;
 
-    await Order.findByIdAndUpdate(order._id, {
+    const updatedOrder = await Order.findByIdAndUpdate(order._id, {
       paymentStatus: 'completed',
       paidAt: new Date()
-    });
+    }, { new: true }).populate('items.product');
+
+    // Send email confirmation
+    if (updatedOrder) {
+      const user = await User.findById(updatedOrder.user);
+      if (user) {
+        await emailService.sendOrderConfirmation(user, updatedOrder).catch(err => console.error('Email failed:', err));
+      }
+    }
 
     console.log(`Order paid: ${order._id}`);
   } catch (error) {

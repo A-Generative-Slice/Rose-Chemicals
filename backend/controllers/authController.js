@@ -49,6 +49,10 @@ exports.register = async (req, res) => {
     // Create token
     const token = generateToken(user._id);
 
+    // Send Welcome Email
+    const emailService = require('../services/emailService');
+    emailService.sendWelcomeEmail(user).catch(err => console.error('Welcome email failed:', err));
+
     res.status(201).json({
       success: true,
       token,
