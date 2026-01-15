@@ -163,7 +163,7 @@ exports.handleWebhook = async (req, res) => {
   try {
     const webhookSignature = req.headers['x-razorpay-signature'];
     const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
-    
+
     if (!webhookSecret) {
       console.error('Webhook secret not configured');
       return res.status(500).json({ success: false, message: 'Webhook not configured' });
@@ -181,7 +181,7 @@ exports.handleWebhook = async (req, res) => {
     }
 
     const event = req.body;
-    
+
     console.log('Webhook received:', event.event);
 
     switch (event.event) {
@@ -193,6 +193,9 @@ exports.handleWebhook = async (req, res) => {
         break;
       case 'order.paid':
         await handleOrderPaid(event.payload.order.entity);
+        break;
+      case 'refund.processed':
+        await handleRefundProcessed(event.payload.refund.entity, event.payload.payment.entity);
         break;
       default:
         console.log('Unhandled webhook event:', event.event);
@@ -255,6 +258,27 @@ const handleOrderPaid = async (orderEntity) => {
     console.log(`Order paid: ${order._id}`);
   } catch (error) {
     console.error('Error handling order paid:', error);
+  }
+};
+
+// Handle refund processed
+const handleRefundProcessed = async (refundEntity, paymentEntity) => {
+  try {
+    // Find order by razorpay payment ID (refunds are linked to payments)
+    const order = await Order.findOne({ razorpayPaymentId: paymentEntity.id });
+    if (!order) {
+      console.log(`Order not found for payment ID: ${paymentEntity.id}`);
+      return;
+    }
+
+    await Order.findByIdAndUpdate(order._id, {
+      paymentStatus: 'refunded',
+      orderStatus: 'cancelled' // Automatically cancel order on refund
+    });
+
+    console.log(`Order refunded and cancelled: ${order._id}`);
+  } catch (error) {
+    console.error('Error handling refund processed:', error);
   }
 };
 
