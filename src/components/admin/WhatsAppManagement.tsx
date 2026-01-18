@@ -14,7 +14,7 @@ import {
 import { adminAPI } from '../../services/api';
 
 interface Conversation {
-    _id: string;
+    phoneNumber: string;
     lastMessage: string;
     lastTimestamp: string;
     type: 'received' | 'sent';
@@ -90,7 +90,7 @@ export default function WhatsAppManagement() {
     };
 
     const filteredConversations = conversations.filter(conv =>
-        conv._id.includes(searchTerm) || conv.lastMessage.toLowerCase().includes(searchTerm.toLowerCase())
+        conv.phoneNumber.includes(searchTerm) || conv.lastMessage.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
@@ -123,16 +123,16 @@ export default function WhatsAppManagement() {
                     ) : (
                         filteredConversations.map((conv) => (
                             <button
-                                key={conv._id}
-                                onClick={() => setSelectedPhone(conv._id)}
-                                className={`w-full p-4 flex items-start gap-4 border-b border-gray-50 hover:bg-gray-50 transition-colors text-left ${selectedPhone === conv._id ? 'bg-blue-50' : ''}`}
+                                key={conv.phoneNumber}
+                                onClick={() => setSelectedPhone(conv.phoneNumber)}
+                                className={`w-full p-4 flex items-start gap-4 border-b border-gray-50 hover:bg-gray-50 transition-colors text-left ${selectedPhone === conv.phoneNumber ? 'bg-blue-50' : ''}`}
                             >
                                 <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 flex-shrink-0">
                                     <User size={20} />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="flex justify-between items-baseline mb-1">
-                                        <h3 className="font-semibold text-gray-900 truncate text-sm">+{conv._id}</h3>
+                                        <h3 className="font-semibold text-gray-900 truncate text-sm">+{conv.phoneNumber}</h3>
                                         <span className="text-[10px] text-gray-500 whitespace-nowrap">{formatTime(conv.lastTimestamp)}</span>
                                     </div>
                                     <p className="text-xs text-gray-600 truncate flex items-center gap-1">

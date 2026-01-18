@@ -655,12 +655,30 @@ export const adminAPI = {
       body: JSON.stringify(settings),
     }),
 
-  // WhatsApp Management
-  getWhatsAppConversations: () =>
-    apiRequest('/admin/whatsapp/conversations'),
+  // WhatsApp Management (Fetching from Railway Bot)
+  getWhatsAppConversations: () => {
+    const botUrl = process.env.NEXT_PUBLIC_RAILWAY_BOT_URL || 'https://bot-production-33ec.up.railway.app';
+    const secret = process.env.NEXT_PUBLIC_RAILWAY_BOT_SECRET || 'RoseAdminSecret2025';
 
-  getWhatsAppChatHistory: (phoneNumber) =>
-    apiRequest(`/admin/whatsapp/history/${phoneNumber}`),
+    return fetch(`${botUrl}/api/chats?api_key=${secret}&flat=true`)
+      .then(res => res.json())
+      .then(data => ({
+        success: true,
+        data: Array.isArray(data) ? data : (data.chats || [])
+      }));
+  },
+
+  getWhatsAppChatHistory: (phoneNumber) => {
+    const botUrl = process.env.NEXT_PUBLIC_RAILWAY_BOT_URL || 'https://bot-production-33ec.up.railway.app';
+    const secret = process.env.NEXT_PUBLIC_RAILWAY_BOT_SECRET || 'RoseAdminSecret2025';
+
+    return fetch(`${botUrl}/api/chats?phoneNumber=${phoneNumber}&api_key=${secret}`)
+      .then(res => res.json())
+      .then(data => ({
+        success: true,
+        data: Array.isArray(data) ? data : (data.chats || [])
+      }));
+  },
 
   // Inquiry Management
   getInquiries: (params = {}) => {

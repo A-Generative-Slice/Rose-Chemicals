@@ -63,6 +63,12 @@ const productSchema = new mongoose.Schema({
     unique: true,
     trim: true
   },
+  slug: {
+    type: String,
+    unique: true,
+    lowercase: true,
+    trim: true
+  },
   features: [{
     type: String
   }],
@@ -139,5 +145,17 @@ const productSchema = new mongoose.Schema({
 
 // Add index for search functionality
 productSchema.index({ name: 'text', description: 'text' });
+
+// Pre-save middleware to generate slug
+productSchema.pre('save', function (next) {
+  if (this.isModified('name') || !this.slug) {
+    this.slug = this.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+  next();
+});
 
 module.exports = mongoose.model('Product', productSchema);
