@@ -86,9 +86,28 @@ export default function WhatsAppManagement() {
         }
     };
 
-    const formatTime = (dateStr: string) => {
-        const date = new Date(dateStr);
-        return date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+    const formatTime = (dateStr: string | number) => {
+        if (!dateStr) return '';
+
+        try {
+            // Handle Unix timestamps (in seconds)
+            let date: Date;
+            if (typeof dateStr === 'number') {
+                date = new Date(dateStr * 1000);
+            } else if (!isNaN(Number(dateStr))) {
+                date = new Date(Number(dateStr) * 1000);
+            } else {
+                date = new Date(dateStr);
+            }
+
+            if (isNaN(date.getTime())) {
+                return '';
+            }
+
+            return date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+        } catch (err) {
+            return '';
+        }
     };
 
     const filteredConversations = conversations.filter(conv =>
