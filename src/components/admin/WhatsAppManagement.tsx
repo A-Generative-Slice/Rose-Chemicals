@@ -60,6 +60,7 @@ export default function WhatsAppManagement() {
         try {
             setLoading(true);
             const data = await adminAPI.getWhatsAppConversations();
+            console.log('WhatsApp Conversations API Response:', data);
             if (data.success) {
                 setConversations(data.data);
             }
@@ -74,6 +75,7 @@ export default function WhatsAppManagement() {
         try {
             setChatLoading(true);
             const data = await adminAPI.getWhatsAppChatHistory(phone);
+            console.log(`WhatsApp Chat History API Response for ${phone}:`, data);
             if (data.success) {
                 setMessages(data.data);
             }
@@ -94,9 +96,9 @@ export default function WhatsAppManagement() {
     );
 
     return (
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm h-[calc(100vh-200px)] flex">
+        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm h-[calc(100vh-140px)] flex">
             {/* Sidebar - Conversation List */}
-            <div className={`w-full md:w-80 border-r border-gray-200 flex flex-col ${selectedPhone ? 'hidden md:flex' : 'flex'}`}>
+            <div className={`w-full md:w-96 border-r border-gray-200 flex flex-col ${selectedPhone ? 'hidden md:flex' : 'flex'}`}>
                 <div className="p-4 border-b border-gray-200 bg-gray-50">
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
@@ -135,8 +137,8 @@ export default function WhatsAppManagement() {
                                         <h3 className="font-semibold text-gray-900 truncate text-sm">+{conv.phoneNumber}</h3>
                                         <span className="text-[10px] text-gray-500 whitespace-nowrap">{formatTime(conv.lastTimestamp)}</span>
                                     </div>
-                                    <p className="text-xs text-gray-600 truncate flex items-center gap-1">
-                                        {conv.type === 'sent' && <CheckCheck size={12} className="text-blue-500" />}
+                                    <p className="text-sm text-gray-600 truncate flex items-center gap-1">
+                                        {conv.type === 'sent' && <CheckCheck size={14} className="text-blue-500" />}
                                         {conv.lastMessage}
                                     </p>
                                 </div>
@@ -162,10 +164,10 @@ export default function WhatsAppManagement() {
                                 <User size={20} />
                             </div>
                             <div className="flex-1 min-w-0">
-                                <h2 className="font-bold text-gray-900 text-sm">+{selectedPhone}</h2>
+                                <h2 className="font-bold text-gray-900 text-base">+{selectedPhone}</h2>
                                 <div className="flex items-center gap-1">
                                     <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                                    <p className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">WhatsApp Customer</p>
+                                    <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">WhatsApp Customer</p>
                                 </div>
                             </div>
                             <button className="text-gray-500 p-2 hover:bg-gray-100 rounded-full transition-colors">
@@ -187,13 +189,13 @@ export default function WhatsAppManagement() {
                                             key={msg._id || idx}
                                             className={`flex ${isReceived ? 'justify-start' : 'justify-end'}`}
                                         >
-                                            <div className={`max-w-[80%] p-3 rounded-lg shadow-sm relative ${isReceived ? 'bg-white rounded-tl-none' : 'bg-[#dcf8c6] rounded-tr-none'}`}>
-                                                <p className="text-gray-800 text-sm whitespace-pre-wrap">{msg.message}</p>
+                                            <div className={`max-w-[85%] p-4 rounded-lg shadow-sm relative ${isReceived ? 'bg-white rounded-tl-none' : 'bg-[#dcf8c6] rounded-tr-none'}`}>
+                                                <p className="text-gray-800 text-base whitespace-pre-wrap leading-relaxed">{msg.message}</p>
                                                 <div className="flex items-center justify-end gap-1 mt-1">
-                                                    <span className="text-[10px] text-gray-500">
+                                                    <span className="text-xs text-gray-500">
                                                         {formatTime(msg.timestamp)}
                                                     </span>
-                                                    {!isReceived && <CheckCheck size={14} className="text-blue-500" />}
+                                                    {!isReceived && <CheckCheck size={16} className="text-blue-500" />}
                                                 </div>
                                             </div>
                                         </div>
