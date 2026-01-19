@@ -674,10 +674,17 @@ export const adminAPI = {
 
     return fetch(`${botUrl}/api/chats?phoneNumber=${phoneNumber}&api_key=${secret}`)
       .then(res => res.json())
-      .then(data => ({
-        success: true,
-        data: Array.isArray(data) ? data : (data.chats || [])
-      }));
+      .then(data => {
+        // Ensure we extract the first chat's messages if a phoneNumber was used
+        const chats = data.chats || (Array.isArray(data) ? data : [data]);
+        const selectedChat = chats[0];
+        const messages = selectedChat?.messages || [];
+
+        return {
+          success: true,
+          data: messages
+        };
+      });
   },
 
   // Inquiry Management

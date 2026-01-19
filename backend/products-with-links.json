@@ -1,0 +1,2617 @@
+{
+  "categories": {
+    "bathroom-cleaners": {
+      "name": "Bathroom Cleaners",
+      "products": [
+        {
+          "id": "694ac34323d6cfdee781c964",
+          "name": "Rose Toilet Bowl Cleaner",
+          "price": 299,
+          "mrp": 399,
+          "description": "Professional strength toilet bowl cleaner with fresh rose fragrance. Removes tough stains and kills 99.9% of germs.",
+          "sku": "RC-TC-001",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c964",
+          "keywords": [
+            "rose toilet bowl cleaner",
+            "bathroom cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c966",
+          "name": "Rose Bathroom Tile Cleaner",
+          "price": 249,
+          "mrp": 329,
+          "description": "Powerful tile and grout cleaner that removes soap scum, mildew, and hard water stains.",
+          "sku": "RC-BTC-002",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c966",
+          "keywords": [
+            "rose bathroom tile cleaner",
+            "bathroom cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c974",
+          "name": "Acetic Acid",
+          "price": 170,
+          "mrp": 190,
+          "description": "Acetic Acid - High quality cleaning product",
+          "sku": "RC-NEW-1",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c974",
+          "keywords": [
+            "acetic acid",
+            "bathroom cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca10",
+          "name": "OLEIC ACID",
+          "price": 99,
+          "mrp": 119,
+          "description": "OLEIC ACID - High quality cleaning product",
+          "sku": "RC-NEW-79",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca10",
+          "keywords": [
+            "oleic acid",
+            "bathroom cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca12",
+          "name": "Acid Slurry",
+          "price": 99,
+          "mrp": 119,
+          "description": "Acid Slurry - High quality cleaning product",
+          "sku": "RC-NEW-80",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca12",
+          "keywords": [
+            "acid slurry",
+            "bathroom cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca3a",
+          "name": "Acid Thickener",
+          "price": 99,
+          "mrp": 119,
+          "description": "Acid Thickener - High quality cleaning product",
+          "sku": "RC-NEW-100",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca3a",
+          "keywords": [
+            "acid thickener",
+            "bathroom cleaners"
+          ]
+        }
+      ]
+    },
+    "kitchen-cleaners": {
+      "name": "Kitchen Cleaners",
+      "products": [
+        {
+          "id": "694ac34323d6cfdee781c968",
+          "name": "Rose Degreaser Pro",
+          "price": 349,
+          "mrp": 449,
+          "description": "Heavy-duty kitchen degreaser for stovetops, ovens, and exhaust fans. Cuts through grease instantly.",
+          "sku": "RC-KD-003",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c968",
+          "keywords": [
+            "rose degreaser pro",
+            "kitchen cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c96a",
+          "name": "Rose Dish Wash Liquid",
+          "price": 129,
+          "mrp": 179,
+          "description": "Concentrated dishwashing liquid with advanced grease-cutting formula and gentle on hands.",
+          "sku": "RC-DW-004",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c96a",
+          "keywords": [
+            "rose dish wash liquid",
+            "kitchen cleaners"
+          ]
+        }
+      ]
+    },
+    "floor-cleaners": {
+      "name": "Floor Cleaners",
+      "products": [
+        {
+          "id": "694ac34323d6cfdee781c96c",
+          "name": "Rose Multi-Surface Floor Cleaner",
+          "price": 199,
+          "mrp": 249,
+          "description": "All-in-one floor cleaner suitable for tiles, marble, granite, and wooden floors.",
+          "sku": "RC-FC-005",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c96c",
+          "keywords": [
+            "rose multi-surface floor cleaner",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c982",
+          "name": "SAMARTHYA A1 KITCHEN WIPER",
+          "price": 45,
+          "mrp": 65,
+          "description": "SAMARTHYA A1 KITCHEN WIPER - High quality cleaning product",
+          "sku": "RC-NEW-8",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c982",
+          "keywords": [
+            "samarthya a1 kitchen wiper",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9b6",
+          "name": "VENUS FLOOR WIPER 18 INCH",
+          "price": 104,
+          "mrp": 124,
+          "description": "VENUS FLOOR WIPER 18 INCH - High quality cleaning product",
+          "sku": "RC-NEW-34",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9b6",
+          "keywords": [
+            "venus floor wiper 18 inch",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9b8",
+          "name": "GLASS WIPER",
+          "price": 26,
+          "mrp": 46,
+          "description": "GLASS WIPER - High quality cleaning product",
+          "sku": "RC-NEW-35",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9b8",
+          "keywords": [
+            "glass wiper",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9ba",
+          "name": "GLASS WIPERRS26",
+          "price": 99,
+          "mrp": 119,
+          "description": "GLASS WIPERRS26 - High quality cleaning product",
+          "sku": "RC-NEW-36",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9ba",
+          "keywords": [
+            "glass wiperrs26",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9bc",
+          "name": "IRONMAN 20 INCH WIPER",
+          "price": 185,
+          "mrp": 205,
+          "description": "IRONMAN 20 INCH WIPER - High quality cleaning product",
+          "sku": "RC-NEW-37",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9bc",
+          "keywords": [
+            "ironman 20 inch wiper",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca0a",
+          "name": "GLASS WIPER",
+          "price": 99,
+          "mrp": 119,
+          "description": "GLASS WIPER - High quality cleaning product",
+          "sku": "RC-NEW-76",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca0a",
+          "keywords": [
+            "glass wiper",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca2e",
+          "name": "3008 GLASS WIPER",
+          "price": 52,
+          "mrp": 72,
+          "description": "3008 GLASS WIPER - High quality cleaning product",
+          "sku": "RC-NEW-94",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca2e",
+          "keywords": [
+            "3008 glass wiper",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca30",
+          "name": "Glass Wiper",
+          "price": 99,
+          "mrp": 119,
+          "description": "Glass Wiper - High quality cleaning product",
+          "sku": "RC-NEW-95",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca30",
+          "keywords": [
+            "glass wiper",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca32",
+          "name": "WINDOW WIPER",
+          "price": 50,
+          "mrp": 70,
+          "description": "WINDOW WIPER - High quality cleaning product",
+          "sku": "RC-NEW-96",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca32",
+          "keywords": [
+            "window wiper",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca34",
+          "name": "Window Wiper",
+          "price": 99,
+          "mrp": 119,
+          "description": "Window Wiper - High quality cleaning product",
+          "sku": "RC-NEW-97",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca34",
+          "keywords": [
+            "window wiper",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca54",
+          "name": "DODIE MOP",
+          "price": 99,
+          "mrp": 119,
+          "description": "DODIE MOP - High quality cleaning product",
+          "sku": "RC-NEW-113",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca54",
+          "keywords": [
+            "dodie mop",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca56",
+          "name": "I MOP",
+          "price": 99,
+          "mrp": 119,
+          "description": "I MOP - High quality cleaning product",
+          "sku": "RC-NEW-114",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca56",
+          "keywords": [
+            "i mop",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca58",
+          "name": "I MOP",
+          "price": 99,
+          "mrp": 119,
+          "description": "I MOP - High quality cleaning product",
+          "sku": "RC-NEW-115",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca58",
+          "keywords": [
+            "i mop",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca78",
+          "name": "STAINLESS STEEL   MOP",
+          "price": 99,
+          "mrp": 119,
+          "description": "STAINLESS STEEL   MOP - High quality cleaning product",
+          "sku": "RC-NEW-131",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca78",
+          "keywords": [
+            "stainless steel   mop",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca7a",
+          "name": "TWIST MOP SS",
+          "price": 99,
+          "mrp": 119,
+          "description": "TWIST MOP SS - High quality cleaning product",
+          "sku": "RC-NEW-132",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca7a",
+          "keywords": [
+            "twist mop ss",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca82",
+          "name": "kitchen wiper",
+          "price": 99,
+          "mrp": 119,
+          "description": "kitchen wiper - High quality cleaning product",
+          "sku": "RC-NEW-136",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca82",
+          "keywords": [
+            "kitchen wiper",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca86",
+          "name": "londonmop",
+          "price": 360,
+          "mrp": 119,
+          "description": "londonmop - High quality cleaning product",
+          "sku": "RC-NEW-138",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca86",
+          "keywords": [
+            "londonmop",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca90",
+          "name": "twist mop colour a",
+          "price": 99,
+          "mrp": 119,
+          "description": "twist mop colour a - High quality cleaning product",
+          "sku": "RC-NEW-143",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca90",
+          "keywords": [
+            "twist mop colour a",
+            "floor cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca92",
+          "name": "whitemop",
+          "price": 99,
+          "mrp": 119,
+          "description": "whitemop - High quality cleaning product",
+          "sku": "RC-NEW-144",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca92",
+          "keywords": [
+            "whitemop",
+            "floor cleaners"
+          ]
+        }
+      ]
+    },
+    "glass-cleaners": {
+      "name": "Glass Cleaners",
+      "products": [
+        {
+          "id": "694ac34323d6cfdee781c96e",
+          "name": "Rose Crystal Glass Cleaner",
+          "price": 149,
+          "mrp": 199,
+          "description": "Streak-free glass cleaner for windows, mirrors, and glass surfaces.",
+          "sku": "RC-GC-006",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c96e",
+          "keywords": [
+            "rose crystal glass cleaner",
+            "glass cleaners"
+          ]
+        }
+      ]
+    },
+    "disinfectants": {
+      "name": "Disinfectants",
+      "products": [
+        {
+          "id": "69537ad322fed516e4260f10",
+          "name": "shampoo",
+          "price": 1,
+          "mrp": 1,
+          "description": "shampooooo",
+          "sku": "SKU-1767078611693-c1c0c",
+          "link": "https://rosechemicals.in/products/69537ad322fed516e4260f10",
+          "keywords": [
+            "shampoo",
+            "disinfectants"
+          ]
+        }
+      ]
+    },
+    "industrial-cleaners": {
+      "name": "Industrial Cleaners",
+      "products": [
+        {
+          "id": "6953bcb97c0098d922c76f0c",
+          "name": "SUPERMOP",
+          "price": 100,
+          "mrp": 100,
+          "description": "clean and clear",
+          "sku": "SKU-1767095481881-bme71",
+          "link": "https://rosechemicals.in/products/6953bcb97c0098d922c76f0c",
+          "keywords": [
+            "supermop",
+            "industrial cleaners"
+          ]
+        },
+        {
+          "id": "6953c0957c0098d922c77040",
+          "name": "retro broom",
+          "price": 100,
+          "mrp": 100,
+          "description": "surwl fklwemo;qw ;dieq.",
+          "sku": "SKU-1767096469701-d7rdb",
+          "link": "https://rosechemicals.in/products/6953c0957c0098d922c77040",
+          "keywords": [
+            "retro broom",
+            "industrial cleaners"
+          ]
+        }
+      ]
+    },
+    "brooms": {
+      "name": "Brooms",
+      "products": [
+        {
+          "id": "694ac34323d6cfdee781c8f6",
+          "name": "Delux Nice Broom",
+          "price": 115,
+          "mrp": 145,
+          "description": "Premium quality delux nice broom for efficient cleaning",
+          "sku": "RC-BR-001",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c8f6",
+          "keywords": [
+            "delux nice broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c8f8",
+          "name": "Sitara Broom",
+          "price": 84,
+          "mrp": 110,
+          "description": "Durable sitara broom for everyday cleaning needs",
+          "sku": "RC-BR-002",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c8f8",
+          "keywords": [
+            "sitara broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c8fa",
+          "name": "Supriya Nice Broom",
+          "price": 115,
+          "mrp": 145,
+          "description": "High-quality Supriya nice broom with excellent cleaning performance",
+          "sku": "RC-BR-003",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c8fa",
+          "keywords": [
+            "supriya nice broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c8fc",
+          "name": "Camel Red Broom",
+          "price": 65,
+          "mrp": 85,
+          "description": "Sturdy camel red broom for heavy-duty cleaning",
+          "sku": "RC-BR-004",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c8fc",
+          "keywords": [
+            "camel red broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c8fe",
+          "name": "Shine Red Broom",
+          "price": 74,
+          "mrp": 95,
+          "description": "Bright shine red broom with superior cleaning bristles",
+          "sku": "RC-BR-005",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c8fe",
+          "keywords": [
+            "shine red broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c900",
+          "name": "Pinky Red Broom",
+          "price": 78,
+          "mrp": 100,
+          "description": "Attractive pinky red broom with efficient cleaning capabilities",
+          "sku": "RC-BR-006",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c900",
+          "keywords": [
+            "pinky red broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c902",
+          "name": "Pinky Blue Broom",
+          "price": 78,
+          "mrp": 100,
+          "description": "Stylish pinky blue broom for effective cleaning",
+          "sku": "RC-BR-007",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c902",
+          "keywords": [
+            "pinky blue broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c904",
+          "name": "Jumbo Red Broom",
+          "price": 129,
+          "mrp": 160,
+          "description": "Large jumbo red broom for extensive cleaning areas",
+          "sku": "RC-BR-008",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c904",
+          "keywords": [
+            "jumbo red broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c906",
+          "name": "Amil Red Broom",
+          "price": 98,
+          "mrp": 125,
+          "description": "Premium Amil red broom with durable bristles",
+          "sku": "RC-BR-009",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c906",
+          "keywords": [
+            "amil red broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c908",
+          "name": "Mr. Clean Broom",
+          "price": 50,
+          "mrp": 65,
+          "description": "Affordable Mr. Clean broom for basic cleaning needs",
+          "sku": "RC-BR-010",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c908",
+          "keywords": [
+            "mr. clean broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c90a",
+          "name": "Amil Blue Nice Broom",
+          "price": 95,
+          "mrp": 120,
+          "description": "Stylish Amil blue nice broom with excellent performance",
+          "sku": "RC-BR-011",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c90a",
+          "keywords": [
+            "amil blue nice broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c90c",
+          "name": "Tulsi Green Cover Broom",
+          "price": 109,
+          "mrp": 135,
+          "description": "Eco-friendly Tulsi green cover broom",
+          "sku": "RC-BR-012",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c90c",
+          "keywords": [
+            "tulsi green cover broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c90e",
+          "name": "Chennai Broom Set",
+          "price": 88,
+          "mrp": 115,
+          "description": "Chennai broom set with small and big variants",
+          "sku": "RC-BR-013",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c90e",
+          "keywords": [
+            "chennai broom set",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c910",
+          "name": "Chennai Burma Cover Broom",
+          "price": 93,
+          "mrp": 120,
+          "description": "Traditional Chennai Burma cover broom",
+          "sku": "RC-BR-014",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c910",
+          "keywords": [
+            "chennai burma cover broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c912",
+          "name": "Lady Dream Plastic Broom",
+          "price": 111,
+          "mrp": 140,
+          "description": "Modern Lady Dream plastic broom with ergonomic design",
+          "sku": "RC-BR-015",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c912",
+          "keywords": [
+            "lady dream plastic broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c914",
+          "name": "Chennai Burma Plastic Broom",
+          "price": 88,
+          "mrp": 115,
+          "description": "Durable Chennai Burma plastic broom",
+          "sku": "RC-BR-016",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c914",
+          "keywords": [
+            "chennai burma plastic broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c916",
+          "name": "Lady Dream Soft Brush",
+          "price": 125,
+          "mrp": 155,
+          "description": "Gentle Lady Dream soft brush for delicate cleaning",
+          "sku": "RC-BR-017",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c916",
+          "keywords": [
+            "lady dream soft brush",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9cc",
+          "name": "DELUX NICE BROOM",
+          "price": 115,
+          "mrp": 135,
+          "description": "DELUX NICE BROOM - High quality cleaning product",
+          "sku": "RC-NEW-45",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9cc",
+          "keywords": [
+            "delux nice broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9ce",
+          "name": "SITARA BROOM",
+          "price": 84,
+          "mrp": 104,
+          "description": "SITARA BROOM - High quality cleaning product",
+          "sku": "RC-NEW-46",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9ce",
+          "keywords": [
+            "sitara broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9d0",
+          "name": "SUPRIYA NICE BROOM",
+          "price": 115,
+          "mrp": 135,
+          "description": "SUPRIYA NICE BROOM - High quality cleaning product",
+          "sku": "RC-NEW-47",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9d0",
+          "keywords": [
+            "supriya nice broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9da",
+          "name": "PINKY RED BROOM",
+          "price": 78,
+          "mrp": 98,
+          "description": "PINKY RED BROOM - High quality cleaning product",
+          "sku": "RC-NEW-52",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9da",
+          "keywords": [
+            "pinky red broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9dc",
+          "name": "PINKY BLUE BROOM",
+          "price": 78,
+          "mrp": 98,
+          "description": "PINKY BLUE BROOM - High quality cleaning product",
+          "sku": "RC-NEW-53",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9dc",
+          "keywords": [
+            "pinky blue broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9de",
+          "name": "JUMBO RED BROOM",
+          "price": 129,
+          "mrp": 149,
+          "description": "JUMBO RED BROOM - High quality cleaning product",
+          "sku": "RC-NEW-54",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9de",
+          "keywords": [
+            "jumbo red broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9e0",
+          "name": "AMIL RED BROOM",
+          "price": 98,
+          "mrp": 118,
+          "description": "AMIL RED BROOM - High quality cleaning product",
+          "sku": "RC-NEW-55",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9e0",
+          "keywords": [
+            "amil red broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9e4",
+          "name": "AMIL BLUE NICE BROOM",
+          "price": 95,
+          "mrp": 115,
+          "description": "AMIL BLUE NICE BROOM - High quality cleaning product",
+          "sku": "RC-NEW-57",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9e4",
+          "keywords": [
+            "amil blue nice broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9e6",
+          "name": "TULSI GREEN COVER BROOM",
+          "price": 109,
+          "mrp": 129,
+          "description": "TULSI GREEN COVER BROOM - High quality cleaning product",
+          "sku": "RC-NEW-58",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9e6",
+          "keywords": [
+            "tulsi green cover broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9f8",
+          "name": "fancy broom",
+          "price": 135,
+          "mrp": 155,
+          "description": "fancy broom - High quality cleaning product",
+          "sku": "RC-NEW-67",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9f8",
+          "keywords": [
+            "fancy broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca2a",
+          "name": "FAN BROOM SPL",
+          "price": 215,
+          "mrp": 235,
+          "description": "FAN BROOM SPL - High quality cleaning product",
+          "sku": "RC-NEW-92",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca2a",
+          "keywords": [
+            "fan broom spl",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca2c",
+          "name": "Fan broom",
+          "price": 99,
+          "mrp": 119,
+          "description": "Fan broom - High quality cleaning product",
+          "sku": "RC-NEW-93",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca2c",
+          "keywords": [
+            "fan broom",
+            "brooms"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca80",
+          "name": "fancy broom",
+          "price": 99,
+          "mrp": 119,
+          "description": "fancy broom - High quality cleaning product",
+          "sku": "RC-NEW-135",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca80",
+          "keywords": [
+            "fancy broom",
+            "brooms"
+          ]
+        }
+      ]
+    },
+    "toilet-brushes": {
+      "name": "Toilet Brushes",
+      "products": [
+        {
+          "id": "694ac34323d6cfdee781c918",
+          "name": "Keetal Toilet Brush",
+          "price": 30,
+          "mrp": 40,
+          "description": "Basic Keetal toilet brush for everyday cleaning",
+          "sku": "RC-TB-001",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c918",
+          "keywords": [
+            "keetal toilet brush",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c91a",
+          "name": "New Container Toilet Brush",
+          "price": 141,
+          "mrp": 180,
+          "description": "Premium container toilet brush with holder",
+          "sku": "RC-TB-002",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c91a",
+          "keywords": [
+            "new container toilet brush",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c91c",
+          "name": "THK Toilet Brush",
+          "price": 68,
+          "mrp": 85,
+          "description": "Sturdy THK toilet brush with comfortable grip",
+          "sku": "RC-TB-003",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c91c",
+          "keywords": [
+            "thk toilet brush",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c91e",
+          "name": "Rich Look Single Hockey Small",
+          "price": 32,
+          "mrp": 42,
+          "description": "Rich Look single hockey small toilet brush",
+          "sku": "RC-TB-004",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c91e",
+          "keywords": [
+            "rich look single hockey small",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c920",
+          "name": "Double Hockey Toilet Brush",
+          "price": 41,
+          "mrp": 55,
+          "description": "Double hockey toilet brush for thorough cleaning",
+          "sku": "RC-TB-005",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c920",
+          "keywords": [
+            "double hockey toilet brush",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c922",
+          "name": "Rich Look Single Hockey Big",
+          "price": 39,
+          "mrp": 50,
+          "description": "Rich Look single hockey big toilet brush",
+          "sku": "RC-TB-006",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c922",
+          "keywords": [
+            "rich look single hockey big",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c924",
+          "name": "Rich Look Steel Toilet Brush",
+          "price": 48,
+          "mrp": 62,
+          "description": "Rich Look steel toilet brush with stainless steel handle",
+          "sku": "RC-TB-007",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c924",
+          "keywords": [
+            "rich look steel toilet brush",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c926",
+          "name": "Jumbo Double Hockey Toilet Brush",
+          "price": 68,
+          "mrp": 85,
+          "description": "Jumbo double hockey toilet brush for heavy-duty cleaning",
+          "sku": "RC-TB-008",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c926",
+          "keywords": [
+            "jumbo double hockey toilet brush",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c928",
+          "name": "Double Hockey New Model",
+          "price": 77,
+          "mrp": 95,
+          "description": "New model double hockey toilet brush",
+          "sku": "RC-TB-009",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c928",
+          "keywords": [
+            "double hockey new model",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c92a",
+          "name": "Container Brush A",
+          "price": 97,
+          "mrp": 120,
+          "description": "Premium container brush with advanced cleaning head",
+          "sku": "RC-TB-010",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c92a",
+          "keywords": [
+            "container brush a",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c92c",
+          "name": "Standard Container Brush",
+          "price": 97,
+          "mrp": 120,
+          "description": "Standard container brush for toilet cleaning",
+          "sku": "RC-TB-011",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c92c",
+          "keywords": [
+            "standard container brush",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c92e",
+          "name": "Double Hockey Jumbo",
+          "price": 68,
+          "mrp": 85,
+          "description": "Double hockey jumbo toilet brush for large areas",
+          "sku": "RC-TB-012",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c92e",
+          "keywords": [
+            "double hockey jumbo",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9f0",
+          "name": "1101 RICH LOOK   TOILET BRUSSINGLE HOCKY SMALL",
+          "price": 32,
+          "mrp": 52,
+          "description": "1101 RICH LOOK   TOILET BRUSSINGLE HOCKY SMALL - High quality cleaning product",
+          "sku": "RC-NEW-63",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9f0",
+          "keywords": [
+            "1101 rich look   toilet brussingle hocky small",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9fa",
+          "name": "8226 (1100) TOILET BRUSH DOUBLE HOCKEY",
+          "price": 41,
+          "mrp": 61,
+          "description": "8226 (1100) TOILET BRUSH DOUBLE HOCKEY - High quality cleaning product",
+          "sku": "RC-NEW-68",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9fa",
+          "keywords": [
+            "8226 (1100) toilet brush double hockey",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9fc",
+          "name": "1501 RICH LOOK  TOILET BRUSH SINGLE HOCKY BIG",
+          "price": 39,
+          "mrp": 59,
+          "description": "1501 RICH LOOK  TOILET BRUSH SINGLE HOCKY BIG - High quality cleaning product",
+          "sku": "RC-NEW-69",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9fc",
+          "keywords": [
+            "1501 rich look  toilet brush single hocky big",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9fe",
+          "name": "1010 RICH LOOK STEEL   TOILET BRUSH SINGLE HOCHY SS",
+          "price": 48,
+          "mrp": 68,
+          "description": "1010 RICH LOOK STEEL   TOILET BRUSH SINGLE HOCHY SS - High quality cleaning product",
+          "sku": "RC-NEW-70",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9fe",
+          "keywords": [
+            "1010 rich look steel   toilet brush single hochy ss",
+            "toilet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca00",
+          "name": "3300 JUMBO TOILET BRUSH DOUBLE HOCKY",
+          "price": 68,
+          "mrp": 88,
+          "description": "3300 JUMBO TOILET BRUSH DOUBLE HOCKY - High quality cleaning product",
+          "sku": "RC-NEW-71",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca00",
+          "keywords": [
+            "3300 jumbo toilet brush double hocky",
+            "toilet brushes"
+          ]
+        }
+      ]
+    },
+    "carpet-brushes": {
+      "name": "Carpet Brushes",
+      "products": [
+        {
+          "id": "694ac34323d6cfdee781c930",
+          "name": "New Carpet Brush",
+          "price": 68,
+          "mrp": 85,
+          "description": "New model carpet brush for deep carpet cleaning",
+          "sku": "RC-CB-001",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c930",
+          "keywords": [
+            "new carpet brush",
+            "carpet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c932",
+          "name": "Avon Carpet Brush",
+          "price": 127,
+          "mrp": 160,
+          "description": "Premium Avon carpet brush for professional cleaning",
+          "sku": "RC-CB-002",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c932",
+          "keywords": [
+            "avon carpet brush",
+            "carpet brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c98e",
+          "name": "NEW CARPET BRUSH 1511",
+          "price": 68,
+          "mrp": 88,
+          "description": "NEW CARPET BRUSH 1511 - High quality cleaning product",
+          "sku": "RC-NEW-14",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c98e",
+          "keywords": [
+            "new carpet brush 1511",
+            "carpet brushes"
+          ]
+        }
+      ]
+    },
+    "long-brushes": {
+      "name": "Long Brushes",
+      "products": [
+        {
+          "id": "694ac34323d6cfdee781c934",
+          "name": "THK Long Brush 140A",
+          "price": 111,
+          "mrp": 140,
+          "description": "THK long brush for extended reach cleaning",
+          "sku": "RC-LB-001",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c934",
+          "keywords": [
+            "thk long brush 140a",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c936",
+          "name": "THK 140 Long Brush",
+          "price": 111,
+          "mrp": 140,
+          "description": "THK 140 model long brush for professional use",
+          "sku": "RC-LB-002",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c936",
+          "keywords": [
+            "thk 140 long brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c938",
+          "name": "SPL Hardy Set Big A",
+          "price": 288,
+          "mrp": 360,
+          "description": "Special hardy set big for heavy-duty cleaning",
+          "sku": "RC-LB-003",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c938",
+          "keywords": [
+            "spl hardy set big a",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c93a",
+          "name": "SPL Hardy Set Big Standard",
+          "price": 288,
+          "mrp": 360,
+          "description": "Standard SPL hardy set big for commercial cleaning",
+          "sku": "RC-LB-004",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c93a",
+          "keywords": [
+            "spl hardy set big standard",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c93c",
+          "name": "SPL Hardy Set",
+          "price": 229,
+          "mrp": 285,
+          "description": "SPL hardy set for regular long brush cleaning",
+          "sku": "RC-LB-005",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c93c",
+          "keywords": [
+            "spl hardy set",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c93e",
+          "name": "SPL Hardy Set A",
+          "price": 229,
+          "mrp": 285,
+          "description": "SPL hardy set A variant for versatile cleaning",
+          "sku": "RC-LB-006",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c93e",
+          "keywords": [
+            "spl hardy set a",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c940",
+          "name": "Gala Static Brush",
+          "price": 222,
+          "mrp": 275,
+          "description": "Gala static brush for anti-static cleaning",
+          "sku": "RC-LB-007",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c940",
+          "keywords": [
+            "gala static brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c942",
+          "name": "Gala Static Brush A",
+          "price": 222,
+          "mrp": 275,
+          "description": "Gala static brush A model for enhanced cleaning",
+          "sku": "RC-LB-008",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c942",
+          "keywords": [
+            "gala static brush a",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c944",
+          "name": "Lady Dream Soft Brush Set",
+          "price": 185,
+          "mrp": 230,
+          "description": "Lady Dream soft brush set for gentle cleaning",
+          "sku": "RC-LB-009",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c944",
+          "keywords": [
+            "lady dream soft brush set",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c946",
+          "name": "Fancy Broom",
+          "price": 155,
+          "mrp": 195,
+          "description": "Decorative fancy broom with cleaning functionality",
+          "sku": "RC-LB-010",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c946",
+          "keywords": [
+            "fancy broom",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c948",
+          "name": "Soft Brush",
+          "price": 135,
+          "mrp": 170,
+          "description": "Gentle soft brush for delicate surface cleaning",
+          "sku": "RC-LB-011",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c948",
+          "keywords": [
+            "soft brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c97c",
+          "name": "8201 WHITE IRON BRUSH",
+          "price": 52,
+          "mrp": 72,
+          "description": "8201 WHITE IRON BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-5",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c97c",
+          "keywords": [
+            "8201 white iron brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c97e",
+          "name": "SUPREEM IRON BRUSH",
+          "price": 68,
+          "mrp": 88,
+          "description": "SUPREEM IRON BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-6",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c97e",
+          "keywords": [
+            "supreem iron brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c980",
+          "name": "BLACK IRON BRUSH",
+          "price": 68,
+          "mrp": 88,
+          "description": "BLACK IRON BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-7",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c980",
+          "keywords": [
+            "black iron brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c984",
+          "name": "MURAM WITH BRUSH 109 SMALL",
+          "price": 29,
+          "mrp": 49,
+          "description": "MURAM WITH BRUSH 109 SMALL - High quality cleaning product",
+          "sku": "RC-NEW-9",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c984",
+          "keywords": [
+            "muram with brush 109 small",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c986",
+          "name": "5500 KEETAL BRUSH",
+          "price": 30,
+          "mrp": 50,
+          "description": "5500 KEETAL BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-10",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c986",
+          "keywords": [
+            "5500 keetal brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c992",
+          "name": "6606 CLOTH BRUSH",
+          "price": 50,
+          "mrp": 70,
+          "description": "6606 CLOTH BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-16",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c992",
+          "keywords": [
+            "6606 cloth brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c998",
+          "name": "NEW CONTAINER BRUSH 1642",
+          "price": 141,
+          "mrp": 161,
+          "description": "NEW CONTAINER BRUSH 1642 - High quality cleaning product",
+          "sku": "RC-NEW-19",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c998",
+          "keywords": [
+            "new container brush 1642",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca22",
+          "name": "AVON CARPER BRUSH (307)",
+          "price": 127,
+          "mrp": 147,
+          "description": "AVON CARPER BRUSH (307) - High quality cleaning product",
+          "sku": "RC-NEW-88",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca22",
+          "keywords": [
+            "avon carper brush (307)",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca24",
+          "name": "GALA STATIC BRUSH",
+          "price": 222,
+          "mrp": 242,
+          "description": "GALA STATIC BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-89",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca24",
+          "keywords": [
+            "gala static brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca26",
+          "name": "GALA STATIS BRUSH A",
+          "price": 222,
+          "mrp": 242,
+          "description": "GALA STATIS BRUSH A - High quality cleaning product",
+          "sku": "RC-NEW-90",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca26",
+          "keywords": [
+            "gala statis brush a",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca40",
+          "name": "8312 CONTAINER BRUSH A",
+          "price": 97,
+          "mrp": 117,
+          "description": "8312 CONTAINER BRUSH A - High quality cleaning product",
+          "sku": "RC-NEW-103",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca40",
+          "keywords": [
+            "8312 container brush a",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca42",
+          "name": "8312 CONTAINER BRUSH",
+          "price": 97,
+          "mrp": 117,
+          "description": "8312 CONTAINER BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-104",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca42",
+          "keywords": [
+            "8312 container brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca74",
+          "name": "LADY DREAM softbrush set",
+          "price": 99,
+          "mrp": 119,
+          "description": "LADY DREAM softbrush set - High quality cleaning product",
+          "sku": "RC-NEW-129",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca74",
+          "keywords": [
+            "lady dream softbrush set",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca84",
+          "name": "lady dream soft brush",
+          "price": 99,
+          "mrp": 119,
+          "description": "lady dream soft brush - High quality cleaning product",
+          "sku": "RC-NEW-137",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca84",
+          "keywords": [
+            "lady dream soft brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca8c",
+          "name": "soft brush",
+          "price": 99,
+          "mrp": 119,
+          "description": "soft brush - High quality cleaning product",
+          "sku": "RC-NEW-141",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca8c",
+          "keywords": [
+            "soft brush",
+            "long brushes"
+          ]
+        },
+        {
+          "id": "6954ddc4b4497cb37f141c5c",
+          "name": "apple broom",
+          "price": 230,
+          "mrp": 230,
+          "description": "djdkod dckdhk kdkwks",
+          "sku": "SKU-1767169476829-8ukj5",
+          "link": "https://rosechemicals.in/products/6954ddc4b4497cb37f141c5c",
+          "keywords": [
+            "apple broom",
+            "long brushes"
+          ]
+        }
+      ]
+    },
+    "sink-brushes": {
+      "name": "Sink Brushes",
+      "products": [
+        {
+          "id": "694ac34323d6cfdee781c94a",
+          "name": "Supreme Sink Square",
+          "price": 57,
+          "mrp": 72,
+          "description": "Supreme sink square brush for kitchen cleaning",
+          "sku": "RC-SB-001",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c94a",
+          "keywords": [
+            "supreme sink square",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c94c",
+          "name": "Sink Brush 2381 A",
+          "price": 38,
+          "mrp": 48,
+          "description": "Model 2381 A sink brush for efficient cleaning",
+          "sku": "RC-SB-002",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c94c",
+          "keywords": [
+            "sink brush 2381 a",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c94e",
+          "name": "Sink Brush 2381",
+          "price": 38,
+          "mrp": 48,
+          "description": "Standard 2381 sink brush for daily use",
+          "sku": "RC-SB-003",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c94e",
+          "keywords": [
+            "sink brush 2381",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c950",
+          "name": "Sink Brush 4D Square",
+          "price": 68,
+          "mrp": 85,
+          "description": "4D square sink brush for multi-dimensional cleaning",
+          "sku": "RC-SB-004",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c950",
+          "keywords": [
+            "sink brush 4d square",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c952",
+          "name": "Sink Brush 1807 A",
+          "price": 39,
+          "mrp": 50,
+          "description": "Model 1807 A sink brush with ergonomic design",
+          "sku": "RC-SB-005",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c952",
+          "keywords": [
+            "sink brush 1807 a",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c954",
+          "name": "Sink Brush 1807",
+          "price": 39,
+          "mrp": 50,
+          "description": "Standard 1807 sink brush for kitchen use",
+          "sku": "RC-SB-006",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c954",
+          "keywords": [
+            "sink brush 1807",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c956",
+          "name": "Sink Brush 1103",
+          "price": 18,
+          "mrp": 25,
+          "description": "Budget-friendly 1103 sink brush",
+          "sku": "RC-SB-007",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c956",
+          "keywords": [
+            "sink brush 1103",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c958",
+          "name": "New Sink Brush 712",
+          "price": 38,
+          "mrp": 48,
+          "description": "New model 712 sink brush for improved cleaning",
+          "sku": "RC-SB-008",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c958",
+          "keywords": [
+            "new sink brush 712",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c95a",
+          "name": "Neo Sink Brush",
+          "price": 48,
+          "mrp": 60,
+          "description": "Modern Neo sink brush with advanced bristles",
+          "sku": "RC-SB-009",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c95a",
+          "keywords": [
+            "neo sink brush",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c978",
+          "name": "SUPREME SINK SQUIRE",
+          "price": 57,
+          "mrp": 77,
+          "description": "SUPREME SINK SQUIRE - High quality cleaning product",
+          "sku": "RC-NEW-3",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c978",
+          "keywords": [
+            "supreme sink squire",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c988",
+          "name": "2381 SINK BRUSH A",
+          "price": 38,
+          "mrp": 58,
+          "description": "2381 SINK BRUSH A - High quality cleaning product",
+          "sku": "RC-NEW-11",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c988",
+          "keywords": [
+            "2381 sink brush a",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c98a",
+          "name": "2381 SINK BRUSH",
+          "price": 38,
+          "mrp": 58,
+          "description": "2381 SINK BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-12",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c98a",
+          "keywords": [
+            "2381 sink brush",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c990",
+          "name": "SINK BRUSH 4D SQUARE",
+          "price": 68,
+          "mrp": 88,
+          "description": "SINK BRUSH 4D SQUARE - High quality cleaning product",
+          "sku": "RC-NEW-15",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c990",
+          "keywords": [
+            "sink brush 4d square",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c99a",
+          "name": "SINK BRUSH 1807 A",
+          "price": 39,
+          "mrp": 59,
+          "description": "SINK BRUSH 1807 A - High quality cleaning product",
+          "sku": "RC-NEW-20",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c99a",
+          "keywords": [
+            "sink brush 1807 a",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c99c",
+          "name": "SINK BRUSH 1807",
+          "price": 39,
+          "mrp": 59,
+          "description": "SINK BRUSH 1807 - High quality cleaning product",
+          "sku": "RC-NEW-21",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c99c",
+          "keywords": [
+            "sink brush 1807",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9f2",
+          "name": "1103 SINK BRUSH",
+          "price": 18,
+          "mrp": 38,
+          "description": "1103 SINK BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-64",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9f2",
+          "keywords": [
+            "1103 sink brush",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9f4",
+          "name": "1103 SINK BRUSH",
+          "price": 18,
+          "mrp": 38,
+          "description": "1103 SINK BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-65",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9f4",
+          "keywords": [
+            "1103 sink brush",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca4e",
+          "name": "712 NEW SINK BRUSH",
+          "price": 38,
+          "mrp": 58,
+          "description": "712 NEW SINK BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-110",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca4e",
+          "keywords": [
+            "712 new sink brush",
+            "sink brushes"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca52",
+          "name": "NEO SINK BRUSH",
+          "price": 48,
+          "mrp": 68,
+          "description": "NEO SINK BRUSH - High quality cleaning product",
+          "sku": "RC-NEW-112",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca52",
+          "keywords": [
+            "neo sink brush",
+            "sink brushes"
+          ]
+        }
+      ]
+    },
+    "cobweb-cleaners": {
+      "name": "Cobweb Cleaners",
+      "products": [
+        {
+          "id": "694ac34323d6cfdee781c95c",
+          "name": "Cobweb Sunflower Outer Lock",
+          "price": 95,
+          "mrp": 120,
+          "description": "Cobweb sunflower cleaner with outer lock mechanism",
+          "sku": "RC-CC-001",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c95c",
+          "keywords": [
+            "cobweb sunflower outer lock",
+            "cobweb cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c95e",
+          "name": "Cobweb Cleaner Flat",
+          "price": 75,
+          "mrp": 95,
+          "description": "Flat design cobweb cleaner for tight spaces",
+          "sku": "RC-CC-002",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c95e",
+          "keywords": [
+            "cobweb cleaner flat",
+            "cobweb cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c960",
+          "name": "Cobweb Flat Cleaner",
+          "price": 78,
+          "mrp": 98,
+          "description": "Specialized flat cobweb cleaner for corners",
+          "sku": "RC-CC-003",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c960",
+          "keywords": [
+            "cobweb flat cleaner",
+            "cobweb cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c962",
+          "name": "Cobweb Sunflower Cleaner",
+          "price": 88,
+          "mrp": 110,
+          "description": "Sunflower design cobweb cleaner for efficient removal",
+          "sku": "RC-CC-004",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c962",
+          "keywords": [
+            "cobweb sunflower cleaner",
+            "cobweb cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca06",
+          "name": "EXTEND COBWEB SET",
+          "price": 99,
+          "mrp": 119,
+          "description": "EXTEND COBWEB SET - High quality cleaning product",
+          "sku": "RC-NEW-74",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca06",
+          "keywords": [
+            "extend cobweb set",
+            "cobweb cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca7c",
+          "name": "cobweb flat",
+          "price": 99,
+          "mrp": 119,
+          "description": "cobweb flat - High quality cleaning product",
+          "sku": "RC-NEW-133",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca7c",
+          "keywords": [
+            "cobweb flat",
+            "cobweb cleaners"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca7e",
+          "name": "cobweb sunflower",
+          "price": 99,
+          "mrp": 119,
+          "description": "cobweb sunflower - High quality cleaning product",
+          "sku": "RC-NEW-134",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca7e",
+          "keywords": [
+            "cobweb sunflower",
+            "cobweb cleaners"
+          ]
+        }
+      ]
+    },
+    "other": {
+      "name": "Other",
+      "products": [
+        {
+          "id": "694ac34323d6cfdee781c976",
+          "name": "cocamidopropyl betaine CAPB",
+          "price": 163,
+          "mrp": 183,
+          "description": "cocamidopropyl betaine CAPB - High quality cleaning product",
+          "sku": "RC-NEW-2",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c976",
+          "keywords": [
+            "cocamidopropyl betaine capb",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c97a",
+          "name": "MAGIC SPONGE",
+          "price": 68,
+          "mrp": 88,
+          "description": "MAGIC SPONGE - High quality cleaning product",
+          "sku": "RC-NEW-4",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c97a",
+          "keywords": [
+            "magic sponge",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c98c",
+          "name": "MINI DUSTER SPL 43 GM",
+          "price": 43,
+          "mrp": 63,
+          "description": "MINI DUSTER SPL 43 GM - High quality cleaning product",
+          "sku": "RC-NEW-13",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c98c",
+          "keywords": [
+            "mini duster spl 43 gm",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c994",
+          "name": "SILVER POLISH",
+          "price": 68,
+          "mrp": 88,
+          "description": "SILVER POLISH - High quality cleaning product",
+          "sku": "RC-NEW-17",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c994",
+          "keywords": [
+            "silver polish",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c996",
+          "name": "METAL POLISH",
+          "price": 111,
+          "mrp": 131,
+          "description": "METAL POLISH - High quality cleaning product",
+          "sku": "RC-NEW-18",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c996",
+          "keywords": [
+            "metal polish",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c99e",
+          "name": "FRIDGE COVER",
+          "price": 68,
+          "mrp": 88,
+          "description": "FRIDGE COVER - High quality cleaning product",
+          "sku": "RC-NEW-22",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c99e",
+          "keywords": [
+            "fridge cover",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9a0",
+          "name": "THK 1108",
+          "price": 68,
+          "mrp": 88,
+          "description": "THK 1108 - High quality cleaning product",
+          "sku": "RC-NEW-23",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9a0",
+          "keywords": [
+            "thk 1108",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9a2",
+          "name": "THK 140 A",
+          "price": 111,
+          "mrp": 131,
+          "description": "THK 140 A - High quality cleaning product",
+          "sku": "RC-NEW-24",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9a2",
+          "keywords": [
+            "thk 140 a",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9a4",
+          "name": "THK 140",
+          "price": 111,
+          "mrp": 131,
+          "description": "THK 140 - High quality cleaning product",
+          "sku": "RC-NEW-25",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9a4",
+          "keywords": [
+            "thk 140",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9a6",
+          "name": "METAL PAD",
+          "price": 11,
+          "mrp": 31,
+          "description": "METAL PAD - High quality cleaning product",
+          "sku": "RC-NEW-26",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9a6",
+          "keywords": [
+            "metal pad",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9a8",
+          "name": "CLEANING TOWEL",
+          "price": 59,
+          "mrp": 79,
+          "description": "CLEANING TOWEL - High quality cleaning product",
+          "sku": "RC-NEW-27",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9a8",
+          "keywords": [
+            "cleaning towel",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9aa",
+          "name": "HPMC",
+          "price": 99,
+          "mrp": 119,
+          "description": "HPMC - High quality cleaning product",
+          "sku": "RC-NEW-28",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9aa",
+          "keywords": [
+            "hpmc",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9ac",
+          "name": "HPMC",
+          "price": 99,
+          "mrp": 119,
+          "description": "HPMC - High quality cleaning product",
+          "sku": "RC-NEW-29",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9ac",
+          "keywords": [
+            "hpmc",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9ae",
+          "name": "FEATHER DUSTER SMALL",
+          "price": 49,
+          "mrp": 69,
+          "description": "FEATHER DUSTER SMALL - High quality cleaning product",
+          "sku": "RC-NEW-30",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9ae",
+          "keywords": [
+            "feather duster small",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9b0",
+          "name": "FEATHER DUSTER SMALL",
+          "price": 49,
+          "mrp": 69,
+          "description": "FEATHER DUSTER SMALL - High quality cleaning product",
+          "sku": "RC-NEW-31",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9b0",
+          "keywords": [
+            "feather duster small",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9b2",
+          "name": "SN937",
+          "price": 250,
+          "mrp": 270,
+          "description": "SN937 - High quality cleaning product",
+          "sku": "RC-NEW-32",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9b2",
+          "keywords": [
+            "sn937",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9b4",
+          "name": "SN937",
+          "price": 251,
+          "mrp": 271,
+          "description": "SN937 - High quality cleaning product",
+          "sku": "RC-NEW-33",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9b4",
+          "keywords": [
+            "sn937",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9be",
+          "name": "GREEN PAD 10X15 (10PCS)",
+          "price": 52,
+          "mrp": 72,
+          "description": "GREEN PAD 10X15 (10PCS) - High quality cleaning product",
+          "sku": "RC-NEW-38",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9be",
+          "keywords": [
+            "green pad 10x15 (10pcs)",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9c0",
+          "name": "CDEA",
+          "price": 111,
+          "mrp": 131,
+          "description": "CDEA - High quality cleaning product",
+          "sku": "RC-NEW-39",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9c0",
+          "keywords": [
+            "cdea",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9c2",
+          "name": "CDEA",
+          "price": 112,
+          "mrp": 132,
+          "description": "CDEA - High quality cleaning product",
+          "sku": "RC-NEW-40",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9c2",
+          "keywords": [
+            "cdea",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9c4",
+          "name": "Cocamide Dea Detergent Cdea",
+          "price": 99,
+          "mrp": 119,
+          "description": "Cocamide Dea Detergent Cdea - High quality cleaning product",
+          "sku": "RC-NEW-41",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9c4",
+          "keywords": [
+            "cocamide dea detergent cdea",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9c6",
+          "name": "SS SCRUBBER PATTA",
+          "price": 60,
+          "mrp": 80,
+          "description": "SS SCRUBBER PATTA - High quality cleaning product",
+          "sku": "RC-NEW-42",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9c6",
+          "keywords": [
+            "ss scrubber patta",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9c8",
+          "name": "SS SCRUBBER PATTA",
+          "price": 65,
+          "mrp": 85,
+          "description": "SS SCRUBBER PATTA - High quality cleaning product",
+          "sku": "RC-NEW-43",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9c8",
+          "keywords": [
+            "ss scrubber patta",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9ca",
+          "name": "PLASTIC SCRUBBER",
+          "price": 81,
+          "mrp": 101,
+          "description": "PLASTIC SCRUBBER - High quality cleaning product",
+          "sku": "RC-NEW-44",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9ca",
+          "keywords": [
+            "plastic scrubber",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9d2",
+          "name": "CAMEL RED",
+          "price": 65,
+          "mrp": 85,
+          "description": "CAMEL RED - High quality cleaning product",
+          "sku": "RC-NEW-48",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9d2",
+          "keywords": [
+            "camel red",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9d4",
+          "name": "SHINE RED",
+          "price": 74,
+          "mrp": 94,
+          "description": "SHINE RED - High quality cleaning product",
+          "sku": "RC-NEW-49",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9d4",
+          "keywords": [
+            "shine red",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9d6",
+          "name": "ROSANAM",
+          "price": 100,
+          "mrp": 120,
+          "description": "ROSANAM - High quality cleaning product",
+          "sku": "RC-NEW-50",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9d6",
+          "keywords": [
+            "rosanam",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9d8",
+          "name": "ROSANAM",
+          "price": 101,
+          "mrp": 121,
+          "description": "ROSANAM - High quality cleaning product",
+          "sku": "RC-NEW-51",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9d8",
+          "keywords": [
+            "rosanam",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9e2",
+          "name": "MR.CLEAN",
+          "price": 50,
+          "mrp": 70,
+          "description": "MR.CLEAN - High quality cleaning product",
+          "sku": "RC-NEW-56",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9e2",
+          "keywords": [
+            "mr.clean",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9e8",
+          "name": "chennai burma cover",
+          "price": 93,
+          "mrp": 113,
+          "description": "chennai burma cover - High quality cleaning product",
+          "sku": "RC-NEW-59",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9e8",
+          "keywords": [
+            "chennai burma cover",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9ea",
+          "name": "Lady Dream Plastic",
+          "price": 111,
+          "mrp": 131,
+          "description": "Lady Dream Plastic - High quality cleaning product",
+          "sku": "RC-NEW-60",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9ea",
+          "keywords": [
+            "lady dream plastic",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9ec",
+          "name": "chennai burma plastic",
+          "price": 88,
+          "mrp": 108,
+          "description": "chennai burma plastic - High quality cleaning product",
+          "sku": "RC-NEW-61",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9ec",
+          "keywords": [
+            "chennai burma plastic",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9ee",
+          "name": "STP",
+          "price": 121,
+          "mrp": 141,
+          "description": "STP - High quality cleaning product",
+          "sku": "RC-NEW-62",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9ee",
+          "keywords": [
+            "stp",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781c9f6",
+          "name": "2200 SUNFLOWER SET",
+          "price": 82,
+          "mrp": 102,
+          "description": "2200 SUNFLOWER SET - High quality cleaning product",
+          "sku": "RC-NEW-66",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781c9f6",
+          "keywords": [
+            "2200 sunflower set",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca02",
+          "name": "2200 SUNFLOWER SET (SPL) OUTER LOCK",
+          "price": 1,
+          "mrp": 21,
+          "description": "2200 SUNFLOWER SET (SPL) OUTER LOCK - High quality cleaning product",
+          "sku": "RC-NEW-72",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca02",
+          "keywords": [
+            "2200 sunflower set (spl) outer lock",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca04",
+          "name": "2200 SUNFLOWER SET (SPL) OUTER LOCK",
+          "price": 99,
+          "mrp": 119,
+          "description": "2200 SUNFLOWER SET (SPL) OUTER LOCK - High quality cleaning product",
+          "sku": "RC-NEW-73",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca04",
+          "keywords": [
+            "2200 sunflower set (spl) outer lock",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca08",
+          "name": "EDTA",
+          "price": 391,
+          "mrp": 411,
+          "description": "EDTA - High quality cleaning product",
+          "sku": "RC-NEW-75",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca08",
+          "keywords": [
+            "edta",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca0c",
+          "name": "STPP",
+          "price": 209,
+          "mrp": 229,
+          "description": "STPP - High quality cleaning product",
+          "sku": "RC-NEW-77",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca0c",
+          "keywords": [
+            "stpp",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca0e",
+          "name": "Glycerine",
+          "price": 99,
+          "mrp": 119,
+          "description": "Glycerine - High quality cleaning product",
+          "sku": "RC-NEW-78",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca0e",
+          "keywords": [
+            "glycerine",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca14",
+          "name": "sodium lauryl ether sulfate SLES 70",
+          "price": 99,
+          "mrp": 119,
+          "description": "sodium lauryl ether sulfate SLES 70 - High quality cleaning product",
+          "sku": "RC-NEW-81",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca14",
+          "keywords": [
+            "sodium lauryl ether sulfate sles 70",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca16",
+          "name": "9967 SPL HARDY SET BIG A",
+          "price": 288,
+          "mrp": 308,
+          "description": "9967 SPL HARDY SET BIG A - High quality cleaning product",
+          "sku": "RC-NEW-82",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca16",
+          "keywords": [
+            "9967 spl hardy set big a",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca18",
+          "name": "9967 SPL HARDY SET BIG",
+          "price": 288,
+          "mrp": 308,
+          "description": "9967 SPL HARDY SET BIG - High quality cleaning product",
+          "sku": "RC-NEW-83",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca18",
+          "keywords": [
+            "9967 spl hardy set big",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca1a",
+          "name": "9965 SPL HARDY SET",
+          "price": 229,
+          "mrp": 249,
+          "description": "9965 SPL HARDY SET - High quality cleaning product",
+          "sku": "RC-NEW-84",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca1a",
+          "keywords": [
+            "9965 spl hardy set",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca1c",
+          "name": "9965SPL HARDY SET A",
+          "price": 229,
+          "mrp": 249,
+          "description": "9965SPL HARDY SET A - High quality cleaning product",
+          "sku": "RC-NEW-85",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca1c",
+          "keywords": [
+            "9965spl hardy set a",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca1e",
+          "name": "KITCHEN ROLL 45X500",
+          "price": 295,
+          "mrp": 315,
+          "description": "KITCHEN ROLL 45X500 - High quality cleaning product",
+          "sku": "RC-NEW-86",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca1e",
+          "keywords": [
+            "kitchen roll 45x500",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca20",
+          "name": "KITCHEN ROLL 45X500",
+          "price": 99,
+          "mrp": 119,
+          "description": "KITCHEN ROLL 45X500 - High quality cleaning product",
+          "sku": "RC-NEW-87",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca20",
+          "keywords": [
+            "kitchen roll 45x500",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca28",
+          "name": "8851 DOUBLE HOCKEY NEW MODAL",
+          "price": 77,
+          "mrp": 97,
+          "description": "8851 DOUBLE HOCKEY NEW MODAL - High quality cleaning product",
+          "sku": "RC-NEW-91",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca28",
+          "keywords": [
+            "8851 double hockey new modal",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca36",
+          "name": "Micro Cup 160gm",
+          "price": 99,
+          "mrp": 119,
+          "description": "Micro Cup 160gm - High quality cleaning product",
+          "sku": "RC-NEW-98",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca36",
+          "keywords": [
+            "micro cup 160gm",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca38",
+          "name": "NCB 4060 MICRO CUP 160 GM",
+          "price": 118,
+          "mrp": 138,
+          "description": "NCB 4060 MICRO CUP 160 GM - High quality cleaning product",
+          "sku": "RC-NEW-99",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca38",
+          "keywords": [
+            "ncb 4060 micro cup 160 gm",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca3c",
+          "name": "Micro SS Round 215 gm",
+          "price": 99,
+          "mrp": 119,
+          "description": "Micro SS Round 215 gm - High quality cleaning product",
+          "sku": "RC-NEW-101",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca3c",
+          "keywords": [
+            "micro ss round 215 gm",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca3e",
+          "name": "ZH 09 13 MICRO SSROUND FD 215 GM",
+          "price": 186,
+          "mrp": 206,
+          "description": "ZH 09 13 MICRO SSROUND FD 215 GM - High quality cleaning product",
+          "sku": "RC-NEW-102",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca3e",
+          "keywords": [
+            "zh 09 13 micro ssround fd 215 gm",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca44",
+          "name": "SAMARTHYA MURAM",
+          "price": 68,
+          "mrp": 88,
+          "description": "SAMARTHYA MURAM - High quality cleaning product",
+          "sku": "RC-NEW-105",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca44",
+          "keywords": [
+            "samarthya muram",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca46",
+          "name": "MURAM SPECIAL",
+          "price": 57,
+          "mrp": 77,
+          "description": "MURAM SPECIAL - High quality cleaning product",
+          "sku": "RC-NEW-106",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca46",
+          "keywords": [
+            "muram special",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca48",
+          "name": "MURAM SADA BIG",
+          "price": 42,
+          "mrp": 62,
+          "description": "MURAM SADA BIG - High quality cleaning product",
+          "sku": "RC-NEW-107",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca48",
+          "keywords": [
+            "muram sada big",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca4a",
+          "name": "MURAM SMALL SADA",
+          "price": 34,
+          "mrp": 54,
+          "description": "MURAM SMALL SADA - High quality cleaning product",
+          "sku": "RC-NEW-108",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca4a",
+          "keywords": [
+            "muram small sada",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca4c",
+          "name": "FABLAS KITCHEN ROLL",
+          "price": 186,
+          "mrp": 206,
+          "description": "FABLAS KITCHEN ROLL - High quality cleaning product",
+          "sku": "RC-NEW-109",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca4c",
+          "keywords": [
+            "fablas kitchen roll",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca50",
+          "name": "Z 12 MICRO GLOVES",
+          "price": 71,
+          "mrp": 91,
+          "description": "Z 12 MICRO GLOVES - High quality cleaning product",
+          "sku": "RC-NEW-111",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca50",
+          "keywords": [
+            "z 12 micro gloves",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca76",
+          "name": "MEXICAN",
+          "price": 99,
+          "mrp": 119,
+          "description": "MEXICAN - High quality cleaning product",
+          "sku": "RC-NEW-130",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca76",
+          "keywords": [
+            "mexican",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca88",
+          "name": "mate 1",
+          "price": 99,
+          "mrp": 119,
+          "description": "mate 1 - High quality cleaning product",
+          "sku": "RC-NEW-139",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca88",
+          "keywords": [
+            "mate 1",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca8a",
+          "name": "mate 2",
+          "price": 99,
+          "mrp": 119,
+          "description": "mate 2 - High quality cleaning product",
+          "sku": "RC-NEW-140",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca8a",
+          "keywords": [
+            "mate 2",
+            "other"
+          ]
+        },
+        {
+          "id": "694ac34323d6cfdee781ca8e",
+          "name": "spanish",
+          "price": 99,
+          "mrp": 119,
+          "description": "spanish - High quality cleaning product",
+          "sku": "RC-NEW-142",
+          "link": "https://rosechemicals.in/products/694ac34323d6cfdee781ca8e",
+          "keywords": [
+            "spanish",
+            "other"
+          ]
+        }
+      ]
+    }
+  }
+}

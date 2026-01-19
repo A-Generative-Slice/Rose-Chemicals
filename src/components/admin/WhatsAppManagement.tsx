@@ -117,7 +117,7 @@ export default function WhatsAppManagement() {
     return (
         <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm h-[calc(100vh-140px)] flex">
             {/* Sidebar - Conversation List */}
-            <div className={`w-full md:w-96 border-r border-gray-200 flex flex-col ${selectedPhone ? 'hidden md:flex' : 'flex'}`}>
+            <div className={`w-full md:w-96 border-r border-gray-200 flex flex-col chat-sidebar-resizable ${selectedPhone ? 'hidden md:flex' : 'flex'}`}>
                 <div className="p-4 border-b border-gray-200 bg-gray-50">
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
