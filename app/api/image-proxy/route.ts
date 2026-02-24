@@ -10,12 +10,9 @@ export async function GET(request: NextRequest) {
 
   try {
     let imageUrl: string;
-    // Use NEXT_PUBLIC_API_URL (baked at build time) or BACKEND_URL (runtime) or fallback
-    // IMPORTANT: Use 127.0.0.1 instead of localhost because the backend binds on IPv4 only
-    // and Node.js fetch resolves localhost to IPv6 ::1 which causes ECONNREFUSED
-    const apiUrl = (process.env.NEXT_PUBLIC_API_URL || process.env.BACKEND_URL || 'http://127.0.0.1:5001/api')
-      .replace('localhost', '127.0.0.1');
-    const backendBase = apiUrl.replace('/api', '');
+    // For server-side requests, ALWAYS use internal IP to avoid nginx loop
+    // NEXT_PUBLIC_API_URL is the public-facing URL for browsers, not for server-to-server
+    const backendBase = 'http://127.0.0.1:5001';
 
     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
       // For S3 URLs, extract the key and proxy through the backend
