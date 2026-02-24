@@ -10,16 +10,22 @@ export async function GET(request: NextRequest) {
 
   try {
     let imageUrl: string;
-    const backendUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:5000';
+    // Use NEXT_PUBLIC_API_URL (baked at build time) or BACKEND_URL (runtime) or fallback
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.BACKEND_URL || 'http://localhost:5001/api';
+    const backendBase = apiUrl.replace('/api', '');
 
     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
       // For S3 URLs, extract the key and proxy through the backend
-      // S3 URLs look like: https://bucket.s3.region.amazonaws.com/products/filename.png
       if (imagePath.includes('.s3.') && imagePath.includes('amazonaws.com')) {
-        // Extract the S3 key from the URL (everything after the bucket path)
-        const urlObj = new URL(imagePath);
-        const key = decodeURIComponent(urlObj.pathname.substring(1)); // Remove leading /
-        imageUrl = `${backendUrl}/api/image/proxy?key=${encodeURIComponent(key)}`;
+        try {
+          const urlObj = new URL(imagePath);
+          const key = decodeURIComponent(urlObj.pathname.substring(1)); // Remove leading /
+          imageUrl = `${backendBase}/api/image/proxy?key=${encodeURIComponent(key)}`;
+        } catch (urlError) {
+          // If URL parsing fails, try passing the full path
+          console.error('URL parse error, trying direct fetch:', urlError);
+          imageUrl = imagePath;
+        }
       } else {
         // Other external URLs - fetch directly
         imageUrl = imagePath;
@@ -29,8 +35,10 @@ export async function GET(request: NextRequest) {
       const cleanPath = imagePath.startsWith('/uploads/')
         ? imagePath.substring('/uploads/'.length)
         : imagePath;
-      imageUrl = `${backendUrl}/uploads/${cleanPath}`;
+      imageUrl = `${backendBase}/uploads/${cleanPath}`;
     }
+
+    console.log('[image-proxy] Fetching:', imageUrl);
 
     const response = await fetch(imageUrl, {
       headers: {
@@ -39,7 +47,7 @@ export async function GET(request: NextRequest) {
     });
 
     if (!response.ok) {
-      console.error(`Image proxy failed for ${imageUrl}: ${response.status}`);
+      console.error(`[image-proxy] Failed: ${imageUrl} => ${response.status}`);
       return NextResponse.json(
         { error: `Failed to fetch image: ${response.status}` },
         { status: response.status }
@@ -58,7 +66,7 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Image proxy error:', error);
+    console.error('[image-proxy] Error:', error);
     return NextResponse.json(
       { error: 'Failed to proxy image' },
       { status: 500 }
