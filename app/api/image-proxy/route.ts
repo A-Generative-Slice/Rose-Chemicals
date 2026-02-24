@@ -11,7 +11,10 @@ export async function GET(request: NextRequest) {
   try {
     let imageUrl: string;
     // Use NEXT_PUBLIC_API_URL (baked at build time) or BACKEND_URL (runtime) or fallback
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.BACKEND_URL || 'http://localhost:5001/api';
+    // IMPORTANT: Use 127.0.0.1 instead of localhost because the backend binds on IPv4 only
+    // and Node.js fetch resolves localhost to IPv6 ::1 which causes ECONNREFUSED
+    const apiUrl = (process.env.NEXT_PUBLIC_API_URL || process.env.BACKEND_URL || 'http://127.0.0.1:5001/api')
+      .replace('localhost', '127.0.0.1');
     const backendBase = apiUrl.replace('/api', '');
 
     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
