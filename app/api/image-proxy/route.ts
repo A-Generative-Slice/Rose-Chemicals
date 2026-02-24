@@ -11,7 +11,6 @@ export async function GET(request: NextRequest) {
   try {
     let imageUrl: string;
     // For server-side requests, ALWAYS use internal IP to avoid nginx loop
-    // NEXT_PUBLIC_API_URL is the public-facing URL for browsers, not for server-to-server
     const backendBase = 'http://127.0.0.1:5001';
 
     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
@@ -22,7 +21,6 @@ export async function GET(request: NextRequest) {
           const key = decodeURIComponent(urlObj.pathname.substring(1)); // Remove leading /
           imageUrl = `${backendBase}/api/image/proxy?key=${encodeURIComponent(key)}`;
         } catch (urlError) {
-          // If URL parsing fails, try passing the full path
           console.error('URL parse error, trying direct fetch:', urlError);
           imageUrl = imagePath;
         }
@@ -30,12 +28,13 @@ export async function GET(request: NextRequest) {
         // Other external URLs - fetch directly
         imageUrl = imagePath;
       }
+    } else if (imagePath.startsWith('/')) {
+      // Handles paths like /uploads/filename.png or /images/CATALOG IMAGES/filename.png
+      // Prepend the backend base URL
+      imageUrl = `${backendBase}${imagePath}`;
     } else {
-      // Local file path - proxy through backend
-      const cleanPath = imagePath.startsWith('/uploads/')
-        ? imagePath.substring('/uploads/'.length)
-        : imagePath;
-      imageUrl = `${backendBase}/uploads/${cleanPath}`;
+      // Bare filename - assume it's in /uploads/
+      imageUrl = `${backendBase}/uploads/${imagePath}`;
     }
 
     console.log('[image-proxy] Fetching:', imageUrl);
