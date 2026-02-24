@@ -1,30 +1,39 @@
 /**
- * Resolves a product image URL for display.
- * Handles S3 URLs, local /uploads/ paths, and relative filenames.
+ * Utility functions for handling product image URLs.
+ * Centralizes the logic for resolving image URLs from various sources
+ * (S3, local uploads, etc.) into displayable URLs.
+ */
+
+/**
+ * Resolves a product image URL to a displayable format.
+ * - S3 URLs (amazonaws.com): proxied through /api/image-proxy to handle private bucket access
+ * - Other full HTTP/HTTPS URLs: proxied through /api/image-proxy for consistency
+ * - Local /uploads/ paths: proxied through /api/image-proxy
+ * - Bare filenames: proxied through /api/image-proxy
+ * - Empty/null/undefined: returns empty string
  */
 export function getProductImageUrl(url: string | undefined | null): string {
-  if (!url) return '/images/placeholder-product.svg';
+  if (!url) return '';
 
-  // Full HTTP(S) URL — use directly (S3, CDN, external)
+  // S3 URLs and other HTTP URLs - proxy through image-proxy for consistent access
   if (url.startsWith('http://') || url.startsWith('https://')) {
-    return url;
+    return `/api/image-proxy?path=${encodeURIComponent(url)}`;
   }
 
-  // Local upload path — proxy through our API route
+  // Local uploads path - strip prefix and proxy
   if (url.startsWith('/uploads/')) {
     const filename = url.replace('/uploads/', '');
     return `/api/image-proxy?path=${encodeURIComponent(filename)}`;
   }
 
-  // Bare filename (e.g. "product-123456.webp") — proxy it
+  // Bare filename - proxy through image-proxy
   return `/api/image-proxy?path=${encodeURIComponent(url)}`;
 }
 
 /**
- * Gets the display URL for the first image of a product,
- * with fallback to placeholder.
+ * Gets the URL for the first image of a product.
  */
-export function getFirstProductImageUrl(product: any): string {
-  const url = product?.images?.[0]?.url || product?.image;
-  return getProductImageUrl(url);
+export function getFirstProductImageUrl(images: Array<{ url?: string }> | undefined | null): string {
+  if (!images || images.length === 0) return '';
+  return getProductImageUrl(images[0]?.url);
 }

@@ -103,6 +103,7 @@ app.use('/api/whatsapp', require('./routes/whatsapp-webhook')); // Public Webhoo
 app.use('/api/upload-local', require('./routes/upload-local'));
 app.use('/api/inquiries', require('./routes/inquiry'));
 app.use('/api/settings', require('./routes/settings'));
+app.use('/api/image', require('./routes/image'));
 
 // Health check
 app.get('/health', (req, res) => {
