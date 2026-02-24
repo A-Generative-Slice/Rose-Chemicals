@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { CheckCircle, Package, Download, ArrowRight } from 'lucide-react';
 import Header from '../../components/Header';
 import { ordersAPI } from '../../src/services/api';
+import { getProductImageUrl } from '../../src/utils/imageUtils';
 
 export default function OrderSuccessPage() {
   const [orderId, setOrderId] = useState<string | null>(null);
@@ -113,14 +114,7 @@ export default function OrderSuccessPage() {
                   {order.items.map((item, index) => (
                     <div key={index} className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg">
                       <img
-                        src={
-                          item.product?.images?.[0]?.url ?
-                            (item.product.images[0].url.startsWith('/uploads/') ?
-                              `/api/image-proxy?path=${item.product.images[0].url.replace('/uploads/', '')}` :
-                              item.product.images[0].url
-                            ) :
-                            (item.product?.image || '/images/placeholder-product.svg')
-                        }
+                        src={getProductImageUrl(item.product?.images?.[0]?.url) || item.product?.image || '/images/placeholder-product.svg'}
                         alt={item.product?.name || 'Product'}
                         className="w-16 h-16 object-contain bg-gray-50 rounded"
                         onError={(e) => {

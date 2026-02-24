@@ -9,6 +9,7 @@ import { useCart } from '../../../src/contexts/CartContext';
 import { useAuth } from '../../../src/contexts/AuthContext';
 import { productsAPI } from '../../../src/services/api';
 import ProductReviews from '../../../src/components/ProductReviews';
+import { getProductImageUrl } from '../../../src/utils/imageUtils';
 
 // No mock data needed - we'll fetch from API
 
@@ -163,15 +164,10 @@ export default function ProductDetailPage() {
               {product.images && product.images.length > 0 ? (
                 <>
                   <img
-                    src={
-                      (() => {
-                        const selectedImage = product.images[selectedImageIndex];
-                        const imageUrl = selectedImage?.url || product.images[0].url;
-                        return imageUrl?.startsWith('/uploads/') ?
-                          `/api/image-proxy?path=${imageUrl.replace('/uploads/', '')}` :
-                          imageUrl;
-                      })()
-                    }
+                    src={getProductImageUrl((() => {
+                      const selectedImage = product.images[selectedImageIndex];
+                      return selectedImage?.url || product.images[0].url;
+                    })())}
                     alt={product.images[selectedImageIndex]?.alt || product.name}
                     className="w-full h-full object-contain"
                     onError={(e) => {
@@ -226,11 +222,7 @@ export default function ProductDetailPage() {
                       }`}
                   >
                     <img
-                      src={
-                        image.url?.startsWith('/uploads/') ?
-                          `/api/image-proxy?path=${image.url.replace('/uploads/', '')}` :
-                          image.url
-                      }
+                      src={getProductImageUrl(image.url)}
                       alt={image.alt || `${product.name} ${index + 1}`}
                       className="w-full h-full object-cover"
                       onError={(e) => {

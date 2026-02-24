@@ -6,6 +6,7 @@ import { ArrowLeft, Package, Eye, Download } from 'lucide-react';
 import Header from '../../components/Header';
 import { useAuth } from '../../src/contexts/AuthContext';
 import { ordersAPI } from '../../src/services/api';
+import { getProductImageUrl } from '../../src/utils/imageUtils';
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
@@ -173,14 +174,7 @@ export default function OrdersPage() {
                         {order.items.slice(0, 3).map((item, index) => (
                           <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                             <img
-                              src={
-                                item.product?.images?.[0]?.url ?
-                                  (item.product.images[0].url.startsWith('/uploads/') ?
-                                    `/api/image-proxy?path=${item.product.images[0].url.replace('/uploads/', '')}` :
-                                    item.product.images[0].url
-                                  ) :
-                                  (item.product?.image || '/images/placeholder-product.svg')
-                              }
+                              src={getProductImageUrl(item.product?.images?.[0]?.url) || item.product?.image || '/images/placeholder-product.svg'}
                               alt={item.product?.name || 'Product'}
                               className="w-12 h-12 object-contain bg-white rounded"
                               onError={(e) => {

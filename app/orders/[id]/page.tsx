@@ -25,6 +25,7 @@ import OrderTracking from '../../../components/OrderTracking';
 import PaymentStatus from '../../../components/PaymentStatus';
 import { ordersAPI } from '../../../src/services/api';
 import { useAuth } from '../../../src/contexts/AuthContext';
+import { getProductImageUrl } from '../../../src/utils/imageUtils';
 
 interface OrderItem {
   _id: string;
@@ -360,14 +361,7 @@ export default function OrderDetailsPage() {
                   <div key={item._id} className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg">
                     <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
                       <img
-                        src={
-                          item.product?.images?.[0]?.url ?
-                            (item.product.images[0].url.startsWith('/uploads/') ?
-                              `/api/image-proxy?path=${item.product.images[0].url.replace('/uploads/', '')}` :
-                              item.product.images[0].url
-                            ) :
-                            (item.product?.image || '/images/placeholder-product.svg')
-                        }
+                        src={getProductImageUrl(item.product?.images?.[0]?.url) || item.product?.image || '/images/placeholder-product.svg'}
                         alt={item.product?.name || 'Product'}
                         className="w-full h-full object-cover rounded-lg"
                         onError={(e) => {

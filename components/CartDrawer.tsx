@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { X, Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react';
 import { useCart } from '../src/contexts/CartContext';
+import { getProductImageUrl } from '../src/utils/imageUtils';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -103,14 +104,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                       }`}
                   >
                     <img
-                      src={
-                        item.product.images?.[0]?.url ?
-                          (item.product.images[0].url.startsWith('/uploads/') ?
-                            `/api/image-proxy?path=${item.product.images[0].url.replace('/uploads/', '')}` :
-                            item.product.images[0].url
-                          ) :
-                          (item.product.image || '/images/placeholder-product.svg')
-                      }
+                      src={getProductImageUrl(item.product.images?.[0]?.url) || item.product.image || '/images/placeholder-product.svg'}
                       alt={item.product.name}
                       className="w-16 h-16 object-contain bg-gray-50 rounded"
                       onError={(e) => {

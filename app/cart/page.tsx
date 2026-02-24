@@ -6,6 +6,7 @@ import { Minus, Plus, Trash2, ArrowLeft } from 'lucide-react';
 import Header from '../../components/Header';
 import { useCart } from '../../src/contexts/CartContext';
 import { useAuth } from '../../src/contexts/AuthContext';
+import { getProductImageUrl } from '../../src/utils/imageUtils';
 
 export default function CartPage() {
   const { items, totalAmount, updateCartItem, removeFromCart, loading } = useCart();
@@ -114,14 +115,7 @@ export default function CartPage() {
                       <div key={item.product._id} className="flex gap-4 p-4 border border-gray-200 rounded-lg">
                         <div className="flex-shrink-0">
                           <img
-                            src={
-                              item.product.images?.[0]?.url ?
-                                (item.product.images[0].url.startsWith('/uploads/') ?
-                                  `/api/image-proxy?path=${item.product.images[0].url.replace('/uploads/', '')}` :
-                                  item.product.images[0].url
-                                ) :
-                                (item.product.image || '/images/placeholder-product.svg')
-                            }
+                            src={getProductImageUrl(item.product.images?.[0]?.url) || item.product.image || '/images/placeholder-product.svg'}
                             alt={item.product.name}
                             className="w-20 h-20 object-contain bg-gray-50 rounded-md"
                             onError={(e) => {

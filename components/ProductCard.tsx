@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../src/contexts/CartContext';
 import { useAuth } from '../src/contexts/AuthContext';
+import { getProductImageUrl } from '../src/utils/imageUtils';
 
 export default function ProductCard({ product }: { product: any }) {
   const [loading, setLoading] = useState(false);
@@ -42,14 +43,7 @@ export default function ProductCard({ product }: { product: any }) {
       <Link href={`/products/${product._id || product.id}`}>
         <div className="overflow-hidden rounded-lg bg-white cursor-pointer">
           <img
-            src={
-              product.images?.[0]?.url ?
-                (product.images[0].url.startsWith('/uploads/') ?
-                  `/api/image-proxy?path=${product.images[0].url.replace('/uploads/', '')}` :
-                  product.images[0].url
-                ) :
-                (product.image || '/images/placeholder-product.svg')
-            }
+            src={getProductImageUrl(product.images?.[0]?.url) || product.image || '/images/placeholder-product.svg'}
             alt={product.images?.[0]?.alt || product.name}
             className="w-full h-48 object-contain transform transition-transform duration-300 hover:scale-105"
             onError={(e) => {

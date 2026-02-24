@@ -10,6 +10,7 @@ import PaymentModal from '../../components/PaymentModal';
 import { useCart } from '../../src/contexts/CartContext';
 import { useAuth } from '../../src/contexts/AuthContext';
 import { ordersAPI, processPayment } from '../../src/services/api';
+import { getProductImageUrl } from '../../src/utils/imageUtils';
 
 export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
@@ -376,14 +377,7 @@ export default function CheckoutPage() {
                 {items.map((item) => (
                   <div key={item.product._id} className="flex gap-3">
                     <img
-                      src={
-                        item.product.images?.[0]?.url ?
-                          (item.product.images[0].url.startsWith('/uploads/') ?
-                            `/api/image-proxy?path=${item.product.images[0].url.replace('/uploads/', '')}` :
-                            item.product.images[0].url
-                          ) :
-                          (item.product.image || '/images/placeholder-product.svg')
-                      }
+                      src={getProductImageUrl(item.product.images?.[0]?.url) || item.product.image || '/images/placeholder-product.svg'}
                       alt={item.product.name}
                       className="w-16 h-16 object-contain bg-gray-50 rounded"
                       onError={(e) => {

@@ -20,6 +20,7 @@ import {
   Image as ImageIcon
 } from 'lucide-react';
 import { adminAPI } from '../../services/api';
+import { getProductImageUrl } from '../../utils/imageUtils';
 
 // Helper component to handle image loading errors
 const ProductImage = ({ src, alt }: { src?: string, alt: string }) => {
@@ -33,10 +34,7 @@ const ProductImage = ({ src, alt }: { src?: string, alt: string }) => {
     );
   }
 
-  // Use proxy for uploaded images
-  const finalSrc = src.startsWith('/uploads/')
-    ? `/api/image-proxy?path=${src.replace('/uploads/', '')}`
-    : src;
+  const finalSrc = getProductImageUrl(src);
 
   return (
     <img
