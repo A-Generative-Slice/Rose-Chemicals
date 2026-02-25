@@ -61,7 +61,7 @@ const ProductsPageEnhanced: React.FC = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       const params: any = {
         page: currentPage,
         limit: 12,
@@ -79,7 +79,7 @@ const ProductsPageEnhanced: React.FC = () => {
       const response = await productsAPI.getAll(params);
       setProducts(response.products || []);
       setTotalPages(response.totalPages || 1);
-      
+
       trackEvent('products_viewed', {
         category: selectedCategory,
         search_term: searchTerm,
@@ -94,16 +94,14 @@ const ProductsPageEnhanced: React.FC = () => {
 
   const loadCategories = async () => {
     try {
-      // For now, extract categories from products
-      // In a real app, you'd have a separate categories API
-      const response = await productsAPI.getAll({ limit: 100 });
-      const uniqueCategories = response.products?.reduce((acc: Category[], product: Product) => {
-        if (product.category && !acc.find(cat => cat._id === product.category._id)) {
-          acc.push(product.category);
+      const apiUrl = (process.env.NEXT_PUBLIC_API_URL || '/api') + '/products/categories';
+      const response = await fetch(apiUrl);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          setCategories(data.categories);
         }
-        return acc;
-      }, []) || [];
-      setCategories(uniqueCategories);
+      }
     } catch (err) {
       console.error('Failed to load categories:', err);
     }
@@ -119,9 +117,9 @@ const ProductsPageEnhanced: React.FC = () => {
         image: product.images[0] || '/images/placeholder.jpg',
         quantity: 1
       });
-      
+
       trackAddToCart(product._id, product.name, product.price);
-      
+
       // Show success message (you could use a toast library here)
       alert('Product added to cart successfully!');
     } catch (err: any) {
@@ -132,13 +130,13 @@ const ProductsPageEnhanced: React.FC = () => {
   };
 
   const filteredProducts = products.filter(product => {
-    const matchesSearch = !searchTerm || 
+    const matchesSearch = !searchTerm ||
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesCategory = selectedCategory === 'all' || 
+
+    const matchesCategory = selectedCategory === 'all' ||
       product.category?.name === selectedCategory;
-    
+
     return matchesSearch && matchesCategory && product.isActive;
   });
 
@@ -196,7 +194,7 @@ const ProductsPageEnhanced: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
+
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-8">
@@ -312,11 +310,10 @@ const ProductsPageEnhanced: React.FC = () => {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`px-4 py-2 rounded-lg ${
-                    currentPage === page
+                  className={`px-4 py-2 rounded-lg ${currentPage === page
                       ? 'bg-rose-500 text-white'
                       : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                  }`}
+                    }`}
                 >
                   {page}
                 </button>
@@ -350,11 +347,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode, onAddToCar
           height={120}
           className="rounded-lg"
         />
-        
+
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
           <p className="text-gray-600 mb-2 line-clamp-2">{product.description}</p>
-          
+
           <div className="flex items-center space-x-2 mb-2">
             <span className="text-xl font-bold text-rose-600">₹{product.price}</span>
             {product.mrp && product.mrp > product.price && (
@@ -366,7 +363,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode, onAddToCar
               </>
             )}
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <span className={`text-sm ${product.stock > 0 ? 'text-green-600' : 'text-red-600'}`}>
               {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
@@ -374,7 +371,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode, onAddToCar
             <span className="text-sm text-gray-500">{product.weight}</span>
           </div>
         </div>
-        
+
         <div className="flex flex-col space-y-2">
           <button
             onClick={() => onAddToCart(product)}
@@ -405,36 +402,36 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode, onAddToCar
           height={200}
           className="w-full h-48"
         />
-        
+
         {discount > 0 && (
           <span className="absolute top-2 left-2 bg-red-500 text-white text-sm px-2 py-1 rounded">
             {discount}% OFF
           </span>
         )}
-        
+
         {product.stock === 0 && (
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <span className="bg-red-500 text-white px-3 py-1 rounded">Out of Stock</span>
           </div>
         )}
       </div>
-      
+
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
         <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
-        
+
         <div className="flex items-center space-x-2 mb-3">
           <span className="text-xl font-bold text-rose-600">₹{product.price}</span>
           {product.mrp && product.mrp > product.price && (
             <span className="text-gray-500 line-through text-sm">₹{product.mrp}</span>
           )}
         </div>
-        
+
         <div className="flex items-center justify-between mb-3">
           <span className="text-sm text-gray-500">{product.weight}</span>
           <span className="text-sm text-gray-500">SKU: {product.sku}</span>
         </div>
-        
+
         <button
           onClick={() => onAddToCart(product)}
           disabled={product.stock === 0 || addingToCart}

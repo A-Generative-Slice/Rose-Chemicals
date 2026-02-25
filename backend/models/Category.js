@@ -28,6 +28,10 @@ const categorySchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
+  order: {
+    type: Number,
+    default: 0
+  },
   createdAt: {
     type: Date,
     default: Date.now
@@ -35,7 +39,7 @@ const categorySchema = new mongoose.Schema({
 });
 
 // Pre-save middleware to generate slug
-categorySchema.pre('save', function(next) {
+categorySchema.pre('save', function (next) {
   if (!this.slug && this.name) {
     this.slug = this.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
   }

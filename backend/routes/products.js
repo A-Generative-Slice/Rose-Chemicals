@@ -29,7 +29,7 @@ router.get('/categories', async (req, res) => {
   try {
     // Try to get categories from Category model first
     const Category = require('../models/Category');
-    let categories = await Category.find({ isActive: true }).select('_id name slug');
+    let categories = await Category.find({ isActive: true }).select('_id name slug order').sort({ order: 1 });
 
     // If no categories in Category model, get unique categories from products
     if (!categories || categories.length === 0) {

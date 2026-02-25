@@ -27,6 +27,7 @@ interface Product {
 
 function ProductsContent() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,7 +46,23 @@ function ProductsContent() {
 
   useEffect(() => {
     loadProducts();
+    loadCategories();
   }, []);
+
+  const loadCategories = async () => {
+    try {
+      const apiUrl = (process.env.NEXT_PUBLIC_API_URL || '/api') + '/products/categories';
+      const response = await fetch(apiUrl);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          setCategories(data.categories);
+        }
+      }
+    } catch (err) {
+      console.error('Error loading categories:', err);
+    }
+  };
 
   const loadProducts = async () => {
     try {
@@ -92,7 +109,7 @@ function ProductsContent() {
     }
   });
 
-  const categories = Array.from(new Set(products.map(p => p.category?.name).filter(Boolean)));
+  // Categories are now fetched from the API instead of being derived from products
 
   if (loading) {
     return (
@@ -160,11 +177,14 @@ function ProductsContent() {
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
               >
                 <option value="all">All Categories</option>
-                {categories.map((category) => (
-                  <option key={category as string} value={category as string}>
-                    {category as string}
-                  </option>
-                ))}
+                {categories.map((category) => {
+                  const name = typeof category === 'string' ? category : category.name;
+                  return (
+                    <option key={name} value={name}>
+                      {name}
+                    </option>
+                  );
+                })}
               </select>
 
               {/* Sort */}

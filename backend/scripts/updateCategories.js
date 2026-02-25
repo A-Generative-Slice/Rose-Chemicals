@@ -6,19 +6,19 @@ const Category = require('../models/Category');
 const Product = require('../models/Product');
 
 const newCategories = [
-    { name: 'Raw materials', slug: 'raw-materials' },
-    { name: 'Products kit', slug: 'products-kit' },
-    { name: 'Monthly packs', slug: 'monthly-packs' },
-    { name: 'Cleaning Liquids', slug: 'cleaning-liquids' },
-    { name: 'Brooms', slug: 'brooms' },
-    { name: 'Carpet Brushes', slug: 'carpet-brushes' },
-    { name: 'Toilet Brushes', slug: 'toilet-brushes' },
-    { name: 'Long Brushes', slug: 'long-brushes' },
-    { name: 'Sink Brushes', slug: 'sink-brushes' },
-    { name: 'Cobweb Cleaners', slug: 'cobweb-cleaners' },
-    { name: 'Kitchen Towels', slug: 'kitchen-towels' },
-    { name: 'Wipers', slug: 'wipers' },
-    { name: 'Others', slug: 'others' }
+    { name: 'Raw materials', slug: 'raw-materials', order: 1 },
+    { name: 'Products kit', slug: 'products-kit', order: 2 },
+    { name: 'Monthly packs', slug: 'monthly-packs', order: 3 },
+    { name: 'Cleaning Liquids', slug: 'cleaning-liquids', order: 4 },
+    { name: 'Brooms', slug: 'brooms', order: 5 },
+    { name: 'Carpet Brushes', slug: 'carpet-brushes', order: 6 },
+    { name: 'Toilet Brushes', slug: 'toilet-brushes', order: 7 },
+    { name: 'Long Brushes', slug: 'long-brushes', order: 8 },
+    { name: 'Sink Brushes', slug: 'sink-brushes', order: 9 },
+    { name: 'Cobweb Cleaners', slug: 'cobweb-cleaners', order: 10 },
+    { name: 'Kitchen Towels', slug: 'kitchen-towels', order: 11 },
+    { name: 'Wipers', slug: 'wipers', order: 12 },
+    { name: 'Others', slug: 'others', order: 13 }
 ];
 
 const updateCategories = async () => {
@@ -31,7 +31,7 @@ const updateCategories = async () => {
         console.log(`Found ${oldCategories.length} existing categories.`);
 
         // 1. Create or update new categories
-        console.log('Upserting new categories...');
+        console.log('Upserting new categories with order...');
         const categoryMap = {}; // name -> _id
         for (const cat of newCategories) {
             const updatedCat = await Category.findOneAndUpdate(
@@ -39,13 +39,14 @@ const updateCategories = async () => {
                 {
                     name: cat.name,
                     description: `${cat.name} cleaning solutions and accessories.`,
-                    isActive: true
+                    isActive: true,
+                    order: cat.order
                 },
                 { upsert: true, new: true }
             );
             categoryMap[cat.name] = updatedCat._id;
             categoryMap[cat.slug] = updatedCat._id; // Store slug too for mapping
-            console.log(`- ${cat.name} (${updatedCat._id})`);
+            console.log(`- ${cat.name} (${updatedCat._id}) - Order: ${cat.order}`);
         }
 
         // 2. Map old categories to new ones
@@ -57,8 +58,9 @@ const updateCategories = async () => {
             const oldCategoryName = product.category ? (product.category.name || product.category.toString()) : 'Other';
             let newCategoryName = 'Others';
 
-            // Mapping Logic
-            if (['Brooms', 'Toilet Brushes', 'Carpet Brushes', 'Long Brushes', 'Sink Brushes', 'Cobweb Cleaners'].includes(oldCategoryName)) {
+            // Mapping Logic (same as before, but ensuring consistency)
+            const exactMatch = newCategories.find(c => c.name === oldCategoryName);
+            if (exactMatch) {
                 newCategoryName = oldCategoryName;
             } else if (['Bathroom Cleaners', 'Kitchen Cleaners', 'Floor Cleaners', 'Glass Cleaners', 'Disinfectants', 'Industrial Cleaners'].includes(oldCategoryName)) {
                 newCategoryName = 'Cleaning Liquids';
