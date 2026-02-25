@@ -79,18 +79,19 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
       } else {
         // Fallback to hardcoded categories if API fails or returns empty
         setCategories([
+          { _id: 'raw-materials', name: 'Raw materials', slug: 'raw-materials' },
+          { _id: 'products-kit', name: 'Products kit', slug: 'products-kit' },
+          { _id: 'monthly-packs', name: 'Monthly packs', slug: 'monthly-packs' },
+          { _id: 'cleaning-liquids', name: 'Cleaning Liquids', slug: 'cleaning-liquids' },
           { _id: 'brooms', name: 'Brooms', slug: 'brooms' },
-          { _id: 'brushes', name: 'Brushes', slug: 'brushes' },
-          { _id: 'dusters', name: 'Dusters', slug: 'dusters' },
-          { _id: 'cleaning_agents', name: 'Cleaning Agents', slug: 'cleaning_agents' },
-          { _id: 'floor_cleaners', name: 'Floor Cleaners', slug: 'floor_cleaners' },
-          { _id: 'disinfectants', name: 'Disinfectants', slug: 'disinfectants' },
-          { _id: 'detergents', name: 'Detergents', slug: 'detergents' },
-          { _id: 'sanitizers', name: 'Sanitizers', slug: 'sanitizers' },
-          { _id: 'mops', name: 'Mops', slug: 'mops' },
-          { _id: 'scrubbers', name: 'Scrubbers', slug: 'scrubbers' },
-          { _id: 'wipes', name: 'Wipes', slug: 'wipes' },
-          { _id: 'other', name: 'Other', slug: 'other' }
+          { _id: 'carpet-brushes', name: 'Carpet Brushes', slug: 'carpet-brushes' },
+          { _id: 'toilet-brushes', name: 'Toilet Brushes', slug: 'toilet-brushes' },
+          { _id: 'long-brushes', name: 'Long Brushes', slug: 'long-brushes' },
+          { _id: 'sink-brushes', name: 'Sink Brushes', slug: 'sink-brushes' },
+          { _id: 'cobweb-cleaners', name: 'Cobweb Cleaners', slug: 'cobweb-cleaners' },
+          { _id: 'kitchen-towels', name: 'Kitchen Towels', slug: 'kitchen-towels' },
+          { _id: 'wipers', name: 'Wipers', slug: 'wipers' },
+          { _id: 'others', name: 'Others', slug: 'others' }
         ]);
       }
     } catch (error) {

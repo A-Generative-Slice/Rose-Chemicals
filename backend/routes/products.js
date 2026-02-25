@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { 
-  getProducts, 
-  getProduct, 
-  createProduct, 
-  updateProduct, 
+const {
+  getProducts,
+  getProduct,
+  createProduct,
+  updateProduct,
   deleteProduct,
   searchProducts,
   getFeaturedProducts,
@@ -19,7 +19,7 @@ const validateProduct = [
   check('name', 'Name is required').not().isEmpty(),
   check('description', 'Description is required').not().isEmpty(),
   check('price', 'Price must be a positive number').isFloat({ min: 0 }),
-  check('category', 'Category is required').isIn(['brooms', 'brushes', 'dusters', 'cleaning_agents', 'floor_cleaners', 'disinfectants', 'detergents', 'sanitizers', 'mops', 'scrubbers', 'wipes', 'other']),
+  check('category', 'Category is required').isIn(['raw-materials', 'products-kit', 'monthly-packs', 'cleaning-liquids', 'brooms', 'carpet-brushes', 'toilet-brushes', 'long-brushes', 'sink-brushes', 'cobweb-cleaners', 'kitchen-towels', 'wipers', 'others']),
   check('stock', 'Stock must be a non-negative number').isInt({ min: 0 })
 ];
 
@@ -30,7 +30,7 @@ router.get('/categories', async (req, res) => {
     // Try to get categories from Category model first
     const Category = require('../models/Category');
     let categories = await Category.find({ isActive: true }).select('_id name slug');
-    
+
     // If no categories in Category model, get unique categories from products
     if (!categories || categories.length === 0) {
       const Product = require('../models/Product');
@@ -41,7 +41,7 @@ router.get('/categories', async (req, res) => {
         slug: cat
       }));
     }
-    
+
     res.json({ success: true, categories });
   } catch (error) {
     console.error('Categories endpoint error:', error);
