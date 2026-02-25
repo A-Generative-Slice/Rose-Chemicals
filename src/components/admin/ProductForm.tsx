@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { productsAPI } from '../../services/api';
+import { getProductImageUrl } from '../../utils/imageUtils';
 
 interface ProductImage {
   url: string;
@@ -525,7 +526,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productId, onSave, onCancel }
                     {formData.images.map((img, index) => (
                       <div key={index} className="relative">
                         <img
-                          src={img.url}
+                          src={getProductImageUrl(img.url)}
                           alt={img.alt || `Product ${index + 1}`}
                           className="w-full h-24 object-cover rounded-lg border"
                           onError={(e) => {

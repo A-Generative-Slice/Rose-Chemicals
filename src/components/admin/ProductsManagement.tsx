@@ -17,6 +17,7 @@ import {
   DollarSign
 } from 'lucide-react';
 import { adminAPI, productsAPI } from '../../services/api';
+import { getProductImageUrl } from '../../utils/imageUtils';
 import ProductForm from './ProductForm';
 
 // Helper component to handle image loading errors
@@ -370,7 +371,7 @@ export default function ProductsManagement() {
                       <div className="flex items-start">
                         <div className="flex-shrink-0 h-12 w-12">
                           <ProductImage
-                            src={product.images && product.images.length > 0 ? product.images[0].url : undefined}
+                            src={product.images && product.images.length > 0 ? getProductImageUrl(product.images[0].url) : undefined}
                             alt={product.name}
                           />
                         </div>
