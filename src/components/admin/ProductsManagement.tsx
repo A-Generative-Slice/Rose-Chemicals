@@ -317,15 +317,16 @@ export default function ProductsManagement() {
         <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
           <Package className="mx-auto h-16 w-16 text-gray-400 mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">
-            {products.length === 0 ? 'No products yet' : 'No products match your filters'}
+            {searchTerm || categoryFilter !== 'all' || statusFilter !== 'all'
+              ? 'No products match your filters'
+              : 'No products yet'}
           </h3>
           <p className="text-gray-600 mb-6">
-            {products.length === 0
-              ? 'Start by adding your first product to the inventory'
-              : 'Try adjusting your search or filter criteria'
-            }
+            {searchTerm || categoryFilter !== 'all' || statusFilter !== 'all'
+              ? 'Try adjusting your search or filter criteria'
+              : 'Start by adding your first product to the inventory'}
           </p>
-          {products.length === 0 && (
+          {!(searchTerm || categoryFilter !== 'all' || statusFilter !== 'all') && (
             <button
               onClick={() => {
                 setShowAddForm(true);

@@ -291,11 +291,25 @@ exports.getEnhancedProducts = async (req, res) => {
         }
       }
     }
-    if (status && status !== 'all') filter.isActive = status === 'active';
-    if (stock) {
+
+    // Status Filter - Improved logic
+    if (status && status !== 'all') {
+      if (status === 'active') {
+        filter.isActive = true;
+      } else if (status === 'inactive') {
+        filter.isActive = false;
+      } else if (status === 'low-stock') {
+        filter.stock = { $gt: 0, $lt: 10 };
+      } else if (status === 'out-of-stock') {
+        filter.stock = { $lte: 0 };
+      }
+    }
+
+    // Separate stock filter if provided directly
+    if (stock && stock !== 'all') {
       switch (stock) {
         case 'low':
-          filter.stock = { $lt: 10 };
+          filter.stock = { $gt: 0, $lt: 10 };
           break;
         case 'out':
           filter.stock = { $lte: 0 };
