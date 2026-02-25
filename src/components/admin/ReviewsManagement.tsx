@@ -457,12 +457,12 @@ export default function ReviewsManagement() {
                     </div>
                     <div className="p-4 flex gap-4">
                       <ProductImage
-                        src={selectedReview.product.images?.[0]?.url || selectedReview.product.imageUrl}
-                        alt={selectedReview.product.name}
+                        src={selectedReview.product?.images?.[0]?.url || selectedReview.product?.imageUrl}
+                        alt={selectedReview.product?.name || 'Deleted Product'}
                       />
                       <div className="flex flex-1 flex-col justify-center">
-                        <h5 className="text-sm font-medium text-gray-900 line-clamp-1">{selectedReview.product.name}</h5>
-                        <p className="text-xs text-gray-500 mt-1">ID: {selectedReview.product._id}</p>
+                        <h5 className="text-sm font-medium text-gray-900 line-clamp-1">{selectedReview.product?.name || 'Product Not Found'}</h5>
+                        <p className="text-xs text-gray-500 mt-1">ID: {selectedReview.product?._id || 'N/A'}</p>
                       </div>
                     </div>
                   </div>
@@ -623,12 +623,12 @@ export default function ReviewsManagement() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <ProductImage
-                          src={review.product.images?.[0]?.url || review.product.imageUrl}
-                          alt={review.product.name}
+                          src={review.product?.images?.[0]?.url || review.product?.imageUrl}
+                          alt={review.product?.name || 'Deleted Product'}
                         />
                         <div className="ml-3">
                           <p className="text-sm font-medium text-gray-900 line-clamp-1">
-                            {review.product.name}
+                            {review.product?.name || 'Product Not Found'}
                           </p>
                         </div>
                       </div>
