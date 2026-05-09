@@ -35,6 +35,16 @@ export default function PrivacyPolicy() {
                         <h2 className="text-xl font-semibold text-gray-900">4. Cookies</h2>
                         <p>We use cookies to enhance your browsing experience, remember your cart items, and understand website traffic.</p>
                     </section>
+                    <section className="mt-8 border-t pt-8">
+                        <h2 className="text-xl font-semibold text-gray-900 mb-4">Contact Information</h2>
+                        <div className="space-y-2 text-gray-700">
+                            <p><strong>Business Name:</strong> Rose Chemicals</p>
+                            <p><strong>Support Email:</strong> <a href="mailto:contact@rosechemicals.in" className="text-blue-600 hover:underline">contact@rosechemicals.in</a></p>
+                            <p><strong>Phone Number:</strong> <a href="tel:+918610570490" className="text-blue-600 hover:underline">+91 8610570490</a></p>
+                            <p><strong>Business Address:</strong> 1st street, Tagore Nagar, Tiruppalai, Madurai, Tamil Nadu 625014</p>
+                            <p><strong>Working Hours:</strong> Mon-Sat | 9 AM - 6 PM</p>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>

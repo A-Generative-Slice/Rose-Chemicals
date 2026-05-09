@@ -3,8 +3,8 @@
 I have audited the repository and identified the following "Real World" gaps. Completing these will make your application a 100% fully working e-commerce platform.
 
 ## 1. Backend Integration Gaps (Critical)
-- [ ] **Email Triggers**: The `EmailService` is ready but **not connected** to the logic. You must add calls to `emailService.sendOrderConfirmation()` in `paymentController.js` (inside the webhook handler) and `emailService.sendWelcomeEmail()` in `authController.js`.
-- [ ] **Password Reset**: The "Forgot Password" flow currently only returns a JSON token. It needs to physically send the email link using the server.
+- [x] **Email Triggers**: Verified. The `EmailService` is connected to `paymentController.js` and `authController.js`.
+- [x] **Password Reset**: Verified. The "Forgot Password" flow now uses secure tokens and sends emails via `emailService.sendPasswordReset()`.
 - [ ] **Payment Webhooks**: Ensure the `RAZORPAY_WEBHOOK_SECRET` is set in your VPS environment and configured in the Razorpay Dashboard to point to `your-domain.com/api/payment/webhook`.
 
 ## 2. Infrastructure & Environment

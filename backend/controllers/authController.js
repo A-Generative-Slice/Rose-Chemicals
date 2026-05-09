@@ -185,8 +185,9 @@ exports.forgotPassword = async (req, res) => {
       });
     }
 
-    // Generate reset token (simplified version - in production use crypto)
-    const resetToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    // Generate reset token (secure version)
+    const crypto = require('crypto');
+    const resetToken = crypto.randomBytes(20).toString('hex');
 
     // Save reset token to user (you'll need to update User model)
     user.resetPasswordToken = resetToken;
