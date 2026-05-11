@@ -54,7 +54,7 @@ import Footer from '../components/Footer'
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-white text-[#334155] antialiased min-h-screen flex flex-col">
+      <body className="bg-[#0f1e3a] text-[#334155] antialiased min-h-screen flex flex-col" style={{ fontFamily: "'Plus Jakarta Sans', 'Inter', system-ui, sans-serif" }}>
         <AuthProvider>
           <CartProvider>
             <main className="flex-grow">

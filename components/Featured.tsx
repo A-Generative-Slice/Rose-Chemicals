@@ -52,7 +52,7 @@ export default function Featured() {
     }
   }
 
-  const mainHeadingStyle = "text-3xl font-bold mb-6 text-gray-800 border-b-2 border-rose-500 pb-2"
+  const mainHeadingStyle = "text-xl font-bold mb-6 text-[#1D3557] flex items-center gap-3 after:content-[''] after:flex-1 after:h-px after:bg-gradient-to-r after:from-[#457B9D]/40 after:to-transparent"
 
   // Group products by category
   const groupedProducts = products.reduce((acc, product) => {
