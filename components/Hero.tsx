@@ -1,14 +1,14 @@
 "use client"
 
 import Link from 'next/link'
-import { ArrowRight, Sparkles, Shield, Leaf, Award, ChevronDown } from 'lucide-react'
+import { ArrowRight, Sparkles, Shield, Leaf, Award, ChevronDown, Star } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 
 const STATS = [
-  { icon: <Award size={15} />, value: '15+', label: 'Years Experience' },
-  { icon: <Shield size={15} />, value: 'ISO Certified', label: 'Quality Assured' },
-  { icon: <Sparkles size={15} />, value: '50K+', label: 'Happy Customers' },
-  { icon: <Leaf size={15} />,  value: 'Eco-Safe', label: 'Formulations' },
+  { value: '15+',  label: 'Years', sub: 'of Excellence' },
+  { value: '50K+', label: 'Clients', sub: 'Served Across India' },
+  { value: 'ISO',  label: '9001:2015', sub: 'Certified Quality' },
+  { value: '100%', label: 'Eco-Safe', sub: 'Formulations' },
 ]
 
 const FEATURES = [
@@ -23,7 +23,6 @@ const FEATURES = [
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  // Animated particle dots in background
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -38,14 +37,13 @@ export default function Hero() {
     resize()
     window.addEventListener('resize', resize)
 
-    const PARTICLE_COUNT = 40
-    const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-      x:  Math.random() * canvas.width,
-      y:  Math.random() * canvas.height,
-      r:  Math.random() * 2.5 + 0.5,
-      dx: (Math.random() - 0.5) * 0.3,
-      dy: (Math.random() - 0.5) * 0.3,
-      opacity: Math.random() * 0.4 + 0.1,
+    const particles = Array.from({ length: 50 }, () => ({
+      x:  Math.random() * (canvas.width || 1000),
+      y:  Math.random() * (canvas.height || 800),
+      r:  Math.random() * 2 + 0.5,
+      dx: (Math.random() - 0.5) * 0.25,
+      dy: (Math.random() - 0.5) * 0.25,
+      opacity: Math.random() * 0.35 + 0.08,
     }))
 
     const draw = () => {
@@ -62,177 +60,206 @@ export default function Hero() {
     }
     draw()
 
-    return () => {
-      cancelAnimationFrame(animId)
-      window.removeEventListener('resize', resize)
-    }
+    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize) }
   }, [])
 
   return (
-    <section className="hero-bg relative min-h-screen flex flex-col">
-      {/* Canvas particles */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ zIndex: 0 }}
-      />
+    <section className="hero-bg relative min-h-[100svh] flex flex-col overflow-hidden">
+      {/* Particle canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }} />
 
-      {/* Floating orbs */}
+      {/* Ambient glow orbs */}
       <div className="hero-orb hero-orb-1" />
       <div className="hero-orb hero-orb-2" />
       <div className="hero-orb hero-orb-3" />
 
-      {/* Main content */}
+      {/* ════ MAIN CONTENT ════ */}
       <div className="relative z-10 flex-1 flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 sm:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-6 pb-16 sm:pt-10 sm:pb-20">
 
-            {/* ── LEFT COLUMN: Text ── */}
-            <div className="flex flex-col gap-6 sm:gap-8">
+          {/* Mobile: stacked | Desktop: side-by-side */}
+          <div className="grid lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] gap-10 lg:gap-6 items-center">
 
-              {/* Pill badge */}
-              <div className="fade-in">
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase
-                                 bg-[#A8DADC]/15 text-[#A8DADC] border border-[#A8DADC]/25">
-                  <Sparkles size={12} />
-                  Premium Cleaning Solutions Since 2009
+            {/* ── LEFT: TEXT CONTENT ── */}
+            <div className="flex flex-col gap-5 sm:gap-6 order-2 lg:order-1">
+
+              {/* Trust badge row */}
+              <div className="fade-in flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold tracking-widest uppercase
+                                 bg-[#F4D35E]/15 text-[#F4D35E] border border-[#F4D35E]/30">
+                  <Star size={10} fill="currentColor" />
+                  Trusted Since 2009
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold
+                                 bg-[#A8DADC]/12 text-[#A8DADC] border border-[#A8DADC]/25">
+                  <Sparkles size={10} />
+                  Premium Cleaning Solutions
                 </span>
               </div>
 
               {/* Headline */}
               <div className="fade-in-delay-1">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] text-white tracking-tight">
-                  Clean Spaces,{' '}
-                  <br className="hidden sm:block" />
+                <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.08] tracking-tight text-white">
+                  Clean Spaces,
+                  <br />
                   <span className="text-gradient-aqua">Brighter</span>{' '}
                   <span className="text-gradient-gold">Tomorrow</span>
                 </h1>
-                <p className="mt-5 text-base sm:text-lg text-white/65 leading-relaxed max-w-lg">
-                  Trusted by homes &amp; industries across India. Our premium cleaning chemicals deliver
-                  professional-grade results — safe, effective, and eco-conscious.
+                <p className="mt-4 text-[15px] sm:text-lg text-white/60 leading-relaxed max-w-lg">
+                  India's trusted cleaning chemicals brand — professional-grade formulas for homes,
+                  businesses, and industries. Safe, effective, and eco-conscious.
                 </p>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="fade-in-delay-2 flex flex-wrap gap-3 sm:gap-4">
+              {/* CTA buttons */}
+              <div className="fade-in-delay-2 flex flex-wrap gap-3">
                 <Link href="/products" className="btn-primary">
-                  Explore Products <ArrowRight size={16} />
+                  Shop Products <ArrowRight size={16} />
                 </Link>
                 <Link href="/request-quote" className="btn-ghost">
-                  Get a Quote
+                  Get Bulk Quote
                 </Link>
               </div>
 
-              {/* Feature chips */}
+              {/* Product category chips */}
               <div className="fade-in-delay-3 flex flex-wrap gap-2">
                 {FEATURES.map(f => (
-                  <span
+                  <Link
                     key={f.label}
+                    href={`/products?search=${encodeURIComponent(f.label)}`}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium
-                               bg-white/08 border border-white/12 text-white/70 hover:text-white hover:border-white/25
-                               transition-all duration-200 cursor-default"
+                               bg-white/06 border border-white/10 text-white/65
+                               hover:bg-white/12 hover:text-white hover:border-[#A8DADC]/40
+                               transition-all duration-200"
                   >
                     <span>{f.emoji}</span> {f.label}
-                  </span>
+                  </Link>
                 ))}
               </div>
 
-              {/* Stats row */}
-              <div className="fade-in-delay-4 grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+              {/* Stats mini-grid */}
+              <div className="fade-in-delay-4 grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
                 {STATS.map(s => (
                   <div
                     key={s.label}
-                    className="flex flex-col gap-1 p-3 rounded-xl bg-white/06 border border-white/10
-                               hover:bg-white/10 hover:border-white/20 transition-all duration-200 cursor-default"
+                    className="p-3 rounded-2xl bg-white/05 border border-white/08
+                               hover:bg-white/09 hover:border-white/15 transition-all duration-200 cursor-default"
                   >
-                    <div className="flex items-center gap-2 text-[#A8DADC]">
-                      {s.icon}
-                      <span className="text-sm font-bold text-white">{s.value}</span>
-                    </div>
-                    <span className="text-[11px] text-white/50 leading-tight">{s.label}</span>
+                    <p className="text-lg font-extrabold text-white leading-none">{s.value}</p>
+                    <p className="text-[11px] font-bold text-[#A8DADC] mt-0.5">{s.label}</p>
+                    <p className="text-[10px] text-white/40 leading-tight">{s.sub}</p>
                   </div>
                 ))}
               </div>
+
+              {/* Social proof mini strip */}
+              <div className="fade-in-delay-4 flex items-center gap-3 pt-1">
+                <div className="flex -space-x-2">
+                  {['#457B9D', '#A8DADC', '#F4D35E', '#7c9fc4'].map((c, i) => (
+                    <div
+                      key={i}
+                      className="w-8 h-8 rounded-full border-2 border-[#0f1e3a] flex items-center justify-center text-[10px] font-bold text-white"
+                      style={{ background: `linear-gradient(135deg, ${c}, rgba(255,255,255,0.3))` }}
+                    >
+                      {['R', 'A', 'S', 'K'][i]}
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-white/50">
+                  <span className="text-white font-semibold">50,000+</span> happy customers across India
+                </p>
+              </div>
             </div>
 
-            {/* ── RIGHT COLUMN: Mascot + Floating Cards ── */}
-            <div className="relative flex items-center justify-center lg:justify-end slide-in-right">
+            {/* ── RIGHT: MASCOT ── */}
+            <div className="relative flex items-end justify-center order-1 lg:order-2 slide-in-right">
 
-              {/* Main mascot container */}
-              <div className="relative w-[280px] sm:w-[340px] lg:w-[400px] aspect-square">
+              {/* Mascot stage — large circle glow platform */}
+              <div className="relative">
+                {/* Platform glow */}
+                <div className="absolute -inset-8 rounded-full opacity-60"
+                  style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 90%, rgba(69,123,157,0.5), transparent 70%)' }} />
 
-                {/* Glow ring */}
-                <div className="absolute inset-4 rounded-full bg-gradient-to-br from-[#457B9D]/30 to-[#A8DADC]/20
-                                blur-3xl animate-pulse" />
+                {/* Soft circular BG behind mascot */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-b from-[#457B9D]/20 to-transparent blur-2xl" />
 
-                {/* Mascot image */}
+                {/* The actual mascot */}
                 <img
-                  src="/mascot.png"
-                  alt="Rosie - Rose Chemicals Mascot"
-                  className="mascot-bubble relative z-10 w-full h-full object-contain"
+                  src="/images/mascot.png"
+                  alt="Rose Chemicals Expert — Your Cleaning Specialist"
+                  className="mascot-float relative z-10 w-[260px] sm:w-[320px] lg:w-[380px] xl:w-[420px]
+                             object-contain object-bottom"
+                  style={{ maxHeight: '520px' }}
                 />
 
-                {/* Mascot name badge */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20">
-                  <div className="glass px-4 py-2 rounded-full text-center">
-                    <p className="text-xs font-bold text-white tracking-wide">Meet Rosie!</p>
-                    <p className="text-[10px] text-[#A8DADC]">Your Cleaning Expert</p>
-                  </div>
-                </div>
+                {/* ── Floating Glass Cards ── */}
 
-                {/* ── Floating Info Cards ── */}
-
-                {/* Card 1 – top left */}
-                <div className="absolute -left-4 sm:-left-10 top-8 z-20">
-                  <div className="glass-card px-4 py-3 flex items-center gap-3 min-w-[140px]">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#F4D35E] to-[#f0c330] flex items-center justify-center text-lg flex-shrink-0">
-                      ✨
+                {/* Card: ISO Badge — top left */}
+                <div className="absolute left-0 top-10 z-20 -translate-x-1/3 lg:-translate-x-2/4">
+                  <div className="glass-card px-3.5 py-2.5 flex items-center gap-2.5 min-w-[138px]">
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#F4D35E] to-[#d4a800]
+                                    flex items-center justify-center flex-shrink-0 text-base shadow-lg">
+                      🏅
                     </div>
                     <div>
-                      <p className="text-white text-xs font-bold leading-tight">Trusted Quality</p>
-                      <p className="text-[#A8DADC] text-[10px]">ISO 9001:2015</p>
+                      <p className="text-white text-[11px] font-bold leading-tight">ISO Certified</p>
+                      <p className="text-[#A8DADC] text-[9px] font-medium">9001:2015 Quality</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Card 2 – right middle */}
-                <div className="absolute -right-4 sm:-right-8 top-1/3 z-20">
-                  <div className="glass-card px-4 py-3 flex items-center gap-3 min-w-[150px]">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#457B9D] to-[#A8DADC] flex items-center justify-center text-lg flex-shrink-0">
+                {/* Card: Eco Safe — right middle */}
+                <div className="absolute right-0 top-1/4 z-20 translate-x-1/3 lg:translate-x-2/4">
+                  <div className="glass-card px-3.5 py-2.5 flex items-center gap-2.5 min-w-[138px]">
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2d6a4f] to-[#52b788]
+                                    flex items-center justify-center flex-shrink-0 text-base shadow-lg">
                       🌿
                     </div>
                     <div>
-                      <p className="text-white text-xs font-bold leading-tight">Eco Safe</p>
-                      <p className="text-[#A8DADC] text-[10px]">Green Certified</p>
+                      <p className="text-white text-[11px] font-bold leading-tight">Eco-Safe Formula</p>
+                      <p className="text-[#A8DADC] text-[9px] font-medium">Green Certified</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Card 3 – bottom right */}
-                <div className="absolute -right-2 sm:-right-6 bottom-16 z-20">
-                  <div className="glass-card px-4 py-3 flex items-center gap-3 min-w-[140px]">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#E63946] to-[#ff6b7a] flex items-center justify-center text-lg flex-shrink-0">
-                      🏆
+                {/* Card: Customers — bottom right */}
+                <div className="absolute right-0 bottom-24 z-20 translate-x-1/4 lg:translate-x-1/2">
+                  <div className="glass-card px-3.5 py-2.5 flex items-center gap-2.5 min-w-[138px]">
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#a78bfa]
+                                    flex items-center justify-center flex-shrink-0 text-base shadow-lg">
+                      ⭐
                     </div>
                     <div>
-                      <p className="text-white text-xs font-bold leading-tight">50,000+</p>
-                      <p className="text-[#A8DADC] text-[10px]">Happy Customers</p>
+                      <p className="text-white text-[11px] font-bold leading-tight">50,000+ Clients</p>
+                      <p className="text-[#A8DADC] text-[9px] font-medium">Pan-India Network</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Decorative small dots */}
-                {[...Array(5)].map((_, i) => (
+                {/* Name tag floating at mascot's head level */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 z-20">
+                  <div className="glass px-4 py-1.5 rounded-full border border-[#A8DADC]/30 flex items-center gap-2">
+                    <span className="text-[9px] font-bold text-[#A8DADC] tracking-widest uppercase">Meet Our Expert</span>
+                    <span className="text-white text-[9px]">✨</span>
+                  </div>
+                </div>
+
+                {/* Decorative sparkle dots */}
+                {[
+                  { top: '15%', left: '5%',  size: 8,  color: 'rgba(244,211,94,0.6)' },
+                  { top: '60%', left: '2%',  size: 6,  color: 'rgba(168,218,220,0.5)' },
+                  { top: '30%', right: '3%', size: 10, color: 'rgba(168,218,220,0.4)' },
+                  { top: '75%', right: '6%', size: 6,  color: 'rgba(244,211,94,0.5)' },
+                ].map((dot, i) => (
                   <div
                     key={i}
-                    className="absolute rounded-full bg-[#A8DADC]/30"
+                    className="absolute rounded-full"
                     style={{
-                      width:  `${6 + i * 3}px`,
-                      height: `${6 + i * 3}px`,
-                      top:    `${10 + i * 15}%`,
-                      right:  i % 2 === 0 ? `${-5 + i}%` : 'auto',
-                      left:   i % 2 !== 0 ? `${-5 + i}%` : 'auto',
-                      animationDelay: `${i * 0.5}s`,
+                      width: dot.size, height: dot.size,
+                      top: dot.top, left: (dot as any).left, right: (dot as any).right,
+                      background: dot.color,
+                      animation: `mascot-float ${5 + i}s ease-in-out infinite`,
+                      animationDelay: `${i * 0.8}s`,
                     }}
                   />
                 ))}
@@ -242,21 +269,18 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="relative z-10 flex justify-center pb-8">
-        <a href="#products" className="flex flex-col items-center gap-2 text-white/40 hover:text-white/70 transition-colors group">
-          <span className="text-xs tracking-widest uppercase">Explore</span>
-          <ChevronDown size={20} className="animate-bounce" />
+      {/* Scroll nudge */}
+      <div className="relative z-10 flex justify-center pb-6 sm:pb-8">
+        <a href="#products" className="flex flex-col items-center gap-1.5 text-white/30 hover:text-white/60 transition-colors">
+          <span className="text-[10px] tracking-widest uppercase font-medium">Scroll to explore</span>
+          <ChevronDown size={18} className="animate-bounce" />
         </a>
       </div>
 
-      {/* Bottom wave into next section */}
+      {/* Wave into light section */}
       <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-none pointer-events-none" style={{ zIndex: 5 }}>
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-[60px] sm:h-[80px]">
-          <path
-            d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"
-            fill="rgba(240,247,255,1)"
-          />
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-[50px] sm:h-[70px]">
+          <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f0f7ff" />
         </svg>
       </div>
     </section>

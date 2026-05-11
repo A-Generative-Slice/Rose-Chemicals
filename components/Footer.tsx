@@ -97,7 +97,7 @@ export default function Footer() {
             {/* Mascot mini */}
             <div className="flex items-center gap-3 glass rounded-2xl p-3 w-fit">
               <img
-                src="/mascot.png"
+                src="/images/mascot.png"
                 alt="Rosie"
                 className="w-12 h-12 object-contain mascot-float"
               />
