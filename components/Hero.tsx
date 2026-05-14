@@ -12,12 +12,12 @@ const STATS = [
 ]
 
 const FEATURES = [
-  { emoji: '🧴', label: 'Floor Cleaners' },
-  { emoji: '🚿', label: 'Bathroom Care' },
-  { emoji: '🍽️', label: 'Kitchen Solutions' },
-  { emoji: '🏭', label: 'Industrial Grade' },
-  { emoji: '🌿', label: 'Eco Friendly' },
-  { emoji: '🛡️', label: 'Disinfectants' },
+  { emoji: '🧪', label: 'Raw materials' },
+  { emoji: '📦', label: 'Products kit' },
+  { emoji: '🗓️', label: 'Monthly packs' },
+  { emoji: '🧴', label: 'Cleaning Liquids' },
+  { emoji: '🧹', label: 'Brooms' },
+  { emoji: '🧽', label: 'Carpet Brushes' },
 ]
 
 export default function Hero() {
@@ -100,10 +100,10 @@ export default function Hero() {
               {/* Headline */}
               <div className="fade-in-delay-1">
                 <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.08] tracking-tight text-white">
-                  Clean Spaces,
+                  Growing Together...
                   <br />
-                  <span className="text-gradient-aqua">Brighter</span>{' '}
-                  <span className="text-gradient-gold">Tomorrow</span>
+                  <span className="text-gradient-aqua">Empowering</span>{' '}
+                  <span className="text-gradient-gold">Entrepreneurs...</span>
                 </h1>
                 <p className="mt-4 text-[15px] sm:text-lg text-white/60 leading-relaxed max-w-lg">
                   India's trusted cleaning chemicals brand — professional-grade formulas for homes,
@@ -185,7 +185,7 @@ export default function Hero() {
 
                 {/* The actual mascot */}
                 <img
-                  src="/images/mascot.png"
+                  src="/images/mascot.jpg"
                   alt="Rose Chemicals Expert — Your Cleaning Specialist"
                   className="mascot-float relative z-10 w-[260px] sm:w-[320px] lg:w-[380px] xl:w-[420px]
                              object-contain object-bottom"

@@ -98,12 +98,37 @@ export default function Featured() {
     )
   }
 
+  const categoryOrder = [
+    'Raw materials',
+    'Products kit',
+    'Monthly packs',
+    'Cleaning Liquids',
+    'Brooms',
+    'Carpet Brushes',
+    'Toilet Brushes',
+    'Long Brushes',
+    'Sink Brushes',
+    'Cobweb Cleaners',
+    'Kitchen Towels',
+    'Wipers',
+    'Others'
+  ]
+
+  const sortedCategories = Object.entries(groupedProducts).sort(([a], [b]) => {
+    const indexA = categoryOrder.indexOf(a)
+    const indexB = categoryOrder.indexOf(b)
+    if (indexA === -1 && indexB === -1) return a.localeCompare(b)
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+    return indexA - indexB
+  })
+
   return (
     <div className="space-y-8">
-      {Object.entries(groupedProducts).map(([category, categoryProducts]) => (
+      {sortedCategories.map(([category, categoryProducts]) => (
         <section key={category}>
           <h2 className={mainHeadingStyle}>
-            {category.charAt(0).toUpperCase() + category.slice(1).replace(/_/g, ' ')}
+            {category}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {categoryProducts.map(product => (
