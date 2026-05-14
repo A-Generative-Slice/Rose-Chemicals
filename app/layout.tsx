@@ -14,6 +14,11 @@ export const metadata = {
   creator: 'Rose Chemicals',
   publisher: 'Rose Chemicals',
   metadataBase: new URL('https://rosechemicals.com'),
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_IN',
