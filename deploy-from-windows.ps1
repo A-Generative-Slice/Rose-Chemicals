@@ -1,7 +1,7 @@
 # Rose Chemicals - Windows to VPS Deployment Script
 # Run this from PowerShell in your project directory
 
-$VPS_IP = "72.60.218.57"
+$VPS_IP = "72.61.244.121" # Updated to match GitHub Actions IP
 $VPS_USER = "root"
 $REMOTE_PATH = "/var/www/rose-chemicals"
 
@@ -46,6 +46,7 @@ switch ($choice) {
         Write-Host "Connecting to VPS and deploying via Git..." -ForegroundColor Yellow
         Write-Host ""
         
+        # Here-string MUST have the terminator at the absolute start of the line
         $commands = @"
 cd /var/www && \
 if [ -d 'rose-chemicals' ]; then \
@@ -84,11 +85,12 @@ echo '🚀 Running deployment...' && \
         Write-Host ""
         Write-Host "Now running deployment script on VPS..." -ForegroundColor Yellow
         
-        ssh ${VPS_USER}@${VPS_IP} @"
+        $remoteScript = @"
 cd $REMOTE_PATH && \
 chmod +x deploy-to-vps.sh && \
 ./deploy-to-vps.sh
 "@
+        ssh ${VPS_USER}@${VPS_IP} $remoteScript
     }
     
     "3" {
@@ -99,7 +101,7 @@ chmod +x deploy-to-vps.sh && \
         Write-Host ""
         
         Write-Host "Step 1: Connect to VPS" -ForegroundColor Yellow
-        Write-Host "  ssh root@72.60.218.57" -ForegroundColor White
+        Write-Host "  ssh root@$VPS_IP" -ForegroundColor White
         Write-Host ""
         
         Write-Host "Step 2: Clone repository" -ForegroundColor Yellow
@@ -111,12 +113,6 @@ chmod +x deploy-to-vps.sh && \
         Write-Host "Step 3: Run deployment script" -ForegroundColor Yellow
         Write-Host "  chmod +x deploy-to-vps.sh" -ForegroundColor White
         Write-Host "  ./deploy-to-vps.sh" -ForegroundColor White
-        Write-Host ""
-        
-        Write-Host "Or use WinSCP/FileZilla:" -ForegroundColor Yellow
-        Write-Host "  Host: 72.60.218.57" -ForegroundColor White
-        Write-Host "  User: root" -ForegroundColor White
-        Write-Host "  Upload to: /var/www/rose-chemicals" -ForegroundColor White
         Write-Host ""
     }
     
@@ -137,10 +133,5 @@ Write-Host "══════════════════════�
 Write-Host ""
 Write-Host "📚 For detailed instructions, see: DEPLOYMENT-STEPS.md" -ForegroundColor Yellow
 Write-Host ""
-Write-Host "🌐 Your site will be available at:" -ForegroundColor Yellow
-Write-Host "  http://rosechemical.in" -ForegroundColor White
-Write-Host "  http://72.60.218.57" -ForegroundColor White
-Write-Host ""
-Write-Host "🔐 To setup SSL (HTTPS), run on VPS:" -ForegroundColor Yellow
-Write-Host "  sudo certbot --nginx -d rosechemical.in -d www.rosechemical.in" -ForegroundColor White
+Write-Host "Your site will be available at: http://rosechemicals.in" -ForegroundColor White
 Write-Host ""

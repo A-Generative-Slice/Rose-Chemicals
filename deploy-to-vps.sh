@@ -3,7 +3,7 @@
 #############################################
 # Rose Chemicals - Quick VPS Deployment
 # For Ubuntu 22.04 LTS on Hostinger VPS
-# IP: 72.60.218.57
+# IP: 72.61.244.121
 # Domain: rosechemical.in
 #############################################
 
@@ -23,7 +23,7 @@ NC='\033[0m'
 
 # Configuration
 DOMAIN="rosechemical.in"
-SERVER_IP="72.60.218.57"
+SERVER_IP="72.61.244.121"
 APP_DIR="/var/www/rose-chemicals"
 
 echo -e "${YELLOW}Step 1: System Update${NC}"
