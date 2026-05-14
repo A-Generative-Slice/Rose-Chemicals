@@ -12,6 +12,9 @@ const orderSchema = new mongoose.Schema({
       ref: 'Product',
       required: true
     },
+    productName: String, // Snapshot of product name at order time
+    productImage: String, // Snapshot of primary image URL
+    productSku: String, // Snapshot of SKU
     quantity: {
       type: Number,
       required: true

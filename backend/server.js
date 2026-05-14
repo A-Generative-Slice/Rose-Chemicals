@@ -63,19 +63,42 @@ const dbReady = connectDB()
 // Middleware
 const limiter = rateLimit({
   windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 1000, // Limit each IP to 1000 requests per 5 minutes
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-  message: {
-    success: false,
-    message: 'Too many requests from this IP, please try again after 5 minutes'
-  }
+  max: 500, // Limit each IP to 500 requests per 5 minutes
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many requests, please try again after 5 minutes' }
 });
 
-// Apply to all routes
+// Strict limiter for auth endpoints (brute-force protection)
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 20, // max 20 login/register attempts per 15 min per IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many auth attempts, please try again in 15 minutes' }
+});
+
+// Apply global rate limit
 app.use(limiter);
 
-app.use(cors());
+// CORS — restrict to known origins
+const allowedOrigins = [
+  'https://www.rosechemicals.in',
+  'https://rosechemicals.in',
+  'http://localhost:3000',
+  'http://localhost:3001',
+];
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(compression());
@@ -88,7 +111,7 @@ app.use('/exports', express.static(path.join(__dirname, 'exports')));
 app.use('/images', express.static(path.join(__dirname, '../public/images')));
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth', authLimiter, require('./routes/auth'));  // strict rate limit on login/register
 app.use('/api/products', require('./routes/products'));
 app.use('/api/cart', require('./routes/cart'));
 app.use('/api/orders', require('./routes/orders'));

@@ -39,6 +39,9 @@ exports.createOrder = async (req, res) => {
 
       return {
         product: item.product._id,
+        productName: item.product.name,
+        productImage: item.product.images?.[0]?.url,
+        productSku: item.product.sku,
         quantity: item.quantity,
         price: item.product.price,
         itemTax: itemTax

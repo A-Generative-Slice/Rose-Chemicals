@@ -57,11 +57,11 @@ router.get('/suggestions', getProductSuggestions);
 router.get('/category/:categoryId', getProductsByCategory);
 router.get('/:id', getProduct);
 
-// Protected routes (temporarily disabled auth for development)
-router.post('/', createProduct);
-router.put('/:id', updateProduct);
-router.patch('/:id', updateProduct);  // Add PATCH method
-router.delete('/:id', deleteProduct);
+// Protected routes (admin only)
+router.post('/', protect, authorize('admin'), createProduct);
+router.put('/:id', protect, authorize('admin'), updateProduct);
+router.patch('/:id', protect, authorize('admin'), updateProduct);
+router.delete('/:id', protect, authorize('admin'), deleteProduct);
 
 // Development only - clear all products and get categories
 if (process.env.NODE_ENV === 'development') {

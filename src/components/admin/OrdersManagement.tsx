@@ -40,7 +40,10 @@ interface Order {
       name: string;
       images?: Array<{ url: string }>;
       price: number;
-    };
+    } | null;
+    productName?: string;
+    productImage?: string;
+    productSku?: string;
     quantity: number;
     price: number;
   }>;
@@ -197,7 +200,7 @@ export default function OrdersManagement() {
         `"${o.shippingAddress?.state || 'N/A'}"`,
         `"${o.shippingAddress?.postalCode || 'N/A'}"`,
         `"${o.shippingAddress?.country || 'N/A'}"`,
-        `"${(o.items || []).map(i => `${i.product?.name || 'Unknown Product'} (x${i.quantity || 0})`).join(' | ')}"`,
+        `"${(o.items || []).map(i => `${i.product?.name || i.productName || 'Unknown Product'} (x${i.quantity || 0})`).join(' | ')}"`,
         o.totalAmount || 0,
         `"${(o.paymentMethod || 'N/A').toUpperCase()}"`,
         `"${(o.paymentStatus || 'N/A').toUpperCase()}"`,
@@ -505,8 +508,8 @@ export default function OrdersManagement() {
 
       {/* Order Detail Modal Overhaul */}
       {selectedOrder && (
-        <div className="fixed inset-0 z-[50] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-white rounded-xl w-full max-w-4xl max-h-[85vh] overflow-hidden flex flex-col shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+          <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl animate-in fade-in zoom-in-95 duration-200 border border-gray-200">
             {/* Modal Header */}
             <div className="flex items-center justify-between px-6 py-4 bg-gray-50 border-b border-gray-100">
               <div>
@@ -525,7 +528,7 @@ export default function OrdersManagement() {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto p-0 sm:p-6 custom-scrollbar">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                 {/* Left Column: Order Info & Items */}
@@ -556,14 +559,14 @@ export default function OrdersManagement() {
                       {selectedOrder.items?.map((item, idx) => (
                         <div key={idx} className="p-4 flex gap-4">
                           <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 bg-gray-50 flex items-center justify-center">
-                            {item.product?.images && item.product.images[0] ? (
-                              <img src={item.product.images[0].url} alt="" className="h-full w-full object-cover object-center" />
+                            {item.product?.images?.[0] || item.productImage ? (
+                              <img src={item.product?.images?.[0]?.url || item.productImage} alt="" className="h-full w-full object-cover object-center" />
                             ) : (
                               <Package className="h-8 w-8 text-gray-300" />
                             )}
                           </div>
                           <div className="flex flex-1 flex-col justify-center">
-                            <h5 className="text-sm font-medium text-gray-900 line-clamp-1">{item.product?.name || 'Unknown Product'}</h5>
+                            <h5 className="text-sm font-medium text-gray-900 line-clamp-1">{item.product?.name || item.productName || 'Unknown Product'}</h5>
                             <div className="mt-1 flex items-center justify-between text-sm">
                               <span className="text-gray-500">{item.quantity} x {formatCurrency(item.price)}</span>
                               <span className="font-medium text-gray-900">{formatCurrency(item.quantity * item.price)}</span>
