@@ -5,9 +5,6 @@ $VPS_IP = "72.60.218.80"
 $VPS_USER = "root"
 $REMOTE_PATH = "/var/www/rose-chemicals"
 
-# Common SSH Options to bypass key issues and force password
-$SSH_OPTS = "-o PubkeyAuthentication=no -o PreferredAuthentications=password"
-
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host "  Rose Chemicals - VPS Deployment         " -ForegroundColor Cyan
 Write-Host "  Windows to Hostinger VPS                " -ForegroundColor Cyan
@@ -30,10 +27,9 @@ Write-Host "1. Deploy using Git (Recommended)"
 Write-Host "2. Transfer files via SCP"
 Write-Host "3. Show manual instructions"
 Write-Host "4. Just open SSH terminal"
-Write-Host "5. Reset/Debug Connection (Force Password)"
 Write-Host ""
 
-$choice = Read-Host "Enter choice (1-5)"
+$choice = Read-Host "Enter choice (1-4)"
 
 if ($choice -eq "1") {
     Write-Host "Connecting to VPS and deploying via Git..." -ForegroundColor Yellow
@@ -51,13 +47,14 @@ if ($choice -eq "1") {
         "./deploy-to-vps.sh"
     )
     $commands = $cmdArray -join " && "
-    ssh $SSH_OPTS ${VPS_USER}@${VPS_IP} "bash -c `"$commands`""
+    # Passing options individually to avoid "extra arguments" error
+    ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password ${VPS_USER}@${VPS_IP} "bash -c `"$commands`""
 }
 elseif ($choice -eq "2") {
     Write-Host "Transferring files via SCP..." -ForegroundColor Yellow
-    ssh $SSH_OPTS ${VPS_USER}@${VPS_IP} "mkdir -p $REMOTE_PATH"
-    scp $SSH_OPTS -r * ${VPS_USER}@${VPS_IP}:${REMOTE_PATH}/
-    ssh $SSH_OPTS ${VPS_USER}@${VPS_IP} "cd $REMOTE_PATH && chmod +x deploy-to-vps.sh && ./deploy-to-vps.sh"
+    ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password ${VPS_USER}@${VPS_IP} "mkdir -p $REMOTE_PATH"
+    scp -o PubkeyAuthentication=no -o PreferredAuthentications=password -r * ${VPS_USER}@${VPS_IP}:${REMOTE_PATH}/
+    ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password ${VPS_USER}@${VPS_IP} "cd $REMOTE_PATH && chmod +x deploy-to-vps.sh && ./deploy-to-vps.sh"
 }
 elseif ($choice -eq "3") {
     Write-Host "Manual Instructions:" -ForegroundColor Yellow
@@ -67,11 +64,7 @@ elseif ($choice -eq "3") {
     Write-Host "4. ./deploy-to-vps.sh"
 }
 elseif ($choice -eq "4") {
-    ssh $SSH_OPTS ${VPS_USER}@${VPS_IP}
-}
-elseif ($choice -eq "5") {
-    Write-Host "Trying to connect by forcing password auth..." -ForegroundColor Yellow
-    ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password -v ${VPS_USER}@${VPS_IP}
+    ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password ${VPS_USER}@${VPS_IP}
 }
 else {
     Write-Host "Invalid choice" -ForegroundColor Red
