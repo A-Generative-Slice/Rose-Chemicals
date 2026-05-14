@@ -37,7 +37,7 @@ function ProductsContent() {
 
   useEffect(() => {
     const q = searchParams.get('search');
-    if (q) setSearchTerm(q);
+    setSearchTerm(q || '');
   }, [searchParams]);
 
   useEffect(() => {

@@ -54,10 +54,15 @@ export default function Header() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    if (searchQuery.trim()) {
-      router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`)
+    const query = searchQuery.trim()
+    if (query) {
+      router.push(`/products?search=${encodeURIComponent(query)}`)
       setSearchOpen(false)
       setSearchQuery('')
+      // Force focus out to close mobile keyboard
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur()
+      }
     }
   }
 
