@@ -27,7 +27,7 @@ Complete setup guide for deploying Rose Chemicals e-commerce platform on a VPS w
 - CPU: 2 cores
 - RAM: 8 GB
 - Storage: 100 GB
-- IP: 72.61.244.121 (update with your actual IP)
+- IP: 72.60.218.80 (update with your actual IP)
 
 ---
 
@@ -186,7 +186,7 @@ npm run seed  # If seed script is available
 
 In your domain registrar (Hostinger, GoDaddy, etc.):
 1. Go to DNS settings
-2. Add A record pointing to your VPS IP: `72.61.244.121`
+2. Add A record pointing to your VPS IP: `72.60.218.80`
 3. Wait 15-30 minutes for DNS to propagate
 
 Check DNS:
@@ -562,3 +562,4 @@ Now you can share the frontend URL with anyone to test the "live" deployment exp
 **Last Updated:** December 23, 2025  
 **Version:** 1.1  
 **Status:** Cleanup & Production Ready
+
