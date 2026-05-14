@@ -185,7 +185,7 @@ export default function Hero() {
 
                 {/* The actual mascot */}
                 <img
-                  src="/images/mascot.jpg"
+                  src="/images/mascot.png"
                   alt="Rose Chemicals Expert — Your Cleaning Specialist"
                   className="mascot-float relative z-10 w-[260px] sm:w-[320px] lg:w-[380px] xl:w-[420px]
                              object-contain object-bottom"

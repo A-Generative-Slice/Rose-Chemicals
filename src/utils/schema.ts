@@ -6,7 +6,7 @@ export const organizationSchema: WithContext<Organization> = {
   name: 'Rose Chemicals',
   description: 'Professional cleaning products and solutions for homes and businesses',
   url: 'https://rosechemicals.com',
-  logo: 'https://rosechemicals.com/logo.jpg',
+  logo: 'https://rosechemicals.com/logo.png',
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '+91-1234567890',

@@ -83,7 +83,7 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-4 flex flex-col gap-5">
             <div className="flex items-center gap-3">
-              <img src="/logo.jpg" alt="Rose Chemicals" className="h-10 w-auto object-contain" />
+              <img src="/logo.png" alt="Rose Chemicals" className="h-10 w-auto object-contain" />
               <div>
                 <p className="font-bold text-white text-sm tracking-wide">{ds.siteName}</p>
                 <p className="text-[10px] text-[#A8DADC] tracking-widest uppercase opacity-70">Premium Cleaning</p>
@@ -97,7 +97,7 @@ export default function Footer() {
             {/* Mascot mini */}
             <div className="flex items-center gap-3 glass rounded-2xl p-3 w-fit">
               <img
-                src="/images/mascot.jpg"
+                src="/images/mascot.png"
                 alt="Rosie"
                 className="w-12 h-12 object-contain mascot-float"
               />

@@ -90,7 +90,7 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
             <div className="relative">
               <img
-                src="/logo.jpg"
+                src="/logo.png"
                 alt="Rose Chemicals Logo"
                 className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />

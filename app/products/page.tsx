@@ -325,7 +325,7 @@ function ProductsContent() {
           {/* Products grid or empty state */}
           {filteredProducts.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-center">
-              <img src="/images/mascot.jpg" alt="No results" className="w-36 sm:w-48 object-contain mb-6 opacity-70" />
+              <img src="/images/mascot.png" alt="No results" className="w-36 sm:w-48 object-contain mb-6 opacity-70" />
               <h3 className="text-xl font-bold text-[#1D3557] mb-2">No products found</h3>
               <p className="text-[#64748b] text-sm mb-6 max-w-sm">
                 Try clearing your search or selecting a different category
