@@ -147,9 +147,9 @@ export default function Header() {
                     placeholder="Search..."
                     value={searchQuery}
                     onChange={e => setSearchQuery(e.target.value)}
-                    className="w-full pl-4 pr-10 py-2 rounded-xl bg-white/12 text-white placeholder:text-white/40
-                               border border-white/20 focus:outline-none focus:border-[#A8DADC]/50 focus:bg-white/18
-                               text-sm transition-all backdrop-blur-sm"
+                    className="w-full pl-4 pr-10 py-2 rounded-xl bg-[#0f1e3a]/40 text-white placeholder:text-white/50
+                               border border-white/20 focus:outline-none focus:border-[#A8DADC]/60 focus:bg-[#0f1e3a]/60
+                               text-sm transition-all backdrop-blur-xl shadow-lg"
                   />
                 </form>
               )}

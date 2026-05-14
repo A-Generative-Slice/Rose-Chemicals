@@ -136,7 +136,7 @@ function ProductsContent() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #0f1e3a 0%, #f0f7ff 220px, #f0f7ff 100%)' }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #0f1e3a 0%, #0f1e3a 180px, #f0f7ff 450px, #f0f7ff 100%)' }}>
       <Header />
 
       {/* ── PAGE HERO STRIP ── */}
@@ -162,7 +162,7 @@ function ProductsContent() {
         </div>
         {/* mini wave */}
         <div className="absolute bottom-0 left-0 right-0 overflow-hidden" style={{ lineHeight: 0 }}>
-          <svg viewBox="0 0 1440 40" preserveAspectRatio="none" className="w-full h-8">
+          <svg viewBox="0 0 1440 40" preserveAspectRatio="none" className="w-full h-10">
             <path d="M0,20 C480,40 960,0 1440,20 L1440,40 L0,40 Z" fill="#f0f7ff" />
           </svg>
         </div>
