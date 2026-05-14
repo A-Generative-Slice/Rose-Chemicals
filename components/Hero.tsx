@@ -78,7 +78,7 @@ export default function Hero() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-6 pb-16 sm:pt-10 sm:pb-20">
 
           {/* Mobile: stacked | Desktop: side-by-side */}
-          <div className="grid lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] gap-10 lg:gap-6 items-center">
+          <div className="grid lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] gap-8 sm:gap-10 lg:gap-6 items-center">
 
             {/* ── LEFT: TEXT CONTENT ── */}
             <div className="flex flex-col gap-5 sm:gap-6 order-2 lg:order-1">
@@ -98,21 +98,21 @@ export default function Hero() {
               </div>
 
               {/* Headline */}
-              <div className="fade-in-delay-1">
-                <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold leading-[1.08] tracking-tight text-white">
+              <div className="fade-in-delay-1 text-center lg:text-left">
+                <h1 className="text-[2.6rem] leading-[1.1] sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-white">
                   Growing Together...
                   <br />
                   <span className="text-gradient-aqua">Empowering</span>{' '}
                   <span className="text-gradient-gold">Entrepreneurs...</span>
                 </h1>
-                <p className="mt-4 text-[15px] sm:text-lg text-white/60 leading-relaxed max-w-lg">
+                <p className="mt-4 text-[15px] sm:text-lg text-white/60 leading-relaxed max-w-lg mx-auto lg:mx-0">
                   India's trusted cleaning chemicals brand — professional-grade formulas for homes,
                   businesses, and industries. Safe, effective, and eco-conscious.
                 </p>
               </div>
 
               {/* CTA buttons */}
-              <div className="fade-in-delay-2 flex flex-wrap gap-3">
+              <div className="fade-in-delay-2 flex flex-wrap justify-center lg:justify-start gap-3">
                 <Link href="/products" className="btn-primary">
                   Shop Products <ArrowRight size={16} />
                 </Link>
@@ -122,12 +122,12 @@ export default function Hero() {
               </div>
 
               {/* Product category chips */}
-              <div className="fade-in-delay-3 flex flex-wrap gap-2">
+              <div className="fade-in-delay-3 flex flex-wrap justify-center lg:justify-start gap-2">
                 {FEATURES.map(f => (
                   <Link
                     key={f.label}
                     href={`/products?search=${encodeURIComponent(f.label)}`}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-medium
                                bg-white/06 border border-white/10 text-white/65
                                hover:bg-white/12 hover:text-white hover:border-[#A8DADC]/40
                                transition-all duration-200"
@@ -153,7 +153,7 @@ export default function Hero() {
               </div>
 
               {/* Social proof mini strip */}
-              <div className="fade-in-delay-4 flex items-center gap-3 pt-1">
+              <div className="fade-in-delay-4 flex items-center justify-center lg:justify-start gap-3 pt-1">
                 <div className="flex -space-x-2">
                   {['#457B9D', '#A8DADC', '#F4D35E', '#7c9fc4'].map((c, i) => (
                     <div
@@ -166,7 +166,7 @@ export default function Hero() {
                   ))}
                 </div>
                 <p className="text-xs text-white/50">
-                  <span className="text-white font-semibold">50,000+</span> happy customers across India
+                  <span className="text-white font-semibold">50,000+</span> happy customers
                 </p>
               </div>
             </div>
@@ -193,8 +193,8 @@ export default function Hero() {
                     style={{ maxHeight: '520px' }}
                   />
                   {/* JOIN NOW Button below bucket */}
-                  <div className="mt-[-20px] sm:mt-[-30px] z-30">
-                    <Link href="/register" className="btn-primary px-8 py-3 rounded-full shadow-2xl hover:scale-105 transition-transform">
+                  <div className="mt-[-25px] sm:mt-[-30px] z-30">
+                    <Link href="/register" className="btn-primary !px-10 !py-3.5 rounded-full shadow-2xl hover:scale-105 transition-transform text-sm sm:text-base">
                       JOIN NOW
                     </Link>
                   </div>
@@ -203,10 +203,10 @@ export default function Hero() {
                 {/* ── Floating Glass Cards ── */}
 
                 {/* Card: ISO Badge — top left */}
-                <div className="absolute left-0 top-10 z-20 -translate-x-1/3 lg:-translate-x-2/4">
-                  <div className="glass-card px-3.5 py-2.5 flex items-center gap-2.5 min-w-[138px]">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#F4D35E] to-[#d4a800]
-                                    flex items-center justify-center flex-shrink-0 text-base shadow-lg">
+                <div className="absolute left-0 top-10 z-20 -translate-x-1/4 lg:-translate-x-2/4 scale-90 sm:scale-100">
+                  <div className="glass-card px-3 py-2 flex items-center gap-2.5 min-w-[120px] sm:min-w-[138px]">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-[#F4D35E] to-[#d4a800]
+                                    flex items-center justify-center flex-shrink-0 text-sm sm:text-base shadow-lg">
                       🏅
                     </div>
                     <div>
@@ -217,10 +217,10 @@ export default function Hero() {
                 </div>
 
                 {/* Card: Eco Safe — right middle */}
-                <div className="absolute right-0 top-1/4 z-20 translate-x-1/3 lg:translate-x-2/4">
-                  <div className="glass-card px-3.5 py-2.5 flex items-center gap-2.5 min-w-[138px]">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2d6a4f] to-[#52b788]
-                                    flex items-center justify-center flex-shrink-0 text-base shadow-lg">
+                <div className="absolute right-0 top-1/4 z-20 translate-x-1/4 lg:translate-x-2/4 scale-90 sm:scale-100">
+                  <div className="glass-card px-3 py-2 flex items-center gap-2.5 min-w-[120px] sm:min-w-[138px]">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-[#2d6a4f] to-[#52b788]
+                                    flex items-center justify-center flex-shrink-0 text-sm sm:text-base shadow-lg">
                       🌿
                     </div>
                     <div>
@@ -231,10 +231,10 @@ export default function Hero() {
                 </div>
 
                 {/* Card: Customers — bottom right */}
-                <div className="absolute right-0 bottom-24 z-20 translate-x-1/4 lg:translate-x-1/2">
-                  <div className="glass-card px-3.5 py-2.5 flex items-center gap-2.5 min-w-[138px]">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#a78bfa]
-                                    flex items-center justify-center flex-shrink-0 text-base shadow-lg">
+                <div className="absolute right-0 bottom-24 z-20 translate-x-1/6 lg:translate-x-1/2 scale-90 sm:scale-100">
+                  <div className="glass-card px-3 py-2 flex items-center gap-2.5 min-w-[120px] sm:min-w-[138px]">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-[#7c3aed] to-[#a78bfa]
+                                    flex items-center justify-center flex-shrink-0 text-sm sm:text-base shadow-lg">
                       ⭐
                     </div>
                     <div>
