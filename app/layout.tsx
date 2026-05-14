@@ -15,10 +15,13 @@ export const metadata = {
   publisher: 'Rose Chemicals',
   metadataBase: new URL('https://rosechemicals.com'),
   icons: {
-    icon: '/favicon.png',
-    shortcut: '/favicon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-48x48.png', type: 'image/png', sizes: '48x48' },
+    ],
     apple: '/apple-touch-icon.png',
   },
+  manifest: '/manifest.json',
   openGraph: {
     type: 'website',
     locale: 'en_IN',

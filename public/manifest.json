@@ -1,0 +1,14 @@
+{
+  "name": "Rose Chemicals",
+  "short_name": "RoseChem",
+  "icons": [
+    {
+      "src": "/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#0b1d3a",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
