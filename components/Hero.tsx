@@ -210,8 +210,8 @@ export default function Hero() {
                       🏅
                     </div>
                     <div>
-                      <p className="text-white text-[11px] font-bold leading-tight">ISO Certified</p>
-                      <p className="text-[#A8DADC] text-[9px] font-medium">9001:2015 Quality</p>
+                      <p className="text-white text-[11px] font-bold leading-tight">Premium Formula</p>
+                      <p className="text-[#A8DADC] text-[9px] font-medium">Export Quality</p>
                     </div>
                   </div>
                 </div>
