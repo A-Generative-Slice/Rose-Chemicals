@@ -15,16 +15,16 @@
 
 ```bash
 # SSH into VPS first
-ssh root@72.60.218.57
+ssh root@72.60.218.80
 
 # Then from YOUR LOCAL MAC (new terminal):
 # Replace the files on VPS
 
 # 1. Upload fixed api.js
-scp /Users/smdhussain/Desktop/projects/Rose-Chemicals-main/src/services/api.js root@72.60.218.57:/root/Rose-Chemicals/src/services/api.js
+scp /Users/smdhussain/Desktop/projects/Rose-Chemicals-main/src/services/api.js root@72.60.218.80:/root/Rose-Chemicals/src/services/api.js
 
 # 2. Upload fixed seed.js
-scp /Users/smdhussain/Desktop/projects/Rose-Chemicals-main/backend/seed.js root@72.60.218.57:/root/Rose-Chemicals/backend/seed.js
+scp /Users/smdhussain/Desktop/projects/Rose-Chemicals-main/backend/seed.js root@72.60.218.80:/root/Rose-Chemicals/backend/seed.js
 ```
 
 ---
@@ -104,6 +104,6 @@ curl -s https://rosechemical.in/api/health
 ## ❓ Questions?
 
 If upload fails, check:
-1. VPS is accessible: `ssh root@72.60.218.57`
+1. VPS is accessible: `ssh root@72.60.218.80`
 2. Path is correct: `ls /root/Rose-Chemicals/src/services/`
 3. File permissions: `chmod 644 /root/Rose-Chemicals/src/services/api.js`

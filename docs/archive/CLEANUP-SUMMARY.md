@@ -217,7 +217,7 @@ cd ..
 
 ### Step 4: Setup Domain & SSL
 ```bash
-# Point domain A record to VPS IP (72.60.218.57)
+# Point domain A record to VPS IP (72.60.218.80)
 # Wait 15-30 minutes for DNS propagation
 
 # Get SSL certificate
@@ -420,3 +420,4 @@ Your Rose Chemicals e-commerce platform is now:
 **Last Updated:** October 26, 2025  
 **Repository Version:** 1.0.0  
 **Status:** Production Ready for VPS Deployment
+

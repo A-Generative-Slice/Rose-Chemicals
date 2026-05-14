@@ -3,10 +3,10 @@
 ## 🎯 Quick Deployment Guide for Hostinger VPS
 
 **VPS Details:**
-- IP: 72.60.218.57
+- IP: 72.60.218.80
 - Domain: rosechemical.in
 - OS: Ubuntu 22.04 LTS
-- SSH: `ssh root@72.60.218.57`
+- SSH: `ssh root@72.60.218.80`
 
 ---
 
@@ -19,7 +19,7 @@ From your Windows machine, use one of these methods:
 **Option A: Using Git (Best)**
 ```bash
 # SSH into VPS
-ssh root@72.60.218.57
+ssh root@72.60.218.80
 
 # Clone repository
 cd /var/www
@@ -34,18 +34,18 @@ chmod +x deploy-to-vps.sh
 **Option B: Using SCP**
 ```powershell
 # From Windows PowerShell (in project directory)
-scp -r . root@72.60.218.57:/var/www/rose-chemicals
+scp -r . root@72.60.218.80:/var/www/rose-chemicals
 ```
 
 **Option C: Using FileZilla/WinSCP**
-- Connect to: 72.60.218.57
+- Connect to: 72.60.218.80
 - Upload entire project to: /var/www/rose-chemicals
 
 ### Step 2: Run Deployment Script
 
 ```bash
 # SSH into VPS
-ssh root@72.60.218.57
+ssh root@72.60.218.80
 
 # Navigate to project
 cd /var/www/rose-chemicals
@@ -336,7 +336,7 @@ If you encounter issues:
 1. Check PM2 logs: `pm2 logs`
 2. Check nginx logs: `sudo tail -f /var/log/nginx/error.log`
 3. Check MongoDB: `sudo systemctl status mongodb`
-4. Verify DNS: Your domain DNS A records should point to 72.60.218.57
+4. Verify DNS: Your domain DNS A records should point to 72.60.218.80
 
 ---
 
@@ -351,3 +351,4 @@ If you encounter issues:
 
 **Deployment Script Created:** deploy-to-vps.sh
 **Last Updated:** November 2025
+

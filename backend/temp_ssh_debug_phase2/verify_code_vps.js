@@ -11,8 +11,9 @@ conn.on('ready', () => {
         }).on('data', (data) => output += data);
     });
 }).connect({
-    host: '72.61.244.121',
+    host: '72.60.218.80',
     port: 22,
     username: 'root',
     password: 'Rosechem@123'
 });
+

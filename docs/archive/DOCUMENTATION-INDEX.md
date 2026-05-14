@@ -210,7 +210,7 @@ Rose-Chemicals-main/
 - [ ] Read QUICK-DEPLOY.md
 - [ ] Have domain name ready
 - [ ] Have VPS SSH access
-- [ ] Know your VPS IP (72.60.218.57)
+- [ ] Know your VPS IP (72.60.218.80)
 
 ### VPS Setup
 - [ ] SSH into VPS
@@ -361,3 +361,4 @@ Your Rose Chemicals e-commerce platform is:
 **Last Updated:** October 26, 2025  
 **Version:** 1.0.0  
 **Status:** ✅ Production Ready
+

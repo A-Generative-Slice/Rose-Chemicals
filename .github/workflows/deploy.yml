@@ -19,7 +19,7 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh -o StrictHostKeyChecking=no root@72.61.244.121 << 'EOF'
+          ssh -o StrictHostKeyChecking=no root@72.60.218.80 << 'EOF'
             cd /var/www/rose-chemicals
             git pull origin main
             npm install

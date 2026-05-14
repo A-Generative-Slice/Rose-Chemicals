@@ -362,7 +362,7 @@ Password: Test@123
 
 ### Deployment Info
 ```
-VPS IP: 72.60.218.57
+VPS IP: 72.60.218.80
 Domain: https://rosechemical.in
 Frontend: Port 3001
 Backend: Port 5001 (proxied through Nginx)
@@ -374,4 +374,5 @@ Database: MongoDB Atlas (Cloud)
 **Generated**: November 3, 2025  
 **Last Updated**: By GitHub Copilot (Final Commercial Audit)  
 **Status**: ✅ READY FOR COMMERCIAL LAUNCH
+
 

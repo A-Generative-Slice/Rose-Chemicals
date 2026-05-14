@@ -116,7 +116,7 @@ curl https://rosechemical.in/api/health
 
 ### SSH to VPS
 ```bash
-ssh root@72.60.218.57
+ssh root@72.60.218.80
 # Password: Iaminsane@06
 ```
 
@@ -146,7 +146,7 @@ pm2 reload ecosystem.config.js
 ```bash
 # From your Mac terminal
 scp /Users/smdhussain/Desktop/projects/Rose-Chemicals-main/path/to/file.js \
-    root@72.60.218.57:/root/Rose-Chemicals/path/to/file.js
+    root@72.60.218.80:/root/Rose-Chemicals/path/to/file.js
 ```
 
 ---
@@ -171,7 +171,7 @@ scp /Users/smdhussain/Desktop/projects/Rose-Chemicals-main/path/to/file.js \
 
 ## 🚨 Important Notes
 
-1. **Domain Configuration:** DNS already pointing to VPS IP (72.60.218.57)
+1. **Domain Configuration:** DNS already pointing to VPS IP (72.60.218.80)
 2. **SSL Certificate:** Auto-renewable (systemd timer set up)
 3. **Database:** MongoDB Atlas (automatic backups included)
 4. **Secrets:** Safely stored on VPS, never committed to Git

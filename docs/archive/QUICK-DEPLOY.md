@@ -49,7 +49,7 @@ cd ..
 ### 3. Setup Domain & DNS
 - [ ] Go to domain registrar (Hostinger)
 - [ ] Find DNS settings
-- [ ] Add A record: `@` pointing to `72.60.218.57`
+- [ ] Add A record: `@` pointing to `72.60.218.80`
 - [ ] Wait 15-30 minutes for DNS to propagate
 - [ ] Verify: `nslookup your-domain.com`
 
@@ -292,3 +292,4 @@ For detailed help, see:
 
 **Last Updated:** October 26, 2025  
 **Version:** 1.0.0
+

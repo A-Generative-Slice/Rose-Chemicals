@@ -204,7 +204,7 @@ Or create new account at: https://rosechemical.in/auth/register
 ### If Something Goes Wrong
 ```
 SSH to VPS:
-ssh root@72.60.218.57
+ssh root@72.60.218.80
 Password: Iaminsane@06
 
 Check services:
@@ -345,3 +345,4 @@ A: ✅ SAFE - Services auto-restart, backups in place, easy to fix
 **What We Recommend**: Option 2 - Get live fast, optimize next week
 
 **Your call!** ✅
+

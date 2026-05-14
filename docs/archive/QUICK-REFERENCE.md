@@ -12,7 +12,7 @@ Choose option 1 for Git deployment (fastest)
 ### Option 2: Manual SSH Commands
 ```powershell
 # Connect to VPS
-ssh root@72.60.218.57
+ssh root@72.60.218.80
 
 # Once connected, run these commands:
 cd /var/www
@@ -43,17 +43,17 @@ The automated deployment script will:
 
 ## 🎯 Your VPS Details
 
-- **IP Address:** 72.60.218.57
+- **IP Address:** 72.60.218.80
 - **Domain:** rosechemical.in
-- **SSH Command:** `ssh root@72.60.218.57`
+- **SSH Command:** `ssh root@72.60.218.80`
 - **OS:** Ubuntu 22.04 LTS
 - **RAM:** 8 GB
 - **Storage:** 100 GB
 
 ### DNS Configuration (Already Set ✓)
-Your DNS A records are pointing to 72.60.218.57:
-- www → 72.60.218.57
-- @ → 72.60.218.57
+Your DNS A records are pointing to 72.60.218.80:
+- www → 72.60.218.80
+- @ → 72.60.218.80
 
 ---
 
@@ -76,7 +76,7 @@ Your site will be accessible at:
 After deployment, run this on the VPS to enable HTTPS:
 
 ```bash
-ssh root@72.60.218.57
+ssh root@72.60.218.80
 
 # Install SSL certificate
 sudo certbot --nginx -d rosechemical.in -d www.rosechemical.in
@@ -100,7 +100,7 @@ This will:
 
 ### Check Application Status
 ```bash
-ssh root@72.60.218.57
+ssh root@72.60.218.80
 pm2 status
 ```
 
@@ -160,7 +160,7 @@ RAZORPAY_KEY_SECRET=your_secret_here
 
 ### To Update Razorpay Keys
 ```bash
-ssh root@72.60.218.57
+ssh root@72.60.218.80
 nano /var/www/rose-chemicals/backend/.env
 # Update RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET
 # Press Ctrl+X, Y, Enter to save
@@ -311,5 +311,6 @@ curl http://rosechemical.in  # Public
 ---
 
 **Created:** November 2025
-**For:** Hostinger VPS (72.60.218.57)
+**For:** Hostinger VPS (72.60.218.80)
 **Domain:** rosechemical.in
+
