@@ -214,6 +214,15 @@ export default function Header() {
                           {label}
                         </Link>
                       ))}
+                      {user?.role === 'admin' && (
+                        <Link
+                          href="/admin"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="block px-4 py-2.5 text-sm text-[#A8DADC] hover:text-white hover:bg-white/10 transition-colors border-t border-white/10"
+                        >
+                          Admin Panel
+                        </Link>
+                      )}
                       <button
                         onClick={() => { logout(); setUserMenuOpen(false) }}
                         className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-[#E63946] hover:bg-white/10 transition-colors"

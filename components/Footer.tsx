@@ -146,8 +146,13 @@ export default function Footer() {
             </ul>
           </div>
 
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Legal */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <h4 className="text-white font-bold text-sm mb-4 tracking-wide uppercase">Legal</h4>
             <ul className="flex flex-col gap-2.5">
               {LEGAL_LINKS.map(({ href, label }) => (
@@ -161,6 +166,31 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Admin & Support */}
+          <div className="lg:col-span-2">
+            <h4 className="text-white font-bold text-sm mb-4 tracking-wide uppercase">Admin</h4>
+            <ul className="flex flex-col gap-2.5">
+              <li>
+                <Link
+                  href="/admin/login"
+                  className="flex items-center gap-1.5 text-sm text-white/50 hover:text-[#A8DADC] transition-colors group"
+                >
+                  <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-200" />
+                  Admin Login
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="flex items-center gap-1.5 text-sm text-white/50 hover:text-[#A8DADC] transition-colors group"
+                >
+                  <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-200" />
+                  Support
+                </Link>
+              </li>
             </ul>
           </div>
 
