@@ -184,13 +184,21 @@ export default function Hero() {
                 <div className="absolute inset-0 rounded-full bg-gradient-to-b from-[#457B9D]/20 to-transparent blur-2xl" />
 
                 {/* The actual mascot */}
-                <img
-                  src="/images/mascot.png"
-                  alt="Rose Chemicals Expert — Your Cleaning Specialist"
-                  className="mascot-float relative z-10 w-[260px] sm:w-[320px] lg:w-[380px] xl:w-[420px]
-                             object-contain object-bottom"
-                  style={{ maxHeight: '520px' }}
-                />
+                <div className="relative z-10 flex flex-col items-center">
+                  <img
+                    src="/images/mascot.png"
+                    alt="Rose Chemicals Expert — Your Cleaning Specialist"
+                    className="mascot-float w-[260px] sm:w-[320px] lg:w-[380px] xl:w-[420px]
+                               object-contain object-bottom"
+                    style={{ maxHeight: '520px' }}
+                  />
+                  {/* JOIN NOW Button below bucket */}
+                  <div className="mt-[-20px] sm:mt-[-30px] z-30">
+                    <Link href="/register" className="btn-primary px-8 py-3 rounded-full shadow-2xl hover:scale-105 transition-transform">
+                      JOIN NOW
+                    </Link>
+                  </div>
+                </div>
 
                 {/* ── Floating Glass Cards ── */}
 
