@@ -1,14 +1,15 @@
 "use client"
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Sparkles, Shield, Leaf, Award, ChevronDown, Star } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 
 const STATS = [
   { value: '15+',  label: 'Years', sub: 'of Excellence' },
   { value: '50K+', label: 'Clients', sub: 'Served Across India' },
-  { value: 'ISO',  label: '9001:2015', sub: 'Certified Quality' },
-  { value: '100%', label: 'Eco-Safe', sub: 'Formulations' },
+  { value: '100+', label: 'Franchises', sub: 'Pan-India Network' },
+  { value: 'B2B', label: 'Bulk Supply', sub: 'Wholesale Pricing' },
 ]
 
 const FEATURES = [
@@ -185,9 +186,12 @@ export default function Hero() {
 
                 {/* The actual mascot */}
                 <div className="relative z-10 flex flex-col items-center">
-                  <img
+                  <Image
                     src="/images/mascot.png"
                     alt="Rose Chemicals Expert — Your Cleaning Specialist"
+                    width={420}
+                    height={520}
+                    priority
                     className="mascot-float w-[260px] sm:w-[320px] lg:w-[380px] xl:w-[420px]
                                object-contain object-bottom"
                     style={{ maxHeight: '520px' }}
@@ -216,16 +220,16 @@ export default function Hero() {
                   </div>
                 </div>
 
-                {/* Card: Eco Safe — right middle */}
+                {/* Card: Franchise Options — right middle */}
                 <div className="absolute right-0 top-1/4 z-20 translate-x-1/4 lg:translate-x-2/4 scale-90 sm:scale-100">
                   <div className="glass-card px-3 py-2 flex items-center gap-2.5 min-w-[120px] sm:min-w-[138px]">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-[#2d6a4f] to-[#52b788]
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-[#028090] to-[#00A896]
                                     flex items-center justify-center flex-shrink-0 text-sm sm:text-base shadow-lg">
-                      🌿
+                      🤝
                     </div>
                     <div>
-                      <p className="text-white text-[11px] font-bold leading-tight">Eco-Safe Formula</p>
-                      <p className="text-[#A8DADC] text-[9px] font-medium">Green Certified</p>
+                      <p className="text-white text-[11px] font-bold leading-tight">Franchise Options</p>
+                      <p className="text-[#A8DADC] text-[9px] font-medium">Grow With Us</p>
                     </div>
                   </div>
                 </div>
