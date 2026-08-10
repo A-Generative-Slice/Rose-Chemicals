@@ -1,25 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Resolve the backend base URL:
-// - On VPS/production: 127.0.0.1:5001 (nginx proxies, local backend runs)
-// - In local dev without backend: fall back to the production API URL so images still load
+/**
+ * Resolve the backend base URL.
+ * - Production VPS: backend runs on port 5000 (not 5001)
+ * - Local dev: use NEXT_PUBLIC_API_URL or fallback to localhost:5000
+ */
 function getBackendBase(): string {
-  // If a server-side backend URL is explicitly set, use it
   if (process.env.BACKEND_INTERNAL_URL) {
     return process.env.BACKEND_INTERNAL_URL;
   }
-  // In production VPS environment
   if (process.env.NODE_ENV === 'production') {
-    return 'http://127.0.0.1:5001';
+    return 'http://127.0.0.1:5000';
   }
-  // Local dev: use the public API URL (rosechemicals.in) so images resolve from live backend
   const publicApi = process.env.NEXT_PUBLIC_API_URL || '';
   if (publicApi) {
-    // Strip the /api suffix to get the backend root
     return publicApi.replace(/\/api\/?$/, '');
   }
-  // Last resort fallback
-  return 'http://127.0.0.1:5001';
+  return 'http://127.0.0.1:5000';
 }
 
 export async function GET(request: NextRequest) {
@@ -35,32 +32,32 @@ export async function GET(request: NextRequest) {
     const backendBase = getBackendBase();
 
     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
-      // S3 URL — extract key and proxy through backend
-      if (imagePath.includes('.s3.') && imagePath.includes('amazonaws.com')) {
-        try {
-          const urlObj = new URL(imagePath);
-          const key = decodeURIComponent(urlObj.pathname.substring(1));
-          imageUrl = `${backendBase}/api/image/proxy?key=${encodeURIComponent(key)}`;
-        } catch {
-          imageUrl = imagePath;
-        }
-      } else {
-        // Other full URLs — fetch directly
-        imageUrl = imagePath;
+      // Old S3 URLs — these are broken (bucket AllAccessDisabled).
+      // Return 404 so frontend falls back to placeholder cleanly.
+      if (imagePath.includes('.amazonaws.com')) {
+        console.warn('[image-proxy] S3 URL requested but S3 is disabled:', imagePath);
+        return NextResponse.json({ error: 'S3 storage no longer available' }, { status: 404 });
       }
+      // Other full HTTP URLs — fetch directly
+      imageUrl = imagePath;
+    } else if (imagePath.startsWith('/uploads/')) {
+      // Local upload path — fetch from backend
+      imageUrl = `${backendBase}${imagePath}`;
+    } else if (imagePath.startsWith('/images/')) {
+      // Static images from public/images/ — fetch from backend (served via /images/ route)
+      imageUrl = `${backendBase}${imagePath}`;
     } else if (imagePath.startsWith('/')) {
-      // Relative paths like /uploads/... or /images/...
+      // Other relative paths
       imageUrl = `${backendBase}${imagePath}`;
     } else {
-      // Bare filename — assume it lives in /uploads/
-      imageUrl = `${backendBase}/uploads/${imagePath}`;
+      // Bare filename — assume uploads/products/
+      imageUrl = `${backendBase}/uploads/products/${imagePath}`;
     }
 
     console.log('[image-proxy] Fetching:', imageUrl);
 
     const response = await fetch(imageUrl, {
       headers: { 'Accept': 'image/*' },
-      // 8-second timeout so we don't hang forever if backend is down
       signal: AbortSignal.timeout(8000),
     });
 

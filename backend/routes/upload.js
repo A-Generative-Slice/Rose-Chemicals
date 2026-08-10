@@ -13,18 +13,9 @@ router.post('/single', upload.single('image'), (req, res) => {
       });
     }
 
-    // Handle both S3 and local uploads
-    let imageUrl, key;
-    if (req.file.location) {
-      // S3 upload
-      imageUrl = req.file.location;
-      key = req.file.key;
-    } else {
-      // Local upload
-      const baseUrl = `${req.protocol}://${req.get('host')}`;
-      imageUrl = `${baseUrl}/uploads/products/${req.file.filename}`;
-      key = req.file.filename;
-    }
+    // Always local storage now — build a public /uploads/products/ URL
+    const imageUrl = `/uploads/products/${req.file.filename}`;
+    const key = req.file.filename;
 
     res.json({
       success: true,
@@ -52,25 +43,11 @@ router.post('/multiple', upload.array('images', 10), (req, res) => {
       });
     }
 
-    const uploadedImages = req.files.map(file => {
-      // Handle both S3 and local uploads
-      if (file.location) {
-        // S3 upload
-        return {
-          url: file.location,
-          key: file.key,
-          originalName: file.originalname
-        };
-      } else {
-        // Local upload
-        const baseUrl = `${req.protocol}://${req.get('host')}`;
-        return {
-          url: `${baseUrl}/uploads/products/${file.filename}`,
-          key: file.filename,
-          originalName: file.originalname
-        };
-      }
-    });
+    const uploadedImages = req.files.map(file => ({
+      url: `/uploads/products/${file.filename}`,
+      key: file.filename,
+      originalName: file.originalname
+    }));
 
     res.json({
       success: true,
@@ -87,12 +64,12 @@ router.post('/multiple', upload.array('images', 10), (req, res) => {
   }
 });
 
-// Delete image from S3
+// Delete image
 router.delete('/:key(*)', protect, async (req, res) => {
   try {
     const key = req.params.key;
     const deleted = await deleteFromS3(key);
-    
+
     if (deleted) {
       res.json({
         success: true,
