@@ -122,7 +122,7 @@ function ProductsContent() {
         <Header />
         <div className="flex flex-col items-center justify-center py-32 px-4 text-center">
           <div className="text-6xl mb-6">⚠️</div>
-          <h2 className="text-2xl font-bold text-white mb-2">Couldn't load products</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Couldn&apos;t load products</h2>
           <p className="text-white/50 mb-8 max-w-sm">{error}</p>
           <button
             onClick={loadProducts}
@@ -265,7 +265,7 @@ function ProductsContent() {
                     className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#1D3557]/08 text-[#1D3557]
                                text-xs font-medium hover:bg-[#E63946]/10 hover:text-[#E63946] transition-colors"
                   >
-                    "{searchTerm}" <X size={11} />
+                    &quot;{searchTerm}&quot; <X size={11} />
                   </button>
                 )}
                 {selectedCategory !== 'all' && (

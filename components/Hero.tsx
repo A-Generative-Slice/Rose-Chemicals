@@ -107,7 +107,7 @@ export default function Hero() {
                   <span className="text-gradient-gold">Entrepreneurs...</span>
                 </h1>
                 <p className="mt-4 text-[15px] sm:text-lg text-white/60 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                  India's trusted cleaning chemicals brand — professional-grade formulas for homes,
+                  India&apos;s trusted cleaning chemicals brand — professional-grade formulas for homes,
                   businesses, and industries. Safe, effective, and eco-conscious.
                 </p>
               </div>
