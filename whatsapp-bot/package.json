@@ -1,0 +1,23 @@
+{
+    "name": "whatsapp-bot",
+    "version": "1.0.0",
+    "description": "WhatsApp Bot with Sarvam AI integration",
+    "main": "index.js",
+    "scripts": {
+        "start": "node api/index.js",
+        "sync:products": "node scripts/sync_products.js",
+        "send:test-batch": "node scripts/send_test_template_batch.js",
+        "send:previous-numbers": "node scripts/send_template_to_previous_numbers.js"
+    },
+    "dependencies": {
+        "axios": "^1.6.2",
+        "body-parser": "^1.20.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "mongoose": "^8.0.3"
+    },
+    "engines": {
+        "node": "22.x"
+    }
+}

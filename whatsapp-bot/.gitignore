@@ -1,0 +1,8 @@
+node_modules/
+.env
+.DS_Store
+*.log
+check_raw_api.js
+test_local_bot.js
+training_text.txt
+Rose_Chemicals_Chatbot_Training_Dataset.docx
